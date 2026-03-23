@@ -99,7 +99,7 @@ html:not(.dark) .icon-sun { display: none; } html:not(.dark) .icon-moon { displa
   transition: opacity .2s, transform .2s, visibility .2s;
   z-index: 200;
 }
-html.dark .mega-dd { box-shadow: 0 12px 32px rgba(0,0,0,.4); }
+html.dark .mega-dd { background: rgba(17,17,17,.95); border: 1px solid rgba(255,255,255,.15); box-shadow: 0 12px 32px rgba(0,0,0,.6); }
 .nav-item:hover > .mega-dd {
   opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
 }
@@ -132,11 +132,11 @@ html.dark .mega-dd { box-shadow: 0 12px 32px rgba(0,0,0,.4); }
 /* Timeline */
 .timeline-wrap { position: relative; max-width: 900px; margin: 0 auto; }
 .timeline-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #E31E24, #f97316); transform: translateX(-50%); border-radius: 2px; }
-.timeline-item { position: relative; display: flex; align-items: flex-start; margin-bottom: 3rem; }
+.timeline-item { position: relative; display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3rem; }
 .timeline-item:last-child { margin-bottom: 0; }
-.timeline-item:nth-child(odd) { flex-direction: row-reverse; }
 .timeline-item .tl-content { width: calc(50% - 2.5rem); }
-.timeline-item:nth-child(odd) .tl-content { text-align: right; }
+.timeline-item:nth-child(odd) .tl-content:first-child { text-align: right; }
+.timeline-item:nth-child(even) .tl-content:last-child { text-align: left; }
 .timeline-dot {
   position: absolute; left: 50%; top: 1.5rem; width: 18px; height: 18px;
   background: linear-gradient(135deg, #E31E24, #f97316); border-radius: 50%;
@@ -193,9 +193,9 @@ html.dark .mega-dd { box-shadow: 0 12px 32px rgba(0,0,0,.4); }
   /* Timeline mobile: stack */
   .timeline-line { left: 1rem !important; }
   .timeline-dot { left: 1rem !important; }
-  .timeline-item, .timeline-item:nth-child(odd) { flex-direction: row !important; padding-left: 3rem; }
+  .timeline-item { flex-direction: row !important; padding-left: 3rem; }
   .timeline-item .tl-content { width: 100% !important; text-align: left !important; }
-  .timeline-item:nth-child(odd) .tl-content { text-align: left !important; }
+  .timeline-item .tl-content:empty { display: none !important; }
 }
 @media(max-width:480px) {
   .team-grid { grid-template-columns: 1fr !important; }
@@ -409,66 +409,6 @@ html.dark .mega-dd { box-shadow: 0 12px 32px rgba(0,0,0,.4); }
   </div>
 </section>
 
-<!-- ====== 4. TEAM ====== -->
-<section style="padding:6rem 0">
-  <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem">
-    <div style="text-align:center;margin-bottom:4rem">
-      <div class="section-badge">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="#E31E24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        Ons Team
-      </div>
-      <h2 style="font-size:clamp(2rem,4vw,3rem);font-weight:900;margin:0 0 .5rem">Experts in <span class="gradient-text">Verwarming</span></h2>
-      <p style="font-size:1.125rem;color:var(--text-secondary)">Passie, kennis en ervaring onder &eacute;&eacute;n dak</p>
-    </div>
-    <div class="team-grid">
-      <!-- Mark -->
-      <div class="team-card glass t" style="border-radius:1.5rem;overflow:hidden">
-        <div style="overflow:hidden;border-radius:1rem;margin:1rem 1rem 0">
-          <img src="assets/images/team-1.jpg" alt="Mark van der Berg">
-        </div>
-        <div style="padding:1.25rem 1.25rem 1.5rem">
-          <h3 style="font-size:1.125rem;font-weight:700;margin:0 0 .25rem">Mark van der Berg</h3>
-          <div style="font-size:.875rem;font-weight:600;color:#E31E24;margin-bottom:.5rem">CEO &amp; Oprichter</div>
-          <p style="color:var(--text-secondary);font-size:.875rem;margin:0;line-height:1.6">20+ jaar in verwarmingstechniek</p>
-        </div>
-      </div>
-      <!-- Lisa -->
-      <div class="team-card glass t" style="border-radius:1.5rem;overflow:hidden">
-        <div style="overflow:hidden;border-radius:1rem;margin:1rem 1rem 0">
-          <img src="assets/images/team-2.jpg" alt="Lisa Janssen">
-        </div>
-        <div style="padding:1.25rem 1.25rem 1.5rem">
-          <h3 style="font-size:1.125rem;font-weight:700;margin:0 0 .25rem">Lisa Janssen</h3>
-          <div style="font-size:.875rem;font-weight:600;color:#E31E24;margin-bottom:.5rem">Commercieel Directeur</div>
-          <p style="color:var(--text-secondary);font-size:.875rem;margin:0;line-height:1.6">B2B relatiebeheer specialist</p>
-        </div>
-      </div>
-      <!-- Tom -->
-      <div class="team-card glass t" style="border-radius:1.5rem;overflow:hidden">
-        <div style="overflow:hidden;border-radius:1rem;margin:1rem 1rem 0">
-          <img src="assets/images/team-3.jpg" alt="Tom Vermeulen">
-        </div>
-        <div style="padding:1.25rem 1.25rem 1.5rem">
-          <h3 style="font-size:1.125rem;font-weight:700;margin:0 0 .25rem">Tom Vermeulen</h3>
-          <div style="font-size:.875rem;font-weight:600;color:#E31E24;margin-bottom:.5rem">Technisch Manager</div>
-          <p style="color:var(--text-secondary);font-size:.875rem;margin:0;line-height:1.6">Expert in installatie &amp; onderhoud</p>
-        </div>
-      </div>
-      <!-- Sarah -->
-      <div class="team-card glass t" style="border-radius:1.5rem;overflow:hidden">
-        <div style="overflow:hidden;border-radius:1rem;margin:1rem 1rem 0">
-          <img src="assets/images/team-4.jpg" alt="Sarah de Vries">
-        </div>
-        <div style="padding:1.25rem 1.25rem 1.5rem">
-          <h3 style="font-size:1.125rem;font-weight:700;margin:0 0 .25rem">Sarah de Vries</h3>
-          <div style="font-size:.875rem;font-weight:600;color:#E31E24;margin-bottom:.5rem">Projectleider</div>
-          <p style="color:var(--text-secondary);font-size:.875rem;margin:0;line-height:1.6">Grootschalige horeca projecten</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ====== 5. VALUES ====== -->
 <section class="section-alt" style="padding:6rem 0">
   <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem">
@@ -532,41 +472,6 @@ html.dark .mega-dd { box-shadow: 0 12px 32px rgba(0,0,0,.4); }
   </div>
 </section>
 
-<!-- ====== 6. PARTNERS ====== -->
-<section style="padding:6rem 0">
-  <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem">
-    <div style="text-align:center;margin-bottom:4rem">
-      <h2 style="font-size:clamp(2rem,4vw,3rem);font-weight:900;margin:0 0 .5rem">Premium <span class="gradient-text">Partners</span></h2>
-      <p style="font-size:1.125rem;color:var(--text-secondary)">Wij werken samen met de beste merken</p>
-    </div>
-    <div class="partners-grid">
-      <div class="glass t partner-card" style="border-radius:1rem;padding:1.5rem">
-        <span style="font-size:1rem;font-weight:700;text-align:center">Sunred</span>
-      </div>
-      <div class="glass t partner-card" style="border-radius:1rem;padding:1.5rem">
-        <span style="font-size:1rem;font-weight:700;text-align:center">Eurom</span>
-      </div>
-      <div class="glass t partner-card" style="border-radius:1rem;padding:1.5rem">
-        <span style="font-size:1rem;font-weight:700;text-align:center">Kratki</span>
-      </div>
-      <div class="glass t partner-card" style="border-radius:1rem;padding:1.5rem">
-        <span style="font-size:1rem;font-weight:700;text-align:center">Burda</span>
-      </div>
-      <div class="glass t partner-card" style="border-radius:1rem;padding:1.5rem">
-        <span style="font-size:1rem;font-weight:700;text-align:center">Fargau</span>
-      </div>
-      <div class="glass t partner-card" style="border-radius:1rem;padding:1.5rem">
-        <span style="font-size:1rem;font-weight:700;text-align:center">Bromic</span>
-      </div>
-      <div class="glass t partner-card" style="border-radius:1rem;padding:1.5rem">
-        <span style="font-size:1rem;font-weight:700;text-align:center">Herschel</span>
-      </div>
-      <div class="glass t partner-card" style="border-radius:1rem;padding:1.5rem">
-        <span style="font-size:1rem;font-weight:700;text-align:center">Tansun</span>
-      </div>
-    </div>
-  </div>
-</section>
 
 </main>
 
