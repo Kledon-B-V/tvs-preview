@@ -108,7 +108,49 @@ html.dark .mega-dd { background: rgba(17,17,17,.95); border: 1px solid rgba(255,
 }
 .mega-dd a:hover { color: var(--text); background: var(--bg-card-hover); }
 
-@media(max-width:1024px) {
+/* Hamburger - only shown on mobile */
+.hamburger {
+  display: none; cursor: pointer; background: none; border: none;
+  padding: .5rem; flex-direction: column; gap: 5px; z-index: 200;
+}
+.hamburger span {
+  display: block; width: 24px; height: 2px; border-radius: 2px;
+  background: var(--text); transition: all .3s;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  position: fixed; inset: 0; z-index: 150;
+  background: var(--bg);
+  display: none; flex-direction: column;
+  padding: 96px 1.5rem 2rem;
+  overflow-y: auto;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu-inner { display: flex; flex-direction: column; gap: .25rem; }
+.mobile-link {
+  display: block; padding: 1rem; border-radius: .75rem;
+  font-size: 1.125rem; font-weight: 600; color: var(--text-secondary);
+  transition: all .2s;
+}
+.mobile-link:hover, .mobile-link.active { color: var(--text); background: var(--bg-card); }
+.mobile-submenu {
+  display: flex; flex-direction: column; gap: .125rem;
+  padding-left: 1rem; margin-bottom: .5rem;
+}
+.mobile-submenu a {
+  display: block; padding: .625rem 1rem; border-radius: .5rem;
+  font-size: .9375rem; color: var(--text-muted); transition: all .2s;
+}
+.mobile-submenu a:hover { color: var(--text); background: var(--bg-card); }
+.mobile-cta {
+  display: block; text-align: center; margin-top: 1rem;
+  padding: 1rem; border-radius: .75rem; font-weight: 700;
+  background: linear-gradient(135deg, #E31E24, #ea580c); color: #fff;
+}
+
+@media (max-width: 1024px) {
+  .hamburger { display: flex; }
   .desk-nav { display: none !important; }
 }
 @media(max-width:768px) {
@@ -123,6 +165,21 @@ html.dark .mega-dd { background: rgba(17,17,17,.95); border: 1px solid rgba(255,
   .stat-grid { grid-template-columns: 1fr !important; }
   .hero-ctas { flex-direction: column; }
   .hero-ctas a { width: 100%; justify-content: center; }
+}
+/* WhatsApp FAB */
+.whatsapp-fab {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 90;
+  width: 60px; height: 60px; border-radius: 50%;
+  background: #25D366; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(37,211,102,.4);
+  transition: all .3s; text-decoration: none;
+}
+.whatsapp-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 24px rgba(37,211,102,.5);
+}
+@media (max-width: 768px) {
+  .whatsapp-fab { bottom: 1.25rem; right: 1.25rem; width: 52px; height: 52px; }
 }
 </style>
 </head>
@@ -147,11 +204,11 @@ html.dark .mega-dd { background: rgba(17,17,17,.95); border: 1px solid rgba(255,
         <div class="nav-item">
           <a href="producten.html" class="nav-link">Producten <svg class="nav-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
           <div class="mega-dd">
-            <a href="producten.html">Terrasverwarming</a>
-            <a href="producten.html">Terras &amp; Loungehaarden</a>
-            <a href="producten.html">Halverwarming</a>
-            <a href="producten.html">Kerkverwarming</a>
-            <a href="producten.html">Zonnepanelen &amp; LED</a>
+            <a href="producten.html?cat=terrasverwarming-gas">Terrasverwarming</a>
+            <a href="producten.html?cat=loungehaarden">Terras &amp; Loungehaarden</a>
+            <a href="producten.html?cat=halverwarming">Halverwarming</a>
+            <a href="producten.html?cat=kerkverwarming">Kerkverwarming</a>
+            <a href="producten.html?cat=zonnepanelen">Zonnepanelen &amp; LED</a>
             <a href="producten.html" style="border-top:1px solid var(--border);margin-top:.25rem;padding-top:.75rem;color:var(--text);font-weight:600">Bekijk alle producten &rarr;</a>
           </div>
         </div>
@@ -159,6 +216,10 @@ html.dark .mega-dd { background: rgba(17,17,17,.95); border: 1px solid rgba(255,
         <a href="contact.html" class="nav-link">Contact</a>
         <a href="contact.html" class="btn-red" style="margin-left:.5rem;padding:.625rem 1.5rem;font-size:.875rem">Offerte Aanvragen</a>
       </nav>
+      <!-- Hamburger (mobile only) -->
+      <button class="hamburger" id="hamburger" aria-label="Menu" onclick="var m=document.getElementById('mobile-menu');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':''">
+        <span></span><span></span><span></span>
+      </button>
       <button class="theme-btn" id="theme-toggle" aria-label="Wissel thema">
         <svg class="icon-sun" fill="none" stroke="#eab308" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         <svg class="icon-moon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -166,6 +227,24 @@ html.dark .mega-dd { background: rgba(17,17,17,.95); border: 1px solid rgba(255,
     </div>
   </div>
 </header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-inner">
+    <a href="index.html" class="mobile-link active">Home</a>
+    <a href="producten.html" class="mobile-link">Producten</a>
+    <div class="mobile-submenu">
+      <a href="producten.html?cat=terrasverwarming-gas">Terrasverwarming</a>
+      <a href="producten.html?cat=loungehaarden">Terras & Loungehaarden</a>
+      <a href="producten.html?cat=halverwarming">Halverwarming</a>
+      <a href="producten.html?cat=kerkverwarming">Kerkverwarming</a>
+      <a href="producten.html?cat=zonnepanelen">Zonnepanelen & LED</a>
+    </div>
+    <a href="over-ons.html" class="mobile-link">Over Ons</a>
+    <a href="contact.html" class="mobile-link">Contact</a>
+    <a href="contact.html" class="mobile-cta">Offerte Aanvragen</a>
+  </div>
+</div>
 
 <main style="padding-top:96px">
 
@@ -232,23 +311,23 @@ html.dark .mega-dd { background: rgba(17,17,17,.95); border: 1px solid rgba(255,
       <p style="font-size:1.125rem;color:var(--text-secondary)">Professionele systemen voor elke toepassing</p>
     </div>
     <div class="cat-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem">
-      <a href="producten.html" class="glass t" style="border-radius:1.5rem;overflow:hidden;display:block">
+      <a href="producten.html?cat=terrasverwarming-gas" class="glass t" style="border-radius:1.5rem;overflow:hidden;display:block">
         <div style="position:relative;height:256px;overflow:hidden"><img src="assets/images/hero-terras.jpg" alt="" style="width:100%;height:100%;object-fit:cover"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent)"></div></div>
         <div style="padding:1.5rem"><h3 style="font-size:1.125rem;font-weight:700;margin:0 0 .5rem">Terrasverwarming</h3><p style="font-size:.875rem;color:var(--text-secondary);margin:0">Gas, elektrisch en verplaatsbare verwarmingsoplossingen</p></div>
       </a>
-      <a href="producten.html" class="glass t" style="border-radius:1.5rem;overflow:hidden;display:block">
+      <a href="producten.html?cat=loungehaarden" class="glass t" style="border-radius:1.5rem;overflow:hidden;display:block">
         <div style="position:relative;height:256px;overflow:hidden"><img src="assets/images/hero-terras.jpg" alt="" style="width:100%;height:100%;object-fit:cover"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent)"></div></div>
         <div style="padding:1.5rem"><h3 style="font-size:1.125rem;font-weight:700;margin:0 0 .5rem">Terras &amp; Loungehaarden</h3><p style="font-size:.875rem;color:var(--text-secondary);margin:0">Happy Cocooning vuurtafels en loungehaarden</p></div>
       </a>
-      <a href="producten.html" class="glass t" style="border-radius:1.5rem;overflow:hidden;display:block">
+      <a href="producten.html?cat=halverwarming" class="glass t" style="border-radius:1.5rem;overflow:hidden;display:block">
         <div style="position:relative;height:256px;overflow:hidden"><img src="assets/images/cat-halverwarming.jpg" alt="" style="width:100%;height:100%;object-fit:cover"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent)"></div></div>
         <div style="padding:1.5rem"><h3 style="font-size:1.125rem;font-weight:700;margin:0 0 .5rem">Halverwarming</h3><p style="font-size:.875rem;color:var(--text-secondary);margin:0">Effectieve verwarming voor bedrijfshallen en sporthallen</p></div>
       </a>
-      <a href="producten.html" class="glass t" style="border-radius:1.5rem;overflow:hidden;display:block">
+      <a href="producten.html?cat=kerkverwarming" class="glass t" style="border-radius:1.5rem;overflow:hidden;display:block">
         <div style="position:relative;height:256px;overflow:hidden"><img src="assets/images/cat-kerkverwarming.jpg" alt="" style="width:100%;height:100%;object-fit:cover"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent)"></div></div>
         <div style="padding:1.5rem"><h3 style="font-size:1.125rem;font-weight:700;margin:0 0 .5rem">Kerkverwarming</h3><p style="font-size:.875rem;color:var(--text-secondary);margin:0">Speciale verwarmingsoplossingen voor kerken</p></div>
       </a>
-      <a href="producten.html" class="glass t" style="border-radius:1.5rem;overflow:hidden;display:block">
+      <a href="producten.html?cat=zonnepanelen" class="glass t" style="border-radius:1.5rem;overflow:hidden;display:block">
         <div style="position:relative;height:256px;overflow:hidden"><img src="assets/images/hero-terras.jpg" alt="" style="width:100%;height:100%;object-fit:cover"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent)"></div></div>
         <div style="padding:1.5rem"><h3 style="font-size:1.125rem;font-weight:700;margin:0 0 .5rem">Zonnepanelen &amp; LED</h3><p style="font-size:.875rem;color:var(--text-secondary);margin:0">Duurzame energie en sfeerverlichting</p></div>
       </a>
@@ -381,6 +460,13 @@ html.dark .mega-dd { background: rgba(17,17,17,.95); border: 1px solid rgba(255,
   </div>
 </footer>
 
+<!-- WhatsApp Widget -->
+<a href="https://wa.me/31348220338?text=Hallo%2C%20ik%20heb%20een%20vraag%20over%20uw%20verwarmingsoplossingen"
+   target="_blank" rel="noopener noreferrer"
+   class="whatsapp-fab" aria-label="Chat via WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
 <script>
 document.getElementById('theme-toggle').addEventListener('click', function() {
   var html = document.documentElement;
@@ -389,6 +475,14 @@ document.getElementById('theme-toggle').addEventListener('click', function() {
   localStorage.setItem('tvs-theme', isDark ? 'dark' : 'light');
   var meta = document.getElementById('meta-theme-color');
   if (meta) meta.content = isDark ? '#000000' : '#f9fafb';
+});
+
+// Close mobile menu on link click
+document.querySelectorAll('.mobile-link, .mobile-submenu a, .mobile-cta').forEach(function(link) {
+  link.addEventListener('click', function() {
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.body.style.overflow = '';
+  });
 });
 </script>
 </body>
