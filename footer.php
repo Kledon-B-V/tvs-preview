@@ -63,7 +63,7 @@ $company = (string) tvs_cfg('company.full_name', 'Terras Verwarmings Specialiste
 
   <div class="border-t border-gray-200 dark:border-white/5">
     <div class="container max-w-7xl mx-auto px-6 py-6 flex flex-wrap items-center justify-between gap-4">
-      <span class="text-gray-500 dark:text-gray-500 text-sm">&copy; <?php echo date('Y'); ?> <?php echo esc_html($company); ?>. Alle rechten voorbehouden.</span>
+      <span class="text-gray-500 dark:text-gray-500 text-sm">&copy; <?php echo date('Y'); ?> TVS NL B.V. Alle rechten voorbehouden.</span>
       <div class="footer-bottom-links">
         <a class="text-gray-500 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 text-sm no-underline" href="#" data-cc-open>Cookie-instellingen</a>
       </div>

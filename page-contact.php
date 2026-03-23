@@ -38,7 +38,7 @@ $hours_wknd = (string) tvs_cfg('opening_hours.weekend', 'Op afspraak');
             </div>
             <div>
               <h3>Adres</h3>
-              <p>Terras Verwarmings Specialisten TVSnl B.V</p>
+              <p>Terras Verwarmings Specialisten<br><span style="font-size:.875rem;color:var(--text-secondary)">(TVS NL B.V.)</span></p>
               <p><?php echo esc_html($address); ?></p>
               <p><?php echo esc_html($zip . ' ' . $city); ?></p>
             </div>

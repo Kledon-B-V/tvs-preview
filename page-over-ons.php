@@ -26,7 +26,7 @@ get_header();
           maar leveren en monteren ook zonnepanelen.
         </p>
         <p style="color:var(--gray-700)">Tevens hebben wij onze producten uitgebreid met de LED-collectie.</p>
-        <p style="color:var(--gray-700)">Wij leveren zowel aan de zakelijke markt, als ook aan particulieren.</p>
+        <p style="color:var(--gray-700)">Wij leveren aan de zakelijke markt.</p>
         <p style="color:var(--gray-700)">
           Bij de hedendaagse Horeca ondernemer bijvoorbeeld, is een goed en sfeervol ingericht terras
           niet meer weg te denken. De ervaring leert dat deze extra service door alle klanten het eerst

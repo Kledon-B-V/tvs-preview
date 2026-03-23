@@ -10,7 +10,7 @@ $brands = get_terms(['taxonomy' => 'product_merk', 'hide_empty' => false]);
 
 // Product types & applications for quick filter pills
 $types = ['Gas', 'Elektrisch'];
-$applications = ['Horeca', 'Retail', 'Industrieel', 'Kerk', 'Particulier'];
+$applications = ['Horeca', 'Retail', 'Industrieel', 'Kerk'];
 
 // Query products
 $args = [

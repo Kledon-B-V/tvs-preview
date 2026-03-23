@@ -52,7 +52,6 @@ function tvs_product_meta_box_html($post) {
           <option value="Retail" <?php selected($application, 'Retail'); ?>>Retail</option>
           <option value="Industrieel" <?php selected($application, 'Industrieel'); ?>>Industrieel</option>
           <option value="Kerk" <?php selected($application, 'Kerk'); ?>>Kerk</option>
-          <option value="Particulier" <?php selected($application, 'Particulier'); ?>>Particulier</option>
         </select>
       </td>
     </tr>

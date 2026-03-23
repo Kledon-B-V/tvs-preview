@@ -19,7 +19,7 @@ return [
   ],
 
   'company' => [
-    'legal_name' => 'Terras Verwarmings Specialisten TVSnl B.V.',
+    'legal_name' => 'Terras Verwarmings Specialisten (TVS NL B.V.)',
     'short_name' => 'TVS',
     'full_name'  => 'Terras Verwarmings Specialisten',
     'kvk'        => '58781005',
