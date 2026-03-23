@@ -1,0 +1,951 @@
+<!doctype html>
+<html lang="nl" class="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TVS — Producten</title>
+<meta name="theme-color" content="#000000" id="meta-theme-color">
+<script>
+/* Anti-flash: set theme before render */
+(function(){var t=localStorage.getItem('tvs-theme');if(t==='light'){document.documentElement.classList.remove('dark');document.getElementById('meta-theme-color').content='#f9fafb'}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* ===== THEME SYSTEM: CSS Custom Properties ===== */
+:root {
+  --bg: #f9fafb; --bg-card: #ffffff; --bg-card-hover: #f3f4f6;
+  --bg-header: rgba(255,255,255,.6); --bg-glass: rgba(255,255,255,.8);
+  --text: #111827; --text-secondary: #4b5563; --text-muted: #9ca3af;
+  --border: #e5e7eb; --border-hover: #d1d5db;
+  --shadow: 0 1px 3px rgba(0,0,0,.08); --shadow-lg: 0 12px 32px rgba(0,0,0,.08);
+  --orb-opacity: 0.08; --grid-color: rgba(0,0,0,.04);
+  --cta-btn-bg: #111827; --cta-btn-text: #fff;
+  --footer-from: #f9fafb; --footer-to: #f3f4f6;
+}
+html.dark {
+  --bg: #000000; --bg-card: rgba(255,255,255,.05); --bg-card-hover: rgba(255,255,255,.1);
+  --bg-header: rgba(0,0,0,.6); --bg-glass: rgba(255,255,255,.05);
+  --text: #ffffff; --text-secondary: #9ca3af; --text-muted: #6b7280;
+  --border: rgba(255,255,255,.1); --border-hover: rgba(255,255,255,.2);
+  --shadow: none; --shadow-lg: none;
+  --orb-opacity: 0.2; --grid-color: rgba(255,255,255,.02);
+  --cta-btn-bg: #ffffff; --cta-btn-text: #000000;
+  --footer-from: #000000; --footer-to: #030712;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { font-family: 'Inter', system-ui, sans-serif; margin: 0; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; transition: background-color .3s, color .3s; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* Theme transition helper */
+.t { transition: background-color .3s, color .3s, border-color .3s, box-shadow .3s; }
+
+/* Glass card */
+.glass { background: var(--bg-card); border: 1px solid var(--border); border-radius: 1rem; box-shadow: var(--shadow); }
+.glass:hover { border-color: var(--border-hover); box-shadow: var(--shadow-lg); }
+
+/* Background effects */
+.bg-orbs { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: var(--orb-opacity); }
+.bg-grid { position: fixed; inset: 0; z-index: -1; pointer-events: none; background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 64px 64px; }
+
+/* Gradient text */
+.gradient-text { background: linear-gradient(135deg, #E31E24, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+/* Red gradient button */
+.btn-red { display: inline-flex; align-items: center; gap: .5rem; padding: 1rem 2rem; background: linear-gradient(135deg, #E31E24, #ea580c); color: #fff; border-radius: .75rem; font-weight: 700; box-shadow: 0 8px 24px rgba(227,30,36,.25); transition: all .3s; }
+.btn-red:hover { box-shadow: 0 12px 32px rgba(227,30,36,.35); transform: translateY(-1px); }
+
+/* Ghost button */
+.btn-ghost { display: inline-flex; align-items: center; gap: .5rem; padding: 1rem 2rem; background: var(--bg-card); border: 1px solid var(--border); color: var(--text); border-radius: .75rem; font-weight: 700; transition: all .3s; }
+.btn-ghost:hover { background: var(--bg-card-hover); }
+
+/* Header */
+.site-hdr { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 96px; display: flex; align-items: center; background: var(--bg-header); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); border-bottom: 1px solid var(--border); transition: background-color .3s, border-color .3s; }
+
+/* Nav link */
+.nav-link { padding: .625rem 1.25rem; border-radius: .75rem; font-weight: 600; color: var(--text-secondary); transition: all .2s; }
+.nav-link:hover { color: var(--text); }
+.nav-link.active { color: var(--text); background: var(--bg-card); }
+
+/* Toggle button */
+.theme-btn { padding: .75rem; border-radius: .75rem; background: var(--bg-card); border: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .3s; }
+.theme-btn:hover { background: var(--bg-card-hover); }
+.theme-btn svg { width: 20px; height: 20px; }
+html.dark .icon-sun { display: block; } html.dark .icon-moon { display: none; }
+html:not(.dark) .icon-sun { display: none; } html:not(.dark) .icon-moon { display: block; }
+
+/* Footer */
+.site-ftr { background: linear-gradient(to bottom, var(--footer-from), var(--footer-to)); border-top: 1px solid var(--border); transition: background .3s, border-color .3s; }
+.ftr-heading { color: var(--text); font-weight: 600; font-size: .875rem; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 1rem; }
+.ftr-link { color: var(--text-secondary); font-size: .875rem; transition: color .2s; }
+.ftr-link:hover { color: var(--text); }
+
+/* ===== DROPDOWN NAV ===== */
+.nav-item { position: relative; }
+.nav-item > .nav-link { display: inline-flex; align-items: center; gap: .25rem; }
+.nav-arrow { width: 12px; height: 12px; transition: transform .25s; }
+.nav-item:hover > .nav-link .nav-arrow { transform: rotate(180deg); }
+
+.mega-dd {
+  position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(8px);
+  min-width: 220px; padding: .5rem 0;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: .75rem;
+  box-shadow: 0 12px 32px rgba(0,0,0,.12);
+  opacity: 0; visibility: hidden;
+  transition: opacity .2s, transform .2s, visibility .2s;
+  z-index: 200;
+}
+html.dark .mega-dd { box-shadow: 0 12px 32px rgba(0,0,0,.4); }
+.nav-item:hover > .mega-dd {
+  opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+}
+.mega-dd a {
+  display: block; padding: .5rem 1.25rem; font-size: .875rem; font-weight: 500;
+  color: var(--text-secondary); transition: color .15s, background .15s; white-space: nowrap;
+}
+.mega-dd a:hover { color: var(--text); background: var(--bg-card-hover); }
+
+/* ===== PRODUCT PAGE SPECIFIC STYLES ===== */
+
+/* Filter pill */
+.filter-pill {
+  display: inline-flex; align-items: center; gap: .375rem;
+  padding: .5rem 1rem; border-radius: 9999px; font-size: .875rem; font-weight: 600;
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text-secondary); cursor: pointer; transition: all .2s;
+  white-space: nowrap; user-select: none;
+}
+.filter-pill:hover { border-color: var(--border-hover); color: var(--text); }
+.filter-pill.active {
+  background: linear-gradient(135deg, #E31E24, #ea580c);
+  border-color: transparent; color: #fff;
+}
+
+/* Filter section heading */
+.filter-label {
+  font-size: .75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--text-muted); margin-bottom: .75rem;
+}
+
+/* Select dropdown */
+.filter-select {
+  width: 100%; padding: .625rem 1rem; border-radius: .75rem;
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text); font-size: .875rem; font-family: inherit;
+  cursor: pointer; transition: all .2s; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%239ca3af' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right .75rem center;
+}
+.filter-select:focus { outline: none; border-color: #E31E24; }
+
+/* Search input */
+.filter-search {
+  width: 100%; padding: .625rem 1rem .625rem 2.5rem; border-radius: .75rem;
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text); font-size: .875rem; font-family: inherit;
+  transition: all .2s;
+}
+.filter-search::placeholder { color: var(--text-muted); }
+.filter-search:focus { outline: none; border-color: #E31E24; }
+
+/* Product card */
+.product-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 1.5rem; overflow: hidden; transition: all .3s; cursor: pointer;
+}
+.product-card:hover {
+  border-color: var(--border-hover); box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+.product-card .card-img { position: relative; height: 220px; overflow: hidden; }
+.product-card .card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+.product-card:hover .card-img img { transform: scale(1.05); }
+
+/* Range slider */
+input[type="range"] {
+  -webkit-appearance: none; width: 100%; height: 6px; border-radius: 3px;
+  background: var(--border); outline: none; transition: background .2s;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%;
+  background: linear-gradient(135deg, #E31E24, #ea580c); cursor: pointer;
+  box-shadow: 0 2px 8px rgba(227,30,36,.3);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 20px; height: 20px; border-radius: 50%; border: none;
+  background: linear-gradient(135deg, #E31E24, #ea580c); cursor: pointer;
+  box-shadow: 0 2px 8px rgba(227,30,36,.3);
+}
+
+/* No results */
+.no-results { text-align: center; padding: 4rem 2rem; display: none; }
+
+/* Prevent layout shift */
+html { overflow-y: scroll; }
+body.modal-open { overflow: hidden; }
+
+/* Custom scrollbars */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ===== MODAL — clean single implementation ===== */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  display: none; overflow: hidden;
+}
+.modal-overlay.open { display: block; }
+
+/* Close btn */
+.modal-close {
+  position: fixed; top: 1.5rem; right: 1.5rem; z-index: 220;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+  color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 1.25rem; transition: all .2s;
+}
+.modal-close:hover { background: rgba(255,255,255,.2); }
+
+/* Nav buttons on overlay */
+.modal-nav {
+  position: fixed; top: 50%; transform: translateY(-50%); z-index: 220;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+  color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.modal-nav:hover { background: rgba(255,255,255,.25); }
+.modal-nav.prev { left: 1.5rem; }
+.modal-nav.next { right: 1.5rem; }
+
+/* Card container */
+.modal-card {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: calc(100% - 8rem); max-width: 64rem; max-height: 85vh;
+  border-radius: 1.5rem; overflow: hidden;
+  display: grid; grid-template-columns: 45% 55%;
+}
+html.dark .modal-card { background: #111; border: 1px solid rgba(255,255,255,.1); }
+html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
+
+/* Left: image */
+.modal-left {
+  position: relative; overflow: hidden;
+  background: #000; min-height: 400px;
+}
+.modal-left img.modal-main-img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block; min-height: 400px;
+}
+.modal-thumbs {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  display: flex; gap: .5rem; padding: .75rem 1rem;
+  background: linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,.4), transparent);
+}
+.modal-thumb {
+  width: 56px; height: 56px; border-radius: .375rem; overflow: hidden;
+  cursor: pointer; border: 2px solid rgba(255,255,255,.25);
+  transition: all .2s; flex-shrink: 0; opacity: .7;
+}
+.modal-thumb:hover { opacity: 1; border-color: rgba(255,255,255,.5); }
+.modal-thumb.active { border-color: #E31E24; opacity: 1; }
+.modal-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Right: info — this is the ONLY scrollable area */
+.modal-right {
+  overflow-y: auto; max-height: 85vh; padding: 2rem;
+}
+.modal-right::-webkit-scrollbar { width: 5px; }
+.modal-right::-webkit-scrollbar-track { background: transparent; }
+.modal-right::-webkit-scrollbar-thumb { background: rgba(128,128,128,.3); border-radius: 3px; }
+
+/* Mobile modal */
+@media(max-width:900px) {
+  .modal-card { grid-template-columns: 1fr; width: calc(100% - 2rem); max-height: 92vh; }
+  .modal-left { min-height: 250px; max-height: 40vh; }
+  .modal-left img.modal-main-img { min-height: 250px; }
+  .modal-right { max-height: 52vh; }
+  .modal-nav.prev { left: .5rem; }
+  .modal-nav.next { right: .5rem; }
+  .modal-close { top: .75rem; right: .75rem; }
+}
+
+@media(max-width:1024px) {
+  .desk-nav { display: none !important; }
+  .products-layout { grid-template-columns: 1fr !important; }
+  .filter-sidebar { position: static !important; top: auto !important; }
+}
+@media(max-width:768px) {
+  .product-grid { grid-template-columns: 1fr !important; }
+  .modal-card { grid-template-columns: 1fr !important; }
+  .modal-card .modal-left { min-height: 300px !important; }
+  .modal-card .modal-right { max-height: 60vh; }
+  .ftr-grid { grid-template-columns: 1fr !important; }
+}
+@media(max-width:480px) {
+  .hero-producten h1 { font-size: 2.5rem !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg-orbs" aria-hidden="true">
+  <div style="position:absolute;top:15%;left:10%;width:500px;height:500px;background:#E31E24;border-radius:50%;filter:blur(120px)"></div>
+  <div style="position:absolute;bottom:20%;right:10%;width:400px;height:400px;background:#f97316;border-radius:50%;filter:blur(120px)"></div>
+</div>
+<div class="bg-grid" aria-hidden="true"></div>
+
+<!-- Header -->
+<header class="site-hdr">
+  <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem;width:100%;display:flex;align-items:center;justify-content:space-between">
+    <a href="index.html" style="display:flex;align-items:center">
+      <img src="assets/images/logo-tvs.svg" alt="TVS" style="height:56px;width:auto">
+    </a>
+    <div style="display:flex;align-items:center;gap:.5rem">
+      <nav class="desk-nav" style="display:flex;align-items:center;gap:.25rem">
+        <a href="index.html" class="nav-link">Home</a>
+        <div class="nav-item">
+          <a href="producten.html" class="nav-link active">Producten <svg class="nav-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="mega-dd">
+            <a href="producten.html">Terrasverwarming</a>
+            <a href="producten.html">Terras &amp; Loungehaarden</a>
+            <a href="producten.html">Halverwarming</a>
+            <a href="producten.html">Kerkverwarming</a>
+            <a href="producten.html">Zonnepanelen &amp; LED</a>
+            <a href="producten.html" style="border-top:1px solid var(--border);margin-top:.25rem;padding-top:.75rem;color:var(--text);font-weight:600">Bekijk alle producten &rarr;</a>
+          </div>
+        </div>
+        <a href="over-ons.html" class="nav-link">Over Ons</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="contact.html" class="btn-red" style="margin-left:.5rem;padding:.625rem 1.5rem;font-size:.875rem">Offerte Aanvragen</a>
+      </nav>
+      <button class="theme-btn" id="theme-toggle" aria-label="Wissel thema">
+        <svg class="icon-sun" fill="none" stroke="#eab308" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main style="padding-top:96px">
+
+<!-- Hero Section -->
+<section class="hero-producten" style="position:relative;padding:5rem 0 4rem;overflow:hidden">
+  <div style="position:absolute;inset:0;z-index:0;pointer-events:none">
+    <div style="position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:800px;height:400px;background:linear-gradient(135deg,rgba(227,30,36,.15),rgba(249,115,22,.1));border-radius:50%;filter:blur(80px)"></div>
+  </div>
+  <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1;text-align:center">
+    <div class="glass t" style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;border-radius:9999px;margin-bottom:1.5rem">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="#E31E24"><path d="M20 7h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM10 4h4v3h-4V4z"/></svg>
+      <span style="font-size:.875rem;font-weight:600;color:var(--text-secondary)">Professioneel Assortiment</span>
+    </div>
+    <h1 style="font-size:clamp(2.5rem,6vw,4rem);font-weight:900;line-height:1.1;margin:0 0 1rem">
+      Ons <span class="gradient-text">Assortiment</span>
+    </h1>
+    <p style="font-size:1.25rem;color:var(--text-secondary);max-width:640px;margin:0 auto 2rem;line-height:1.7">
+      Ontdek ons complete assortiment van 143+ verwarmings- en klimaatoplossingen
+    </p>
+    <div class="glass t" id="product-count-badge" style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.25rem;border-radius:9999px">
+      <span style="width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block"></span>
+      <span style="font-size:.875rem;font-weight:600;color:var(--text-secondary)"><span id="product-count">7</span> producten gevonden</span>
+    </div>
+  </div>
+</section>
+
+<!-- Main Content -->
+<section style="padding:0 0 6rem">
+  <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem">
+    <div class="products-layout" style="display:grid;grid-template-columns:1fr 3fr;gap:2rem">
+
+      <!-- Left Sidebar: FilterPanel -->
+      <aside class="filter-sidebar" style="position:sticky;top:120px;align-self:start">
+        <div class="glass t" style="padding:1.5rem;border-radius:1.5rem">
+          <h3 style="font-size:1.125rem;font-weight:700;margin:0 0 1.5rem;display:flex;align-items:center;gap:.5rem">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            Filters
+          </h3>
+
+          <!-- Search -->
+          <div style="margin-bottom:1.5rem">
+            <div class="filter-label">Zoeken</div>
+            <div style="position:relative">
+              <svg width="16" height="16" fill="none" stroke="var(--text-muted)" stroke-width="2" viewBox="0 0 24 24" style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" class="filter-search" id="filter-search" placeholder="Zoek product...">
+            </div>
+          </div>
+
+          <!-- Category pills -->
+          <div style="margin-bottom:1.5rem">
+            <div class="filter-label">Categorie</div>
+            <div style="display:flex;flex-wrap:wrap;gap:.5rem" id="category-filters">
+              <button class="filter-pill active" data-filter="category" data-value="all">Alle</button>
+              <button class="filter-pill" data-filter="category" data-value="terrasverwarming-gas">Terrasverwarming Gas</button>
+              <button class="filter-pill" data-filter="category" data-value="terrasverwarming-elektrisch">Terrasverwarming Elektrisch</button>
+              <button class="filter-pill" data-filter="category" data-value="verplaatsbaar">Verplaatsbaar</button>
+              <button class="filter-pill" data-filter="category" data-value="parasolverwarming">Parasolverwarming</button>
+              <button class="filter-pill" data-filter="category" data-value="donkerstralers">Donkerstralers</button>
+              <button class="filter-pill" data-filter="category" data-value="loungehaarden">Loungehaarden</button>
+            </div>
+          </div>
+
+          <!-- Type pills -->
+          <div style="margin-bottom:1.5rem">
+            <div class="filter-label">Type</div>
+            <div style="display:flex;flex-wrap:wrap;gap:.5rem" id="type-filters">
+              <button class="filter-pill active" data-filter="type" data-value="all">Alle</button>
+              <button class="filter-pill" data-filter="type" data-value="gas">Gas</button>
+              <button class="filter-pill" data-filter="type" data-value="elektrisch">Elektrisch</button>
+              <button class="filter-pill" data-filter="type" data-value="infrarood">Infrarood</button>
+              <button class="filter-pill" data-filter="type" data-value="lpg">LPG</button>
+            </div>
+          </div>
+
+          <!-- Brand dropdown -->
+          <div style="margin-bottom:1.5rem">
+            <div class="filter-label">Merk</div>
+            <select class="filter-select" id="filter-brand">
+              <option value="all">Alle</option>
+              <option value="tvs">TVS</option>
+              <option value="eurom">Eurom</option>
+              <option value="burda">Burda</option>
+              <option value="frico">Frico</option>
+              <option value="herschel">Herschel</option>
+              <option value="goldsun">Goldsun</option>
+              <option value="happy-cocooning">Happy Cocooning</option>
+            </select>
+          </div>
+
+          <!-- Application dropdown -->
+          <div style="margin-bottom:1.5rem">
+            <div class="filter-label">Toepassing</div>
+            <select class="filter-select" id="filter-application">
+              <option value="all">Alle</option>
+              <option value="horeca">Horeca</option>
+              <option value="retail">Retail</option>
+              <option value="industrieel">Industrieel</option>
+              <option value="kerk">Kerk</option>
+              <option value="particulier">Particulier</option>
+              <option value="sport-tribune">Sport &amp; Tribune</option>
+            </select>
+          </div>
+
+          <!-- Price range slider -->
+          <div style="margin-bottom:1.5rem">
+            <div class="filter-label">Maximale prijs</div>
+            <input type="range" id="filter-price" min="0" max="3000" value="3000" step="50">
+            <div style="display:flex;justify-content:space-between;margin-top:.5rem;font-size:.75rem;color:var(--text-muted)">
+              <span>&euro;0</span>
+              <span style="font-weight:700;color:var(--text)" id="price-display">&euro;3000</span>
+            </div>
+          </div>
+
+          <!-- Reset button -->
+          <button id="reset-filters" style="width:100%;padding:.75rem 1rem;border-radius:.75rem;background:var(--bg-card-hover);border:1px solid var(--border);color:var(--text-secondary);font-size:.875rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:.5rem">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            Reset Filters
+          </button>
+        </div>
+      </aside>
+
+      <!-- Right Content: ProductGrid -->
+      <div>
+        <div class="product-grid" id="product-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem">
+
+          <!-- Product 1: TVS Heatstrip 2000W -->
+          <div class="product-card" data-category="terrasverwarming-elektrisch" data-type="elektrisch" data-brand="tvs" data-application="horeca" data-name="TVS Heatstrip 2000W" data-price="459" onclick="openModal(0)">
+            <div class="card-img">
+              <img src="assets/images/product-outdoor-dining.jpg" alt="TVS Heatstrip 2000W">
+              <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent)"></div>
+              <span style="position:absolute;top:.75rem;left:.75rem;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.2)">Elektrisch</span>
+            </div>
+            <div style="padding:1.25rem">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Terrasverwarming Elektrisch</div>
+              <h3 style="font-size:1rem;font-weight:700;margin:0 0 .5rem;transition:color .2s">TVS Heatstrip 2000W</h3>
+              <p style="font-size:.875rem;color:var(--text-muted);margin:0 0 1rem">TVS &bull; 2000W</p>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <span style="font-size:1.5rem;font-weight:900">&euro;459</span>
+                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Bekijk</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2: Patioheater TVS-514 RVS -->
+          <div class="product-card" data-category="terrasverwarming-gas" data-type="gas" data-brand="tvs" data-application="horeca" data-name="Patioheater TVS-514 RVS" data-price="899" onclick="openModal(1)">
+            <div class="card-img">
+              <img src="assets/images/hero-terras.jpg" alt="Patioheater TVS-514 RVS">
+              <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent)"></div>
+              <span style="position:absolute;top:.75rem;left:.75rem;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.2)">Gas</span>
+              <span style="position:absolute;top:.75rem;right:.75rem;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:700;background:linear-gradient(135deg,#eab308,#ea580c);color:#fff;display:flex;align-items:center;gap:.25rem">
+                <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.09 6.26L20.18 9.27l-5 4.87L16.36 21 12 17.77 7.64 21l1.18-6.86-5-4.87 6.09-1.01L12 2z"/></svg>
+                Top
+              </span>
+            </div>
+            <div style="padding:1.25rem">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Terrasverwarming Gas</div>
+              <h3 style="font-size:1rem;font-weight:700;margin:0 0 .5rem;transition:color .2s">Patioheater TVS-514 RVS</h3>
+              <p style="font-size:.875rem;color:var(--text-muted);margin:0 0 1rem">TVS &bull; 12kW</p>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <span style="font-size:1.5rem;font-weight:900">&euro;899</span>
+                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Bekijk</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3: TVS Aqua LG 3000W Zwart -->
+          <div class="product-card" data-category="terrasverwarming-elektrisch" data-type="infrarood" data-brand="goldsun" data-application="horeca" data-name="TVS Aqua LG 3000W Zwart" data-price="679" onclick="openModal(2)">
+            <div class="card-img">
+              <img src="assets/images/cat-halverwarming.jpg" alt="TVS Aqua LG 3000W Zwart">
+              <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent)"></div>
+              <span style="position:absolute;top:.75rem;left:.75rem;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.2)">Infrarood</span>
+            </div>
+            <div style="padding:1.25rem">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Terrasverwarming Elektrisch</div>
+              <h3 style="font-size:1rem;font-weight:700;margin:0 0 .5rem;transition:color .2s">TVS Aqua LG 3000W Zwart</h3>
+              <p style="font-size:.875rem;color:var(--text-muted);margin:0 0 1rem">Goldsun &bull; 3000W</p>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <span style="font-size:1.5rem;font-weight:900">&euro;679</span>
+                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Bekijk</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4: Elektrische Donkerstraler 3200W -->
+          <div class="product-card" data-category="donkerstralers" data-type="infrarood" data-brand="tvs" data-application="industrieel" data-name="Elektrische Donkerstraler 3200W" data-price="549" onclick="openModal(3)">
+            <div class="card-img">
+              <img src="assets/images/product-warehouse.jpg" alt="Elektrische Donkerstraler 3200W">
+              <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent)"></div>
+              <span style="position:absolute;top:.75rem;left:.75rem;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.2)">Infrarood</span>
+            </div>
+            <div style="padding:1.25rem">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Donkerstralers</div>
+              <h3 style="font-size:1rem;font-weight:700;margin:0 0 .5rem;transition:color .2s">Elektrische Donkerstraler 3200W</h3>
+              <p style="font-size:.875rem;color:var(--text-muted);margin:0 0 1rem">TVS &bull; 3200W</p>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <span style="font-size:1.5rem;font-weight:900">&euro;549</span>
+                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Bekijk</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 5: Happy Cocooning Vuurtafel Rechthoek -->
+          <div class="product-card" data-category="loungehaarden" data-type="gas" data-brand="happy-cocooning" data-application="particulier" data-name="Happy Cocooning Vuurtafel Rechthoek" data-price="1299" onclick="openModal(4)">
+            <div class="card-img">
+              <img src="assets/images/cta-terrace.jpg" alt="Happy Cocooning Vuurtafel Rechthoek">
+              <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent)"></div>
+              <span style="position:absolute;top:.75rem;left:.75rem;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.2)">Gas</span>
+              <span style="position:absolute;top:.75rem;right:.75rem;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:700;background:linear-gradient(135deg,#eab308,#ea580c);color:#fff;display:flex;align-items:center;gap:.25rem">
+                <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.09 6.26L20.18 9.27l-5 4.87L16.36 21 12 17.77 7.64 21l1.18-6.86-5-4.87 6.09-1.01L12 2z"/></svg>
+                Top
+              </span>
+            </div>
+            <div style="padding:1.25rem">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Loungehaarden</div>
+              <h3 style="font-size:1rem;font-weight:700;margin:0 0 .5rem;transition:color .2s">Happy Cocooning Vuurtafel Rechthoek</h3>
+              <p style="font-size:.875rem;color:var(--text-muted);margin:0 0 1rem">Happy Cocooning</p>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <span style="font-size:1.5rem;font-weight:900">&euro;1.299</span>
+                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Bekijk</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 6: TVS Halverwarmer 18kW -->
+          <div class="product-card" data-category="halverwarming" data-type="gas" data-brand="tvs" data-application="industrieel" data-name="TVS Halverwarmer 18kW" data-price="1599" onclick="openModal(5)">
+            <div class="card-img">
+              <img src="assets/images/product-warehouse.jpg" alt="TVS Halverwarmer 18kW">
+              <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent)"></div>
+              <span style="position:absolute;top:.75rem;left:.75rem;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.2)">Gas</span>
+            </div>
+            <div style="padding:1.25rem">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Halverwarming</div>
+              <h3 style="font-size:1rem;font-weight:700;margin:0 0 .5rem;transition:color .2s">TVS Halverwarmer 18kW</h3>
+              <p style="font-size:.875rem;color:var(--text-muted);margin:0 0 1rem">TVS &bull; 18kW</p>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <span style="font-size:1.5rem;font-weight:900">&euro;1.599</span>
+                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Bekijk</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 7: TVS Parasolset Aqua 1500W -->
+          <div class="product-card" data-category="parasolverwarming" data-type="infrarood" data-brand="goldsun" data-application="horeca" data-name="TVS Parasolset Aqua 1500W" data-price="349" onclick="openModal(6)">
+            <div class="card-img">
+              <img src="assets/images/product-outdoor-dining.jpg" alt="TVS Parasolset Aqua 1500W">
+              <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent)"></div>
+              <span style="position:absolute;top:.75rem;left:.75rem;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.2)">Infrarood</span>
+            </div>
+            <div style="padding:1.25rem">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Parasolverwarming</div>
+              <h3 style="font-size:1rem;font-weight:700;margin:0 0 .5rem;transition:color .2s">TVS Parasolset Aqua 1500W</h3>
+              <p style="font-size:.875rem;color:var(--text-muted);margin:0 0 1rem">Goldsun &bull; 1500W</p>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <span style="font-size:1.5rem;font-weight:900">&euro;349</span>
+                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Bekijk</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- No results message -->
+        <div class="no-results" id="no-results">
+          <svg width="64" height="64" fill="none" stroke="var(--text-muted)" stroke-width="1.5" viewBox="0 0 24 24" style="margin:0 auto 1rem"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <h3 style="font-size:1.25rem;font-weight:700;margin:0 0 .5rem">Geen producten gevonden</h3>
+          <p style="color:var(--text-secondary);margin:0 0 1.5rem">Pas je filters aan om meer producten te zien.</p>
+          <button onclick="resetFilters()" class="btn-red" style="font-size:.875rem;padding:.75rem 1.5rem;border:none;cursor:pointer;font-family:inherit">Reset Filters</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Product Modal -->
+<div class="modal-overlay" id="product-modal">
+  <button class="modal-close" onclick="closeModal()">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <button class="modal-nav prev" onclick="navigateModal(-1)">
+    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="modal-nav next" onclick="navigateModal(1)">
+    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <div class="modal-card" id="modal-card">
+    <div class="modal-left" id="modal-left"></div>
+    <div class="modal-right" id="modal-right"></div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="site-ftr">
+  <div style="max-width:1400px;margin:0 auto;padding:4rem 1.5rem">
+    <div class="ftr-grid" style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem">
+      <div>
+        <img src="assets/images/logo-tvs.svg" alt="TVS" style="height:48px;width:auto;margin-bottom:1rem">
+        <p style="color:var(--text-secondary);font-size:.875rem;line-height:1.7;margin:0">Specialist in verwarmingsoplossingen voor terrassen, hallen, kerken en meer.</p>
+      </div>
+      <div>
+        <div class="ftr-heading">Producten</div>
+        <div style="display:flex;flex-direction:column;gap:.625rem"><a href="#" class="ftr-link">Terrasverwarming</a><a href="#" class="ftr-link">Halverwarming</a><a href="#" class="ftr-link">Kerkverwarming</a></div>
+      </div>
+      <div>
+        <div class="ftr-heading">Navigatie</div>
+        <div style="display:flex;flex-direction:column;gap:.625rem"><a href="index.html" class="ftr-link">Home</a><a href="producten.html" class="ftr-link">Producten</a><a href="index.html#waarom-tvs" class="ftr-link">Over Ons</a><a href="index.html#contact" class="ftr-link">Contact</a></div>
+      </div>
+      <div>
+        <div class="ftr-heading">Contact</div>
+        <div style="display:flex;flex-direction:column;gap:.625rem;font-size:.875rem;color:var(--text-secondary)">
+          <span>Nijverheidsweg 16B</span><span>3481 MB Harmelen</span>
+          <a href="tel:0348220338" class="ftr-link" style="margin-top:.5rem">0348-220338</a>
+          <a href="mailto:info@terrasverwarmer.nu" class="ftr-link">info@terrasverwarmer.nu</a>
+        </div>
+      </div>
+    </div>
+    <div style="padding-top:2rem;border-top:1px solid var(--border);text-align:center">
+      <p style="color:var(--text-muted);font-size:.875rem;margin:0">&copy; 2026 Terras Verwarmings Specialisten B.V. Alle rechten voorbehouden.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ===== THEME TOGGLE ===== */
+document.getElementById('theme-toggle').addEventListener('click', function() {
+  var html = document.documentElement;
+  html.classList.toggle('dark');
+  var isDark = html.classList.contains('dark');
+  localStorage.setItem('tvs-theme', isDark ? 'dark' : 'light');
+  var meta = document.getElementById('meta-theme-color');
+  if (meta) meta.content = isDark ? '#000000' : '#f9fafb';
+});
+
+/* ===== PRODUCT DATA ===== */
+var products = [
+  {
+    name: 'TVS Heatstrip 2000W',
+    category: 'Terrasverwarming Elektrisch', type: 'Elektrisch', brand: 'TVS', power: '2000W',
+    price: 459, application: 'Horeca', featured: false,
+    image: 'assets/images/product-outdoor-dining.jpg',
+    images: ['assets/images/product-outdoor-dining.jpg','assets/images/hero-terras.jpg','assets/images/cta-terrace.jpg','assets/images/hero-restaurant.jpg'],
+    description: 'Slanke elektrische heatstrip met infrarood technologie voor directe warmte op het terras. Ideaal voor montage onder overkappingen en luifels. IP65 waterdicht en geruisloos.',
+    features: ['IP65 waterdicht','Infrarood warmte','Geruisloos','Slank design','Muur-/plafondmontage','Geen CO2 uitstoot'],
+    specs: {Vermogen:'2000W',Aansluiting:'230V',Bereik:'14 m\u00B2',Lengte:'60 cm',Gewicht:'3.2 kg',Garantie:'2 jaar',Kleur:'Antraciet',Certificering:'CE / IP65'}
+  },
+  {
+    name: 'Patioheater TVS-514 RVS',
+    category: 'Terrasverwarming Gas', type: 'Gas', brand: 'TVS', power: '12kW',
+    price: 899, application: 'Horeca', featured: true,
+    image: 'assets/images/hero-terras.jpg',
+    images: ['assets/images/hero-terras.jpg','assets/images/product-outdoor-dining.jpg','assets/images/hero-restaurant.jpg','assets/images/cta-terrace.jpg'],
+    description: 'De TVS-514 is onze bestseller patioheater in volledig RVS uitvoering. Met 12kW vermogen verwarmt deze staande terrasverwarmer een bereik tot 21 m\u00B2. Voorzien van piezo-ontsteking en kantelbeveiliging.',
+    features: ['Piezo-ontsteking','Kantelbeveiliging','Volledige RVS uitvoering','Wielen voor mobiliteit','Thermokoppel beveiliging','Windbestendig ontwerp'],
+    specs: {Vermogen:'12kW',Brandstof:'Propaan/Butaan',Bereik:'21 m\u00B2',Hoogte:'220 cm',Gewicht:'18 kg',Garantie:'3 jaar',Kleur:'RVS',Certificering:'CE / TUV'}
+  },
+  {
+    name: 'TVS Aqua LG 3000W Zwart',
+    category: 'Terrasverwarming Elektrisch', type: 'Infrarood', brand: 'Goldsun', power: '3000W',
+    price: 679, application: 'Horeca', featured: false,
+    image: 'assets/images/cat-halverwarming.jpg',
+    images: ['assets/images/cat-halverwarming.jpg','assets/images/hero-terras.jpg','assets/images/product-outdoor-dining.jpg','assets/images/cta-terrace.jpg'],
+    description: 'Premium infrarood terrasverwarmer van Goldsun met low-glare element voor minimale lichtemissie. Waterbestendig (IP55) en geschikt voor intensief horeca gebruik. Levert gerichte stralingswarmte.',
+    features: ['Low-glare element','IP55 waterbestendig','3 warmtestanden','Afstandsbediening','Instant warmte','Ultra-stil'],
+    specs: {Vermogen:'3000W',Aansluiting:'230V',Bereik:'20 m\u00B2',Lengte:'105 cm',Gewicht:'5.8 kg',Garantie:'3 jaar',Kleur:'Zwart',Certificering:'CE / IP55'}
+  },
+  {
+    name: 'Elektrische Donkerstraler 3200W',
+    category: 'Donkerstralers', type: 'Infrarood', brand: 'TVS', power: '3200W',
+    price: 549, application: 'Industrieel', featured: false,
+    image: 'assets/images/product-warehouse.jpg',
+    images: ['assets/images/product-warehouse.jpg','assets/images/cat-halverwarming.jpg','assets/images/product-modern-interior.jpg','assets/images/hero-restaurant.jpg'],
+    description: 'Krachtige donkerstraler voor industri\u00EBle toepassingen. Produceert geen zichtbaar licht, enkel infraroodstraling voor effici\u00EBnte en gerichte verwarming van werkplekken en magazijnen.',
+    features: ['Geen zichtbaar licht','Gerichte verwarming','Dimbaar 0-100%','IP44 beschermd','Koppelbaar in zones','Lange levensduur'],
+    specs: {Vermogen:'3200W',Aansluiting:'230V',Bereik:'24 m\u00B2',Lengte:'120 cm',Gewicht:'6.5 kg',Garantie:'3 jaar',Kleur:'Antraciet',Certificering:'CE / IP44'}
+  },
+  {
+    name: 'Happy Cocooning Vuurtafel Rechthoek',
+    category: 'Loungehaarden', type: 'Gas', brand: 'Happy Cocooning', power: 'n.v.t.',
+    price: 1299, application: 'Particulier', featured: true,
+    image: 'assets/images/cta-terrace.jpg',
+    images: ['assets/images/cta-terrace.jpg','assets/images/hero-terras.jpg','assets/images/product-outdoor-dining.jpg','assets/images/hero-restaurant.jpg'],
+    description: 'Stijlvolle rechthoekige vuurtafel van Happy Cocooning. Creëert een warme en gezellige sfeer op uw terras of in de tuin. Werkt op gas en is eenvoudig te bedienen met de bijgeleverde afstandsbediening.',
+    features: ['Betonlook afwerking','Afstandsbediening','Vlamhoogte regelbaar','Glasvenster bescherming','Weerbestendig','Eenvoudige installatie'],
+    specs: {Vermogen:'10kW',Brandstof:'Propaan',Afmetingen:'107x80x50 cm',Gewicht:'65 kg',Garantie:'2 jaar',Kleur:'Grijs/Antraciet',Materiaal:'Vezelversterkt beton',Certificering:'CE'}
+  },
+  {
+    name: 'TVS Halverwarmer 18kW',
+    category: 'Halverwarming', type: 'Gas', brand: 'TVS', power: '18kW',
+    price: 1599, application: 'Industrieel', featured: false,
+    image: 'assets/images/product-warehouse.jpg',
+    images: ['assets/images/product-warehouse.jpg','assets/images/cat-halverwarming.jpg','assets/images/product-modern-interior.jpg','assets/images/hero-restaurant.jpg'],
+    description: 'Krachtige industriële halverwarmer met 18kW vermogen voor grote ruimtes zoals magazijnen, werkplaatsen en sporthallen. Hoog rendement van 95% en modulerend vermogen voor optimale effici\u00EBntie.',
+    features: ['Hoog rendement (95%)','Thermostaat aansluiting','Modulerend vermogen','Lage geluidsproductie','Robuuste constructie','Geschikt voor grote ruimtes'],
+    specs: {Vermogen:'18kW',Brandstof:'Aardgas',Bereik:'120 m\u00B2',Afmetingen:'85x45x35 cm',Gewicht:'28 kg',Garantie:'5 jaar',Kleur:'Grijs',Certificering:'CE / EN 13842'}
+  },
+  {
+    name: 'TVS Parasolset Aqua 1500W',
+    category: 'Parasolverwarming', type: 'Infrarood', brand: 'Goldsun', power: '1500W',
+    price: 349, application: 'Horeca', featured: false,
+    image: 'assets/images/product-outdoor-dining.jpg',
+    images: ['assets/images/product-outdoor-dining.jpg','assets/images/hero-terras.jpg','assets/images/cta-terrace.jpg','assets/images/hero-restaurant.jpg'],
+    description: 'Compacte infrarood parasolverwarmer die eenvoudig aan de parasolstok bevestigd wordt. Ideaal voor horecaterrassen waar ruimte schaars is. Waterbestendig en direct warmte na het inschakelen.',
+    features: ['Parasolmontage','IP55 waterbestendig','Compact design','Instant warmte','Geen CO2 uitstoot','Eenvoudige installatie'],
+    specs: {Vermogen:'1500W',Aansluiting:'230V',Bereik:'9 m\u00B2',Diameter:'42 cm',Gewicht:'2.1 kg',Garantie:'2 jaar',Kleur:'Zwart',Certificering:'CE / IP55'}
+  }
+];
+
+var currentModalIndex = -1;
+var visibleProducts = [];
+
+/* ===== FILTERING ===== */
+var activeFilters = {
+  category: 'all',
+  type: 'all',
+  brand: 'all',
+  application: 'all',
+  search: '',
+  maxPrice: 3000
+};
+
+function applyFilters() {
+  var cards = document.querySelectorAll('.product-card');
+  var count = 0;
+  visibleProducts = [];
+
+  cards.forEach(function(card) {
+    var show = true;
+    var cat = card.getAttribute('data-category');
+    var type = card.getAttribute('data-type');
+    var brand = card.getAttribute('data-brand');
+    var app = card.getAttribute('data-application');
+    var name = card.getAttribute('data-name').toLowerCase();
+    var price = parseInt(card.getAttribute('data-price'));
+
+    if (activeFilters.category !== 'all' && cat !== activeFilters.category) show = false;
+    if (activeFilters.type !== 'all' && type !== activeFilters.type) show = false;
+    if (activeFilters.brand !== 'all' && brand !== activeFilters.brand) show = false;
+    if (activeFilters.application !== 'all' && app !== activeFilters.application) show = false;
+    if (activeFilters.search && name.indexOf(activeFilters.search.toLowerCase()) === -1) show = false;
+    if (price > activeFilters.maxPrice) show = false;
+
+    card.style.display = show ? '' : 'none';
+    if (show) {
+      count++;
+      var idx = parseInt(card.getAttribute('onclick').match(/\d+/)[0]);
+      visibleProducts.push(idx);
+    }
+  });
+
+  document.getElementById('product-count').textContent = count;
+  document.getElementById('no-results').style.display = count === 0 ? 'block' : 'none';
+}
+
+/* Pill click handlers */
+document.querySelectorAll('.filter-pill').forEach(function(pill) {
+  pill.addEventListener('click', function() {
+    var filterType = this.getAttribute('data-filter');
+    var value = this.getAttribute('data-value');
+    var parent = this.parentElement;
+
+    parent.querySelectorAll('.filter-pill').forEach(function(p) { p.classList.remove('active'); });
+    this.classList.add('active');
+
+    activeFilters[filterType] = value;
+    applyFilters();
+  });
+});
+
+/* Search input */
+document.getElementById('filter-search').addEventListener('input', function() {
+  activeFilters.search = this.value;
+  applyFilters();
+});
+
+/* Dropdowns */
+document.getElementById('filter-brand').addEventListener('change', function() {
+  activeFilters.brand = this.value;
+  applyFilters();
+});
+document.getElementById('filter-application').addEventListener('change', function() {
+  activeFilters.application = this.value;
+  applyFilters();
+});
+
+/* Price range */
+document.getElementById('filter-price').addEventListener('input', function() {
+  activeFilters.maxPrice = parseInt(this.value);
+  document.getElementById('price-display').textContent = '\u20AC' + parseInt(this.value).toLocaleString('nl-NL');
+  applyFilters();
+});
+
+/* Reset */
+function resetFilters() {
+  activeFilters = { category:'all', type:'all', brand:'all', application:'all', search:'', maxPrice:3000 };
+  document.querySelectorAll('.filter-pill').forEach(function(p) {
+    p.classList.remove('active');
+    if (p.getAttribute('data-value') === 'all') p.classList.add('active');
+  });
+  document.getElementById('filter-search').value = '';
+  document.getElementById('filter-brand').value = 'all';
+  document.getElementById('filter-application').value = 'all';
+  document.getElementById('filter-price').value = 3000;
+  document.getElementById('price-display').textContent = '\u20AC3000';
+  applyFilters();
+}
+document.getElementById('reset-filters').addEventListener('click', resetFilters);
+
+/* Initial visible products */
+(function() {
+  visibleProducts = [];
+  for (var i = 0; i < products.length; i++) visibleProducts.push(i);
+})();
+
+/* ===== MODAL ===== */
+function formatPrice(p) {
+  return '\u20AC' + p.toLocaleString('nl-NL');
+}
+
+function openModal(index) {
+  currentModalIndex = index;
+  var p = products[index];
+  var modal = document.getElementById('product-modal');
+  var left = document.getElementById('modal-left');
+  var right = document.getElementById('modal-right');
+
+  // Thumbnails
+  var thumbsHtml = '';
+  p.images.forEach(function(img, i) {
+    thumbsHtml += '<div class="modal-thumb' + (i === 0 ? ' active' : '') + '" onclick="changeModalImage(\'' + img + '\', this)"><img src="' + img + '" alt=""></div>';
+  });
+
+  // Left panel: image + thumbs
+  left.innerHTML =
+    '<img class="modal-main-img" id="modal-main-img" src="' + p.images[0] + '" alt="' + p.name + '">' +
+    '<div class="modal-thumbs">' + thumbsHtml + '</div>';
+
+  // Features
+  var featuresHtml = '';
+  p.features.forEach(function(f) {
+    featuresHtml += '<div style="display:flex;align-items:center;gap:.5rem"><svg width="16" height="16" fill="none" stroke="#22c55e" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span style="font-size:.875rem">' + f + '</span></div>';
+  });
+
+  // Specs
+  var specsHtml = '';
+  Object.keys(p.specs).forEach(function(key) {
+    specsHtml += '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:.75rem;padding:.75rem 1rem"><div style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.25rem">' + key + '</div><div style="font-size:.875rem;font-weight:600">' + p.specs[key] + '</div></div>';
+  });
+
+  // Featured badge
+  var featured = p.featured ? '<span style="padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:700;background:linear-gradient(135deg,#eab308,#ea580c);color:#fff">Top Product</span>' : '';
+
+  // Right panel: info
+  right.innerHTML =
+    '<div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem">' +
+      '<span style="padding:.375rem .875rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:rgba(227,30,36,.12);color:#E31E24">' + p.category + '</span>' +
+      '<span style="padding:.375rem .875rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:var(--bg-card);border:1px solid var(--border);color:var(--text-secondary)">' + p.type + '</span>' +
+      featured +
+    '</div>' +
+    '<h2 style="font-size:1.75rem;font-weight:800;margin:0 0 .5rem;line-height:1.25">' + p.name + '</h2>' +
+    '<div class="gradient-text" style="font-size:2.5rem;font-weight:900;margin-bottom:1.25rem">' + formatPrice(p.price) + '</div>' +
+    '<p style="color:var(--text-secondary);line-height:1.7;margin:0 0 1.5rem;font-size:.9375rem">' + p.description + '</p>' +
+    '<h3 style="font-weight:700;margin:0 0 .75rem;font-size:1rem">Kenmerken</h3>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem .75rem;margin-bottom:1.5rem">' + featuresHtml + '</div>' +
+    '<h3 style="font-weight:700;margin:0 0 .75rem;font-size:1rem">Specificaties</h3>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1.5rem">' + specsHtml + '</div>' +
+    '<div style="display:flex;gap:.75rem;flex-wrap:wrap;padding-top:.5rem">' +
+      '<a href="index.html#contact" class="btn-red" style="flex:1;justify-content:center;font-size:.875rem;padding:.875rem 1.5rem">Offerte Aanvragen</a>' +
+      '<button class="btn-ghost" style="cursor:pointer;font-family:inherit;font-size:.875rem;padding:.875rem 1.5rem">Brochure</button>' +
+    '</div>';
+
+  // Scroll right panel to top
+  right.scrollTop = 0;
+
+  modal.classList.add('open');
+  document.body.classList.add('modal-open');
+}
+
+function closeModal() {
+  var modal = document.getElementById('product-modal');
+  modal.classList.remove('open');
+  document.body.classList.remove('modal-open');
+  currentModalIndex = -1;
+}
+
+function navigateModal(direction) {
+  if (visibleProducts.length === 0) return;
+  var currentPos = visibleProducts.indexOf(currentModalIndex);
+  if (currentPos === -1) currentPos = 0;
+  var newPos = (currentPos + direction + visibleProducts.length) % visibleProducts.length;
+  openModal(visibleProducts[newPos]);
+}
+
+function changeModalImage(src, thumbEl) {
+  document.getElementById('modal-main-img').src = src;
+  var thumbs = thumbEl.parentElement.querySelectorAll('.modal-thumb');
+  thumbs.forEach(function(t) { t.classList.remove('active'); });
+  thumbEl.classList.add('active');
+}
+
+/* Click overlay background to close (not the card) */
+document.getElementById('product-modal').addEventListener('click', function(e) {
+  if (e.target === this || e.target.classList.contains('modal-overlay')) closeModal();
+});
+
+/* Keyboard navigation */
+document.addEventListener('keydown', function(e) {
+  var modal = document.getElementById('product-modal');
+  if (!modal.classList.contains('open')) return;
+  if (e.key === 'Escape') closeModal();
+  if (e.key === 'ArrowLeft') navigateModal(-1);
+  if (e.key === 'ArrowRight') navigateModal(1);
+});
+</script>
+</body>
+</html>

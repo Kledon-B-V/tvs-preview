@@ -1,0 +1,96 @@
+/* ============ Site-specific overrides ============ */
+/* Use this file for tweaks without touching style.css */
+
+/* Admin bar offset */
+.admin-bar .site-header{top:32px}
+@media(max-width:782px){
+  .admin-bar .site-header{top:46px}
+}
+
+/* ============ WP content styling (dark theme) ============ */
+.content{color:rgba(255,255,255,.9)}
+.content h1,.content h2,.content h3,.content h4,.content h5,.content h6{color:#fff}
+.content p{color:rgba(255,255,255,.75)}
+.content a{color:var(--red-500)}
+.content a:hover{color:var(--red-400, #f87171)}
+.content strong{color:#fff}
+
+/* Content images — rounded corners */
+.content img{
+  border-radius:var(--radius-lg);
+  margin:var(--space-6) 0;
+  border:1px solid rgba(255,255,255,.08);
+}
+
+/* Lists */
+.content ul,.content ol{padding-left:1.5em;margin-bottom:1em;color:rgba(255,255,255,.8)}
+.content li{margin-bottom:.5em}
+.content li::marker{color:var(--red-500)}
+
+/* Blockquote — red left border on dark bg */
+.content blockquote{
+  border-left:4px solid var(--red-500);
+  padding:var(--space-5) var(--space-6);
+  margin:var(--space-6) 0;
+  background:rgba(255,255,255,.04);
+  border-radius:0 var(--radius-md) var(--radius-md) 0;
+  color:rgba(255,255,255,.85);
+  font-style:italic;
+}
+.content blockquote p{color:rgba(255,255,255,.85)}
+.content blockquote cite{display:block;margin-top:var(--space-3);font-size:var(--text-sm);color:var(--red-500);font-style:normal}
+
+/* Tables */
+.content table{width:100%;border-collapse:collapse;margin:var(--space-6) 0}
+.content th{background:rgba(255,255,255,.06);color:#fff;text-align:left;padding:var(--space-3) var(--space-4);font-weight:600}
+.content td{padding:var(--space-3) var(--space-4);border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.75)}
+
+/* Code */
+.content code{background:rgba(255,255,255,.08);padding:2px 8px;border-radius:var(--radius-sm);font-size:var(--text-sm);color:var(--red-500)}
+.content pre{background:rgba(0,0,0,.4);padding:var(--space-5);border-radius:var(--radius-md);overflow-x:auto;border:1px solid rgba(255,255,255,.08)}
+.content pre code{background:none;padding:0;color:rgba(255,255,255,.85)}
+
+/* HR */
+.content hr{border:none;border-top:1px solid rgba(255,255,255,.1);margin:var(--space-8) 0}
+
+/* ============ Selection color ============ */
+::selection{background:var(--red-500);color:#fff}
+::-moz-selection{background:var(--red-500);color:#fff}
+
+/* ============ Dark theme utility classes ============ */
+.text-white{color:#fff !important}
+.text-white-75{color:rgba(255,255,255,.75) !important}
+.text-white-50{color:rgba(255,255,255,.5) !important}
+.text-red{color:var(--red-500) !important}
+
+.bg-dark{background:var(--gray-900) !important}
+.bg-dark-deeper{background:#0a0f1a !important}
+.bg-dark-card{background:rgba(255,255,255,.04) !important}
+
+/* Glass card utility */
+.glass-card{
+  background:rgba(255,255,255,.05);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius-xl);
+}
+.glass-card--hover:hover{
+  background:rgba(255,255,255,.08);
+  border-color:rgba(255,255,255,.15);
+  transform:translateY(-2px);
+  transition:all var(--duration) var(--ease);
+}
+
+/* Glow accent */
+.glow-red{box-shadow:0 0 40px rgba(227,30,36,.15)}
+.glow-red-sm{box-shadow:0 0 20px rgba(227,30,36,.1)}
+
+/* Divider on dark */
+.divider-dark{border-color:rgba(255,255,255,.08)}
+
+/* Dark scrollbar */
+.dark-scrollbar::-webkit-scrollbar{width:6px}
+.dark-scrollbar::-webkit-scrollbar-track{background:rgba(255,255,255,.02)}
+.dark-scrollbar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
+.dark-scrollbar::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.2)}

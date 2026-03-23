@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="nl" class="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — TVS Terras Verwarmings Specialisten</title>
+<meta name="theme-color" content="#000000" id="meta-theme-color">
+<script>
+/* Anti-flash: set theme before render */
+(function(){var t=localStorage.getItem('tvs-theme');if(t==='light'){document.documentElement.classList.remove('dark');document.getElementById('meta-theme-color').content='#f9fafb'}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* ===== THEME SYSTEM: CSS Custom Properties ===== */
+:root {
+  --bg: #f9fafb; --bg-card: #ffffff; --bg-card-hover: #f3f4f6;
+  --bg-header: rgba(255,255,255,.6); --bg-glass: rgba(255,255,255,.8);
+  --text: #111827; --text-secondary: #4b5563; --text-muted: #9ca3af;
+  --border: #e5e7eb; --border-hover: #d1d5db;
+  --shadow: 0 1px 3px rgba(0,0,0,.08); --shadow-lg: 0 12px 32px rgba(0,0,0,.08);
+  --orb-opacity: 0.08; --grid-color: rgba(0,0,0,.04);
+  --cta-btn-bg: #111827; --cta-btn-text: #fff;
+  --footer-from: #f9fafb; --footer-to: #f3f4f6;
+}
+html.dark {
+  --bg: #000000; --bg-card: rgba(255,255,255,.05); --bg-card-hover: rgba(255,255,255,.1);
+  --bg-header: rgba(0,0,0,.6); --bg-glass: rgba(255,255,255,.05);
+  --text: #ffffff; --text-secondary: #9ca3af; --text-muted: #6b7280;
+  --border: rgba(255,255,255,.1); --border-hover: rgba(255,255,255,.2);
+  --shadow: none; --shadow-lg: none;
+  --orb-opacity: 0.2; --grid-color: rgba(255,255,255,.02);
+  --cta-btn-bg: #ffffff; --cta-btn-text: #000000;
+  --footer-from: #000000; --footer-to: #030712;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { font-family: 'Inter', system-ui, sans-serif; margin: 0; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; transition: background-color .3s, color .3s; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* Theme transition helper */
+.t { transition: background-color .3s, color .3s, border-color .3s, box-shadow .3s; }
+
+/* Glass card */
+.glass { background: var(--bg-card); border: 1px solid var(--border); border-radius: 1rem; box-shadow: var(--shadow); }
+.glass:hover { border-color: var(--border-hover); box-shadow: var(--shadow-lg); }
+
+/* Background effects */
+.bg-orbs { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: var(--orb-opacity); }
+.bg-grid { position: fixed; inset: 0; z-index: -1; pointer-events: none; background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 64px 64px; }
+
+/* Gradient text */
+.gradient-text { background: linear-gradient(135deg, #E31E24, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+/* Red gradient button */
+.btn-red { display: inline-flex; align-items: center; gap: .5rem; padding: 1rem 2rem; background: linear-gradient(135deg, #E31E24, #ea580c); color: #fff; border-radius: .75rem; font-weight: 700; box-shadow: 0 8px 24px rgba(227,30,36,.25); transition: all .3s; border: none; cursor: pointer; font-size: 1rem; font-family: inherit; }
+.btn-red:hover { box-shadow: 0 12px 32px rgba(227,30,36,.35); transform: translateY(-1px); }
+
+/* Ghost button */
+.btn-ghost { display: inline-flex; align-items: center; gap: .5rem; padding: 1rem 2rem; background: var(--bg-card); border: 1px solid var(--border); color: var(--text); border-radius: .75rem; font-weight: 700; transition: all .3s; }
+.btn-ghost:hover { background: var(--bg-card-hover); }
+
+/* Header */
+.site-hdr { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 96px; display: flex; align-items: center; background: var(--bg-header); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); border-bottom: 1px solid var(--border); transition: background-color .3s, border-color .3s; }
+
+/* Nav link */
+.nav-link { padding: .625rem 1.25rem; border-radius: .75rem; font-weight: 600; color: var(--text-secondary); transition: all .2s; }
+.nav-link:hover { color: var(--text); }
+.nav-link.active { color: var(--text); background: var(--bg-card); }
+
+/* Toggle button */
+.theme-btn { padding: .75rem; border-radius: .75rem; background: var(--bg-card); border: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .3s; }
+.theme-btn:hover { background: var(--bg-card-hover); }
+.theme-btn svg { width: 20px; height: 20px; }
+html.dark .icon-sun { display: block; } html.dark .icon-moon { display: none; }
+html:not(.dark) .icon-sun { display: none; } html:not(.dark) .icon-moon { display: block; }
+
+/* Footer */
+.site-ftr { background: linear-gradient(to bottom, var(--footer-from), var(--footer-to)); border-top: 1px solid var(--border); transition: background .3s, border-color .3s; }
+.ftr-heading { color: var(--text); font-weight: 600; font-size: .875rem; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 1rem; }
+.ftr-link { color: var(--text-secondary); font-size: .875rem; transition: color .2s; }
+.ftr-link:hover { color: var(--text); }
+
+/* ===== MEGA DROPDOWN NAV ===== */
+.nav-item { position: relative; }
+.nav-item > .nav-link { display: inline-flex; align-items: center; gap: .25rem; }
+.nav-arrow { width: 12px; height: 12px; transition: transform .25s; }
+.nav-item:hover > .nav-link .nav-arrow { transform: rotate(180deg); }
+
+.mega-dd {
+  position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(8px);
+  min-width: 220px; padding: .5rem 0;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: .75rem;
+  box-shadow: 0 12px 32px rgba(0,0,0,.12);
+  opacity: 0; visibility: hidden;
+  transition: opacity .2s, transform .2s, visibility .2s;
+  z-index: 200;
+}
+html.dark .mega-dd { box-shadow: 0 12px 32px rgba(0,0,0,.4); }
+.nav-item:hover > .mega-dd {
+  opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+}
+.mega-dd a {
+  display: block; padding: .5rem 1.25rem; font-size: .875rem; font-weight: 500;
+  color: var(--text-secondary); transition: color .15s, background .15s; white-space: nowrap;
+}
+.mega-dd a:hover { color: var(--text); background: var(--bg-card-hover); }
+
+/* ===== CONTACT PAGE STYLES ===== */
+.contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; }
+.contact-info-item { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.5rem; }
+.contact-icon { width: 48px; height: 48px; min-width: 48px; background: linear-gradient(135deg, #E31E24, #ea580c); border-radius: .75rem; display: flex; align-items: center; justify-content: center; }
+.contact-icon svg { width: 22px; height: 22px; }
+
+.form-group { margin-bottom: 1.25rem; }
+.form-label { display: block; font-size: .875rem; font-weight: 600; color: var(--text); margin-bottom: .5rem; }
+.form-input, .form-select, .form-textarea {
+  width: 100%; padding: .875rem 1rem; font-size: .9375rem; font-family: inherit;
+  background: var(--bg-glass); border: 1px solid var(--border); border-radius: .75rem;
+  color: var(--text); transition: border-color .2s, box-shadow .2s; outline: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: #E31E24; box-shadow: 0 0 0 3px rgba(227,30,36,.15);
+}
+.form-input::placeholder, .form-textarea::placeholder { color: var(--text-muted); }
+.form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%239ca3af' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1rem; padding-right: 2.5rem; }
+.form-textarea { resize: vertical; min-height: 140px; }
+html.dark .form-select option { background: #1f2937; color: #fff; }
+
+.map-placeholder {
+  width: 100%; height: 400px; border-radius: 1.5rem; border: 1px solid var(--border);
+  background: var(--bg-card); display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted); font-size: 1.125rem; transition: border-color .3s;
+}
+
+@media(max-width:1024px) {
+  .desk-nav { display: none !important; }
+}
+@media(max-width:768px) {
+  .contact-grid { grid-template-columns: 1fr !important; }
+  .ftr-grid { grid-template-columns: 1fr !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg-orbs" aria-hidden="true">
+  <div style="position:absolute;top:15%;left:10%;width:500px;height:500px;background:#E31E24;border-radius:50%;filter:blur(120px)"></div>
+  <div style="position:absolute;bottom:20%;right:10%;width:400px;height:400px;background:#f97316;border-radius:50%;filter:blur(120px)"></div>
+</div>
+<div class="bg-grid" aria-hidden="true"></div>
+
+<!-- Header -->
+<header class="site-hdr">
+  <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem;width:100%;display:flex;align-items:center;justify-content:space-between">
+    <a href="index.html" style="display:flex;align-items:center">
+      <img src="assets/images/logo-tvs.svg" alt="TVS" style="height:56px;width:auto">
+    </a>
+    <div style="display:flex;align-items:center;gap:.5rem">
+      <nav class="desk-nav" style="display:flex;align-items:center;gap:.25rem">
+        <a href="index.html" class="nav-link">Home</a>
+        <div class="nav-item">
+          <a href="producten.html" class="nav-link">Producten <svg class="nav-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="mega-dd">
+            <a href="producten.html">Terrasverwarming</a>
+            <a href="producten.html">Terras &amp; Loungehaarden</a>
+            <a href="producten.html">Halverwarming</a>
+            <a href="producten.html">Kerkverwarming</a>
+            <a href="producten.html">Zonnepanelen &amp; LED</a>
+            <a href="producten.html" style="border-top:1px solid var(--border);margin-top:.25rem;padding-top:.75rem;color:var(--text);font-weight:600">Bekijk alle producten &rarr;</a>
+          </div>
+        </div>
+        <a href="over-ons.html" class="nav-link">Over Ons</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+        <a href="contact.html" class="btn-red" style="margin-left:.5rem;padding:.625rem 1.5rem;font-size:.875rem">Offerte Aanvragen</a>
+      </nav>
+      <button class="theme-btn" id="theme-toggle" aria-label="Wissel thema">
+        <svg class="icon-sun" fill="none" stroke="#eab308" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main style="padding-top:96px">
+
+<!-- Hero -->
+<section style="padding:5rem 0 3rem;text-align:center">
+  <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem">
+    <h1 style="font-size:clamp(2.5rem,5vw,4rem);font-weight:900;margin:0 0 1rem">
+      Neem <span class="gradient-text">Contact</span> Op
+    </h1>
+    <p style="font-size:1.25rem;color:var(--text-secondary);max-width:600px;margin:0 auto;line-height:1.7">
+      Wij staan klaar om u te helpen met al uw vragen over verwarmingsoplossingen. Neem gerust contact met ons op.
+    </p>
+  </div>
+</section>
+
+<!-- Main Content: Info + Form -->
+<section style="padding:3rem 0 6rem">
+  <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem">
+    <div class="contact-grid">
+
+      <!-- Left Column: Contact Info -->
+      <div>
+        <div class="glass t" style="padding:2.5rem;border-radius:1.5rem;margin-bottom:2rem">
+          <h2 style="font-size:1.5rem;font-weight:800;margin:0 0 2rem">Contactgegevens</h2>
+
+          <!-- Company -->
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <svg fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:700;margin-bottom:.25rem">Terras Verwarmings Specialisten TVSnl B.V.</div>
+              <div style="color:var(--text-secondary);font-size:.9375rem">Uw specialist in verwarmingsoplossingen</div>
+            </div>
+          </div>
+
+          <!-- Address -->
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <svg fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:700;margin-bottom:.25rem">Adres</div>
+              <div style="color:var(--text-secondary);font-size:.9375rem">Nijverheidsweg 16B<br>3481 MB Harmelen</div>
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <svg fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:700;margin-bottom:.25rem">Telefoon</div>
+              <a href="tel:0348220338" style="color:#E31E24;font-size:.9375rem;font-weight:600">+31 (0)348 220338</a>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <svg fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:700;margin-bottom:.25rem">Email</div>
+              <a href="mailto:info@terrasverwarmer.nu" style="color:#E31E24;font-size:.9375rem;font-weight:600">info@terrasverwarmer.nu</a>
+            </div>
+          </div>
+
+          <!-- KvK -->
+          <div class="contact-info-item" style="margin-bottom:0">
+            <div class="contact-icon" style="background:var(--bg-card-hover);border:1px solid var(--border)">
+              <svg fill="none" stroke="var(--text-secondary)" stroke-width="2" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:700;margin-bottom:.25rem">KvK-nummer</div>
+              <div style="color:var(--text-secondary);font-size:.9375rem">58781005</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Opening Hours -->
+        <div class="glass t" style="padding:2.5rem;border-radius:1.5rem">
+          <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem">
+            <div class="contact-icon">
+              <svg fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h2 style="font-size:1.5rem;font-weight:800;margin:0">Openingstijden</h2>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:.75rem">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:.875rem 1rem;background:var(--bg-glass);border:1px solid var(--border);border-radius:.75rem">
+              <span style="font-weight:600">Maandag - Vrijdag</span>
+              <span style="color:#E31E24;font-weight:700">9:00 - 17:00</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:.875rem 1rem;background:var(--bg-glass);border:1px solid var(--border);border-radius:.75rem">
+              <span style="font-weight:600">Weekend</span>
+              <span style="color:var(--text-secondary);font-weight:600">Op afspraak</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Contact Form -->
+      <div>
+        <div class="glass t" style="padding:2.5rem;border-radius:1.5rem">
+          <h2 style="font-size:1.5rem;font-weight:800;margin:0 0 .5rem">Offerte Aanvragen</h2>
+          <p style="color:var(--text-secondary);margin:0 0 2rem;font-size:.9375rem;line-height:1.7">Vul het formulier in en we nemen binnen 24 uur contact met u op</p>
+
+          <form id="contact-form" onsubmit="event.preventDefault();">
+            <!-- Bedrijfsnaam -->
+            <div class="form-group">
+              <label class="form-label" for="bedrijfsnaam">Bedrijfsnaam *</label>
+              <input type="text" id="bedrijfsnaam" name="bedrijfsnaam" class="form-input" placeholder="Uw bedrijfsnaam" required>
+            </div>
+
+            <!-- Contactpersoon -->
+            <div class="form-group">
+              <label class="form-label" for="contactpersoon">Contactpersoon *</label>
+              <input type="text" id="contactpersoon" name="contactpersoon" class="form-input" placeholder="Uw volledige naam" required>
+            </div>
+
+            <!-- Email + Telefoon row -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+              <div class="form-group">
+                <label class="form-label" for="email">Email *</label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="uw@email.nl" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="telefoon">Telefoon</label>
+                <input type="tel" id="telefoon" name="telefoon" class="form-input" placeholder="+31 6 12345678">
+              </div>
+            </div>
+
+            <!-- Onderwerp -->
+            <div class="form-group">
+              <label class="form-label" for="onderwerp">Onderwerp</label>
+              <select id="onderwerp" name="onderwerp" class="form-select form-input">
+                <option value="" disabled selected>Selecteer een onderwerp</option>
+                <option value="terrasverwarming">Terrasverwarming</option>
+                <option value="halverwarming">Halverwarming</option>
+                <option value="kerkverwarming">Kerkverwarming</option>
+                <option value="zonnepanelen">Zonnepanelen</option>
+                <option value="led">LED</option>
+                <option value="terrasoverkappingen">Terrasoverkappingen</option>
+                <option value="anders">Anders</option>
+              </select>
+            </div>
+
+            <!-- Bericht -->
+            <div class="form-group">
+              <label class="form-label" for="bericht">Bericht *</label>
+              <textarea id="bericht" name="bericht" class="form-textarea form-input" placeholder="Beschrijf uw vraag of gewenste offerte..." required></textarea>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn-red" style="width:100%;justify-content:center;padding:1rem 2rem;font-size:1rem;margin-top:.5rem">
+              Verstuur Aanvraag
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Map Section -->
+<section style="padding:0 0 6rem">
+  <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem">
+    <div style="text-align:center;margin-bottom:2rem">
+      <h2 style="font-size:clamp(1.75rem,3vw,2.5rem);font-weight:900;margin:0 0 .5rem">Onze Locatie</h2>
+      <p style="color:var(--text-secondary);font-size:1.125rem;margin:0">Nijverheidsweg 16B, 3481 MB Harmelen</p>
+    </div>
+    <div class="map-placeholder">
+      <div style="text-align:center">
+        <svg width="48" height="48" fill="none" stroke="var(--text-muted)" stroke-width="1.5" viewBox="0 0 24 24" style="margin:0 auto 1rem"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div>Kaart wordt geladen...</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="site-ftr">
+  <div style="max-width:1400px;margin:0 auto;padding:4rem 1.5rem">
+    <div class="ftr-grid" style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem">
+      <div>
+        <img src="assets/images/logo-tvs.svg" alt="TVS" style="height:48px;width:auto;margin-bottom:1rem">
+        <p style="color:var(--text-secondary);font-size:.875rem;line-height:1.7;margin:0">Specialist in verwarmingsoplossingen voor terrassen, hallen, kerken en meer.</p>
+      </div>
+      <div>
+        <div class="ftr-heading">Producten</div>
+        <div style="display:flex;flex-direction:column;gap:.625rem"><a href="producten.html" class="ftr-link">Terrasverwarming</a><a href="producten.html" class="ftr-link">Halverwarming</a><a href="producten.html" class="ftr-link">Kerkverwarming</a></div>
+      </div>
+      <div>
+        <div class="ftr-heading">Navigatie</div>
+        <div style="display:flex;flex-direction:column;gap:.625rem"><a href="index.html" class="ftr-link">Home</a><a href="producten.html" class="ftr-link">Producten</a><a href="index.html#waarom-tvs" class="ftr-link">Over Ons</a><a href="contact.html" class="ftr-link">Contact</a></div>
+      </div>
+      <div>
+        <div class="ftr-heading">Contact</div>
+        <div style="display:flex;flex-direction:column;gap:.625rem;font-size:.875rem;color:var(--text-secondary)">
+          <span>Nijverheidsweg 16B</span><span>3481 MB Harmelen</span>
+          <a href="tel:0348220338" class="ftr-link" style="margin-top:.5rem">0348-220338</a>
+          <a href="mailto:info@terrasverwarmer.nu" class="ftr-link">info@terrasverwarmer.nu</a>
+        </div>
+      </div>
+    </div>
+    <div style="padding-top:2rem;border-top:1px solid var(--border);text-align:center">
+      <p style="color:var(--text-muted);font-size:.875rem;margin:0">&copy; 2026 Terras Verwarmings Specialisten B.V. Alle rechten voorbehouden.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('theme-toggle').addEventListener('click', function() {
+  var html = document.documentElement;
+  html.classList.toggle('dark');
+  var isDark = html.classList.contains('dark');
+  localStorage.setItem('tvs-theme', isDark ? 'dark' : 'light');
+  var meta = document.getElementById('meta-theme-color');
+  if (meta) meta.content = isDark ? '#000000' : '#f9fafb';
+});
+</script>
+</body>
+</html>

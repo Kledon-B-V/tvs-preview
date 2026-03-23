@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="nl" class="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Over Ons — TVS Terras Verwarmings Specialisten</title>
+<meta name="theme-color" content="#000000" id="meta-theme-color">
+<script>
+/* Anti-flash: set theme before render */
+(function(){var t=localStorage.getItem('tvs-theme');if(t==='light'){document.documentElement.classList.remove('dark');document.getElementById('meta-theme-color').content='#f9fafb'}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* ===== THEME SYSTEM: CSS Custom Properties ===== */
+:root {
+  --bg: #f9fafb; --bg-card: #ffffff; --bg-card-hover: #f3f4f6;
+  --bg-header: rgba(255,255,255,.6); --bg-glass: rgba(255,255,255,.8);
+  --text: #111827; --text-secondary: #4b5563; --text-muted: #9ca3af;
+  --border: #e5e7eb; --border-hover: #d1d5db;
+  --shadow: 0 1px 3px rgba(0,0,0,.08); --shadow-lg: 0 12px 32px rgba(0,0,0,.08);
+  --orb-opacity: 0.08; --grid-color: rgba(0,0,0,.04);
+  --cta-btn-bg: #111827; --cta-btn-text: #fff;
+  --footer-from: #f9fafb; --footer-to: #f3f4f6;
+  --bg-alt: #f3f4f6;
+}
+html.dark {
+  --bg: #000000; --bg-card: rgba(255,255,255,.05); --bg-card-hover: rgba(255,255,255,.1);
+  --bg-header: rgba(0,0,0,.6); --bg-glass: rgba(255,255,255,.05);
+  --text: #ffffff; --text-secondary: #9ca3af; --text-muted: #6b7280;
+  --border: rgba(255,255,255,.1); --border-hover: rgba(255,255,255,.2);
+  --shadow: none; --shadow-lg: none;
+  --orb-opacity: 0.2; --grid-color: rgba(255,255,255,.02);
+  --cta-btn-bg: #ffffff; --cta-btn-text: #000000;
+  --footer-from: #000000; --footer-to: #030712;
+  --bg-alt: #0a0a0a;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { font-family: 'Inter', system-ui, sans-serif; margin: 0; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; transition: background-color .3s, color .3s; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* Theme transition helper */
+.t { transition: background-color .3s, color .3s, border-color .3s, box-shadow .3s; }
+
+/* Glass card */
+.glass { background: var(--bg-card); border: 1px solid var(--border); border-radius: 1rem; box-shadow: var(--shadow); }
+.glass:hover { border-color: var(--border-hover); box-shadow: var(--shadow-lg); }
+
+/* Background effects */
+.bg-orbs { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: var(--orb-opacity); }
+.bg-grid { position: fixed; inset: 0; z-index: -1; pointer-events: none; background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 64px 64px; }
+
+/* Gradient text */
+.gradient-text { background: linear-gradient(135deg, #E31E24, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+/* Red gradient button */
+.btn-red { display: inline-flex; align-items: center; gap: .5rem; padding: 1rem 2rem; background: linear-gradient(135deg, #E31E24, #ea580c); color: #fff; border-radius: .75rem; font-weight: 700; box-shadow: 0 8px 24px rgba(227,30,36,.25); transition: all .3s; }
+.btn-red:hover { box-shadow: 0 12px 32px rgba(227,30,36,.35); transform: translateY(-1px); }
+
+/* Ghost button */
+.btn-ghost { display: inline-flex; align-items: center; gap: .5rem; padding: 1rem 2rem; background: var(--bg-card); border: 1px solid var(--border); color: var(--text); border-radius: .75rem; font-weight: 700; transition: all .3s; }
+.btn-ghost:hover { background: var(--bg-card-hover); }
+
+/* Header */
+.site-hdr { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 96px; display: flex; align-items: center; background: var(--bg-header); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); border-bottom: 1px solid var(--border); transition: background-color .3s, border-color .3s; }
+
+/* Nav link */
+.nav-link { padding: .625rem 1.25rem; border-radius: .75rem; font-weight: 600; color: var(--text-secondary); transition: all .2s; }
+.nav-link:hover { color: var(--text); }
+.nav-link.active { color: var(--text); background: var(--bg-card); }
+
+/* Toggle button */
+.theme-btn { padding: .75rem; border-radius: .75rem; background: var(--bg-card); border: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .3s; }
+.theme-btn:hover { background: var(--bg-card-hover); }
+.theme-btn svg { width: 20px; height: 20px; }
+html.dark .icon-sun { display: block; } html.dark .icon-moon { display: none; }
+html:not(.dark) .icon-sun { display: none; } html:not(.dark) .icon-moon { display: block; }
+
+/* Footer */
+.site-ftr { background: linear-gradient(to bottom, var(--footer-from), var(--footer-to)); border-top: 1px solid var(--border); transition: background .3s, border-color .3s; }
+.ftr-heading { color: var(--text); font-weight: 600; font-size: .875rem; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 1rem; }
+.ftr-link { color: var(--text-secondary); font-size: .875rem; transition: color .2s; }
+.ftr-link:hover { color: var(--text); }
+
+/* Mega dropdown */
+.nav-item { position: relative; }
+.nav-item > .nav-link { display: inline-flex; align-items: center; gap: .25rem; }
+.nav-arrow { width: 12px; height: 12px; transition: transform .25s; }
+.nav-item:hover > .nav-link .nav-arrow { transform: rotate(180deg); }
+.mega-dd {
+  position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(8px);
+  min-width: 220px; padding: .5rem 0;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: .75rem;
+  box-shadow: 0 12px 32px rgba(0,0,0,.12);
+  opacity: 0; visibility: hidden;
+  transition: opacity .2s, transform .2s, visibility .2s;
+  z-index: 200;
+}
+html.dark .mega-dd { box-shadow: 0 12px 32px rgba(0,0,0,.4); }
+.nav-item:hover > .mega-dd {
+  opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+}
+.mega-dd a {
+  display: block; padding: .5rem 1.25rem; font-size: .875rem; font-weight: 500;
+  color: var(--text-secondary); transition: color .15s, background .15s; white-space: nowrap;
+}
+.mega-dd a:hover { color: var(--text); background: var(--bg-card-hover); }
+
+/* ===== ABOUT PAGE SECTIONS ===== */
+
+/* Hero */
+.about-hero {
+  position: relative; min-height: 70vh; display: flex; align-items: center; justify-content: center;
+  overflow: hidden; text-align: center;
+}
+.about-hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: url('assets/images/about-team.jpg') center/cover no-repeat;
+}
+.about-hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.7) 100%);
+}
+
+/* Story */
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.quick-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+/* Timeline */
+.timeline-wrap { position: relative; max-width: 900px; margin: 0 auto; }
+.timeline-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #E31E24, #f97316); transform: translateX(-50%); border-radius: 2px; }
+.timeline-item { position: relative; display: flex; align-items: flex-start; margin-bottom: 3rem; }
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-item:nth-child(odd) { flex-direction: row-reverse; }
+.timeline-item .tl-content { width: calc(50% - 2.5rem); }
+.timeline-item:nth-child(odd) .tl-content { text-align: right; }
+.timeline-dot {
+  position: absolute; left: 50%; top: 1.5rem; width: 18px; height: 18px;
+  background: linear-gradient(135deg, #E31E24, #f97316); border-radius: 50%;
+  transform: translateX(-50%); z-index: 2;
+  box-shadow: 0 0 0 4px var(--bg);
+}
+
+/* Team */
+.team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.team-card img { aspect-ratio: 1/1; object-fit: cover; border-radius: 1rem; transition: transform .4s; width: 100%; }
+.team-card:hover img { transform: scale(1.05); }
+
+/* Values */
+.values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+/* Partners */
+.partners-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 1rem; }
+.partner-card { aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; transition: transform .3s; }
+.partner-card:hover { transform: scale(1.05); }
+
+/* Badge */
+.section-badge {
+  display: inline-flex; align-items: center; gap: .5rem; padding: .5rem 1.25rem;
+  border-radius: 9999px; font-size: .875rem; font-weight: 600;
+  background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary);
+  margin-bottom: 1.25rem;
+}
+
+/* Icon box */
+.icon-box {
+  width: 56px; height: 56px; border-radius: 1rem; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #E31E24, #ea580c); flex-shrink: 0;
+}
+.icon-box-sm {
+  width: 48px; height: 48px; border-radius: .75rem; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #E31E24, #ea580c); flex-shrink: 0;
+}
+
+/* Section alt bg */
+.section-alt { background: var(--bg-alt); transition: background-color .3s; }
+
+@media(max-width:1024px) {
+  .desk-nav { display: none !important; }
+  .team-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .partners-grid { grid-template-columns: repeat(4, 1fr) !important; }
+}
+@media(max-width:768px) {
+  .story-grid { grid-template-columns: 1fr !important; }
+  .quick-facts { grid-template-columns: 1fr 1fr !important; }
+  .values-grid { grid-template-columns: 1fr !important; }
+  .team-grid { grid-template-columns: 1fr 1fr !important; }
+  .partners-grid { grid-template-columns: repeat(4, 1fr) !important; }
+  .ftr-grid { grid-template-columns: 1fr !important; }
+  /* Timeline mobile: stack */
+  .timeline-line { left: 1rem !important; }
+  .timeline-dot { left: 1rem !important; }
+  .timeline-item, .timeline-item:nth-child(odd) { flex-direction: row !important; padding-left: 3rem; }
+  .timeline-item .tl-content { width: 100% !important; text-align: left !important; }
+  .timeline-item:nth-child(odd) .tl-content { text-align: left !important; }
+}
+@media(max-width:480px) {
+  .team-grid { grid-template-columns: 1fr !important; }
+  .partners-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg-orbs" aria-hidden="true">
+  <div style="position:absolute;top:15%;left:10%;width:500px;height:500px;background:#E31E24;border-radius:50%;filter:blur(120px)"></div>
+  <div style="position:absolute;bottom:20%;right:10%;width:400px;height:400px;background:#f97316;border-radius:50%;filter:blur(120px)"></div>
+</div>
+<div class="bg-grid" aria-hidden="true"></div>
+
+<!-- Header -->
+<header class="site-hdr">
+  <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem;width:100%;display:flex;align-items:center;justify-content:space-between">
+    <a href="index.html" style="display:flex;align-items:center">
+      <img src="assets/images/logo-tvs.svg" alt="TVS" style="height:56px;width:auto">
+    </a>
+    <div style="display:flex;align-items:center;gap:.5rem">
+      <nav class="desk-nav" style="display:flex;align-items:center;gap:.25rem">
+        <a href="index.html" class="nav-link">Home</a>
+        <div class="nav-item">
+          <a href="producten.html" class="nav-link">Producten <svg class="nav-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="mega-dd">
+            <a href="producten.html">Terrasverwarming</a>
+            <a href="producten.html">Terras &amp; Loungehaarden</a>
+            <a href="producten.html">Halverwarming</a>
+            <a href="producten.html">Kerkverwarming</a>
+            <a href="producten.html">Zonnepanelen &amp; LED</a>
+            <a href="producten.html" style="border-top:1px solid var(--border);margin-top:.25rem;padding-top:.75rem;color:var(--text);font-weight:600">Bekijk alle producten &rarr;</a>
+          </div>
+        </div>
+        <a href="over-ons.html" class="nav-link active">Over Ons</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="contact.html" class="btn-red" style="margin-left:.5rem;padding:.625rem 1.5rem;font-size:.875rem">Offerte Aanvragen</a>
+      </nav>
+      <button class="theme-btn" id="theme-toggle" aria-label="Wissel thema">
+        <svg class="icon-sun" fill="none" stroke="#eab308" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main style="padding-top:96px">
+
+<!-- ====== 1. HERO ====== -->
+<section class="about-hero">
+  <div class="about-hero-bg" aria-hidden="true"></div>
+  <div class="about-hero-overlay" aria-hidden="true"></div>
+  <div style="position:relative;z-index:2;max-width:900px;margin:0 auto;padding:4rem 1.5rem">
+    <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.25rem;border-radius:9999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);margin-bottom:2rem;backdrop-filter:blur(8px)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="#f97316"><path d="M12 22c-4 0-8-2.5-8-8 0-4 4-8 4-8s1 2 3 3c2-4 4-7 4-7s4 4 4 8c0 5.5-4 8-7 8z"/></svg>
+      <span style="font-size:.875rem;font-weight:600;color:#fff">20+ Jaar Expertise</span>
+    </div>
+    <h1 style="font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;line-height:1.05;margin:0 0 1.5rem;color:#fff">
+      Specialisten in<br><span class="gradient-text">Verwarmingsoplossingen</span>
+    </h1>
+    <p style="font-size:1.25rem;color:rgba(255,255,255,.8);max-width:680px;margin:0 auto;line-height:1.7">
+      Van kleine horeca-terrassen tot grote evenementenlocaties. TVS levert professionele verwarmingsoplossingen die uw bedrijf het hele jaar door optimaal laten presteren.
+    </p>
+  </div>
+</section>
+
+<!-- ====== 2. STORY ====== -->
+<section style="padding:6rem 0">
+  <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem">
+    <div class="story-grid">
+      <!-- Left: Image -->
+      <div style="position:relative">
+        <div style="border-radius:1.5rem;overflow:hidden;aspect-ratio:4/3">
+          <img src="assets/images/about-office.jpg" alt="TVS kantoor" style="width:100%;height:100%;object-fit:cover">
+        </div>
+        <!-- Floating stats card -->
+        <div class="glass t" style="position:absolute;bottom:-1.5rem;right:-1rem;padding:1.25rem 1.75rem;border-radius:1rem;text-align:center;z-index:2;backdrop-filter:blur(12px)">
+          <div class="gradient-text" style="font-size:2.5rem;font-weight:900;line-height:1">1000+</div>
+          <div style="font-size:.875rem;font-weight:600;color:var(--text-secondary);margin-top:.25rem">Tevreden Klanten</div>
+        </div>
+      </div>
+      <!-- Right: Content -->
+      <div>
+        <div class="section-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#E31E24"><path d="M12 2l2.09 6.26L20.18 9.27l-5 4.87L16.36 21 12 17.77 7.64 21l1.18-6.86-5-4.87 6.09-1.01L12 2z"/></svg>
+          Ons Verhaal
+        </div>
+        <h2 style="font-size:clamp(2rem,4vw,3rem);font-weight:900;margin:0 0 1.5rem">Van Passie naar <span class="gradient-text">Expertise</span></h2>
+        <p style="font-size:1.05rem;color:var(--text-secondary);line-height:1.8;margin:0 0 1.25rem">
+          Wij zijn niet alleen een bedrijf dat gespecialiseerd is in de verkoop en het installeren van verwarmingsinstallaties voor terrassen, sport- en tribunes, bedrijfshallen, kerken e.a., maar leveren en monteren ook zonnepanelen. Tevens hebben wij onze producten uitgebreid met de LED-collectie.
+        </p>
+        <p style="font-size:1.05rem;color:var(--text-secondary);line-height:1.8;margin:0 0 1.25rem">
+          Onze terrasverwarming wordt veelvuldig ingezet in de horeca, waar een comfortabel en warm terras essentieel is voor de gastvrijheid en het verlengde seizoen. Van kleine terrasjes tot grote buitenlocaties: wij zorgen voor de perfecte warmteoplossing.
+        </p>
+        <p style="font-size:1.05rem;color:var(--text-secondary);line-height:1.8;margin:0 0 2rem">
+          Met meer dan 20 jaar ervaring in verwarmingstechniek hebben wij ons ontwikkeld tot een toonaangevende speler in de Benelux. Wij leveren zowel aan de zakelijke markt als ook aan particulieren, altijd met dezelfde toewijding aan kwaliteit en service.
+        </p>
+        <!-- Quick Facts -->
+        <div class="quick-facts">
+          <div class="glass t" style="padding:1rem 1.25rem;border-radius:1rem;display:flex;align-items:center;gap:.75rem">
+            <div style="width:36px;height:36px;border-radius:.5rem;background:linear-gradient(135deg,#E31E24,#f97316);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <span style="font-weight:700;font-size:.875rem">A-Merk Partner</span>
+          </div>
+          <div class="glass t" style="padding:1rem 1.25rem;border-radius:1rem;display:flex;align-items:center;gap:.75rem">
+            <div style="width:36px;height:36px;border-radius:.5rem;background:linear-gradient(135deg,#E31E24,#f97316);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <span style="font-weight:700;font-size:.875rem">3 Jaar Garantie</span>
+          </div>
+          <div class="glass t" style="padding:1rem 1.25rem;border-radius:1rem;display:flex;align-items:center;gap:.75rem">
+            <div style="width:36px;height:36px;border-radius:.5rem;background:linear-gradient(135deg,#E31E24,#f97316);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span style="font-weight:700;font-size:.875rem">24/7 Support</span>
+          </div>
+          <div class="glass t" style="padding:1rem 1.25rem;border-radius:1rem;display:flex;align-items:center;gap:.75rem">
+            <div style="width:36px;height:36px;border-radius:.5rem;background:linear-gradient(135deg,#E31E24,#f97316);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <span style="font-weight:700;font-size:.875rem">Maatwerk</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 3. TIMELINE ====== -->
+<section class="section-alt" style="padding:6rem 0">
+  <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem">
+    <div style="text-align:center;margin-bottom:4rem">
+      <div class="section-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#E31E24"><circle cx="12" cy="12" r="10"/></svg>
+        Onze Groei
+      </div>
+      <h2 style="font-size:clamp(2rem,4vw,3rem);font-weight:900;margin:0 0 .5rem">20+ Jaar <span class="gradient-text">Ontwikkeling</span></h2>
+    </div>
+    <div class="timeline-wrap">
+      <div class="timeline-line" aria-hidden="true"></div>
+
+      <!-- 2004 -->
+      <div class="timeline-item">
+        <div class="tl-content">
+          <div class="glass t" style="padding:2rem;border-radius:1.5rem">
+            <div class="gradient-text" style="font-size:3rem;font-weight:900;line-height:1;margin-bottom:.5rem">2004</div>
+            <h3 style="font-size:1.25rem;font-weight:700;margin:0 0 .5rem">Oprichting</h3>
+            <p style="color:var(--text-secondary);margin:0;line-height:1.7">TVS gestart als specialist in terrasverwarming</p>
+          </div>
+        </div>
+        <div class="timeline-dot"></div>
+        <div class="tl-content"></div>
+      </div>
+
+      <!-- 2010 -->
+      <div class="timeline-item">
+        <div class="tl-content"></div>
+        <div class="timeline-dot"></div>
+        <div class="tl-content">
+          <div class="glass t" style="padding:2rem;border-radius:1.5rem">
+            <div class="gradient-text" style="font-size:3rem;font-weight:900;line-height:1;margin-bottom:.5rem">2010</div>
+            <h3 style="font-size:1.25rem;font-weight:700;margin:0 0 .5rem">Uitbreiding</h3>
+            <p style="color:var(--text-secondary);margin:0;line-height:1.7">Portfolio uitgebreid naar halverwarming en kerkverwarming</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2015 -->
+      <div class="timeline-item">
+        <div class="tl-content">
+          <div class="glass t" style="padding:2rem;border-radius:1.5rem">
+            <div class="gradient-text" style="font-size:3rem;font-weight:900;line-height:1;margin-bottom:.5rem">2015</div>
+            <h3 style="font-size:1.25rem;font-weight:700;margin:0 0 .5rem">Groei</h3>
+            <p style="color:var(--text-secondary);margin:0;line-height:1.7">Meer dan 500 tevreden klanten in de Benelux</p>
+          </div>
+        </div>
+        <div class="timeline-dot"></div>
+        <div class="tl-content"></div>
+      </div>
+
+      <!-- 2020 -->
+      <div class="timeline-item">
+        <div class="tl-content"></div>
+        <div class="timeline-dot"></div>
+        <div class="tl-content">
+          <div class="glass t" style="padding:2rem;border-radius:1.5rem">
+            <div class="gradient-text" style="font-size:3rem;font-weight:900;line-height:1;margin-bottom:.5rem">2020</div>
+            <h3 style="font-size:1.25rem;font-weight:700;margin:0 0 .5rem">Innovatie</h3>
+            <p style="color:var(--text-secondary);margin:0;line-height:1.7">Introductie van smart verwarmingssystemen</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2026 -->
+      <div class="timeline-item">
+        <div class="tl-content">
+          <div class="glass t" style="padding:2rem;border-radius:1.5rem">
+            <div class="gradient-text" style="font-size:3rem;font-weight:900;line-height:1;margin-bottom:.5rem">2026</div>
+            <h3 style="font-size:1.25rem;font-weight:700;margin:0 0 .5rem">Marktleider</h3>
+            <p style="color:var(--text-secondary);margin:0;line-height:1.7">Toonaangevend in professionele B2B verwarmingsoplossingen</p>
+          </div>
+        </div>
+        <div class="timeline-dot"></div>
+        <div class="tl-content"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====== 4. TEAM ====== -->
+<section style="padding:6rem 0">
+  <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem">
+    <div style="text-align:center;margin-bottom:4rem">
+      <div class="section-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#E31E24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Ons Team
+      </div>
+      <h2 style="font-size:clamp(2rem,4vw,3rem);font-weight:900;margin:0 0 .5rem">Experts in <span class="gradient-text">Verwarming</span></h2>
+      <p style="font-size:1.125rem;color:var(--text-secondary)">Passie, kennis en ervaring onder &eacute;&eacute;n dak</p>
+    </div>
+    <div class="team-grid">
+      <!-- Mark -->
+      <div class="team-card glass t" style="border-radius:1.5rem;overflow:hidden">
+        <div style="overflow:hidden;border-radius:1rem;margin:1rem 1rem 0">
+          <img src="assets/images/team-1.jpg" alt="Mark van der Berg">
+        </div>
+        <div style="padding:1.25rem 1.25rem 1.5rem">
+          <h3 style="font-size:1.125rem;font-weight:700;margin:0 0 .25rem">Mark van der Berg</h3>
+          <div style="font-size:.875rem;font-weight:600;color:#E31E24;margin-bottom:.5rem">CEO &amp; Oprichter</div>
+          <p style="color:var(--text-secondary);font-size:.875rem;margin:0;line-height:1.6">20+ jaar in verwarmingstechniek</p>
+        </div>
+      </div>
+      <!-- Lisa -->
+      <div class="team-card glass t" style="border-radius:1.5rem;overflow:hidden">
+        <div style="overflow:hidden;border-radius:1rem;margin:1rem 1rem 0">
+          <img src="assets/images/team-2.jpg" alt="Lisa Janssen">
+        </div>
+        <div style="padding:1.25rem 1.25rem 1.5rem">
+          <h3 style="font-size:1.125rem;font-weight:700;margin:0 0 .25rem">Lisa Janssen</h3>
+          <div style="font-size:.875rem;font-weight:600;color:#E31E24;margin-bottom:.5rem">Commercieel Directeur</div>
+          <p style="color:var(--text-secondary);font-size:.875rem;margin:0;line-height:1.6">B2B relatiebeheer specialist</p>
+        </div>
+      </div>
+      <!-- Tom -->
+      <div class="team-card glass t" style="border-radius:1.5rem;overflow:hidden">
+        <div style="overflow:hidden;border-radius:1rem;margin:1rem 1rem 0">
+          <img src="assets/images/team-3.jpg" alt="Tom Vermeulen">
+        </div>
+        <div style="padding:1.25rem 1.25rem 1.5rem">
+          <h3 style="font-size:1.125rem;font-weight:700;margin:0 0 .25rem">Tom Vermeulen</h3>
+          <div style="font-size:.875rem;font-weight:600;color:#E31E24;margin-bottom:.5rem">Technisch Manager</div>
+          <p style="color:var(--text-secondary);font-size:.875rem;margin:0;line-height:1.6">Expert in installatie &amp; onderhoud</p>
+        </div>
+      </div>
+      <!-- Sarah -->
+      <div class="team-card glass t" style="border-radius:1.5rem;overflow:hidden">
+        <div style="overflow:hidden;border-radius:1rem;margin:1rem 1rem 0">
+          <img src="assets/images/team-4.jpg" alt="Sarah de Vries">
+        </div>
+        <div style="padding:1.25rem 1.25rem 1.5rem">
+          <h3 style="font-size:1.125rem;font-weight:700;margin:0 0 .25rem">Sarah de Vries</h3>
+          <div style="font-size:.875rem;font-weight:600;color:#E31E24;margin-bottom:.5rem">Projectleider</div>
+          <p style="color:var(--text-secondary);font-size:.875rem;margin:0;line-height:1.6">Grootschalige horeca projecten</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 5. VALUES ====== -->
+<section class="section-alt" style="padding:6rem 0">
+  <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem">
+    <div style="text-align:center;margin-bottom:4rem">
+      <div class="section-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#E31E24"><path d="M12 2l2.09 6.26L20.18 9.27l-5 4.87L16.36 21 12 17.77 7.64 21l1.18-6.86-5-4.87 6.09-1.01L12 2z"/></svg>
+        Kernwaarden
+      </div>
+      <h2 style="font-size:clamp(2rem,4vw,3rem);font-weight:900;margin:0 0 .5rem">Waar Wij Voor <span class="gradient-text">Staan</span></h2>
+    </div>
+    <div class="values-grid">
+      <!-- Vakmanschap -->
+      <div class="glass t" style="padding:2rem;border-radius:1.5rem">
+        <div class="icon-box-sm" style="margin-bottom:1.25rem">
+          <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+        </div>
+        <h3 style="font-size:1.125rem;font-weight:700;margin:0 0 .5rem">Vakmanschap</h3>
+        <p style="color:var(--text-secondary);margin:0;line-height:1.7">Jarenlange ervaring en expertise in verwarmingstechniek, geleverd door gecertificeerde vakmensen.</p>
+      </div>
+      <!-- Kwaliteit -->
+      <div class="glass t" style="padding:2rem;border-radius:1.5rem">
+        <div class="icon-box-sm" style="margin-bottom:1.25rem">
+          <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 style="font-size:1.125rem;font-weight:700;margin:0 0 .5rem">Kwaliteit</h3>
+        <p style="color:var(--text-secondary);margin:0;line-height:1.7">Uitsluitend premium A-merken en hoogwaardige materialen voor langdurige prestaties en betrouwbaarheid.</p>
+      </div>
+      <!-- Service -->
+      <div class="glass t" style="padding:2rem;border-radius:1.5rem">
+        <div class="icon-box-sm" style="margin-bottom:1.25rem">
+          <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        </div>
+        <h3 style="font-size:1.125rem;font-weight:700;margin:0 0 .5rem">Service</h3>
+        <p style="color:var(--text-secondary);margin:0;line-height:1.7">Persoonlijk advies, snelle levering en professionele installatie door ons eigen team van specialisten.</p>
+      </div>
+      <!-- Betrouwbaarheid -->
+      <div class="glass t" style="padding:2rem;border-radius:1.5rem">
+        <div class="icon-box-sm" style="margin-bottom:1.25rem">
+          <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3 style="font-size:1.125rem;font-weight:700;margin:0 0 .5rem">Betrouwbaarheid</h3>
+        <p style="color:var(--text-secondary);margin:0;line-height:1.7">Een solide partner waar u op kunt rekenen, met transparante communicatie en eerlijke prijzen.</p>
+      </div>
+      <!-- Innovatie -->
+      <div class="glass t" style="padding:2rem;border-radius:1.5rem">
+        <div class="icon-box-sm" style="margin-bottom:1.25rem">
+          <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <h3 style="font-size:1.125rem;font-weight:700;margin:0 0 .5rem">Innovatie</h3>
+        <p style="color:var(--text-secondary);margin:0;line-height:1.7">Continu investeren in de nieuwste verwarmingstechnologieën en smart heating oplossingen.</p>
+      </div>
+      <!-- Klantgericht -->
+      <div class="glass t" style="padding:2rem;border-radius:1.5rem">
+        <div class="icon-box-sm" style="margin-bottom:1.25rem">
+          <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 style="font-size:1.125rem;font-weight:700;margin:0 0 .5rem">Klantgericht</h3>
+        <p style="color:var(--text-secondary);margin:0;line-height:1.7">De klant staat altijd centraal. Wij luisteren, adviseren en leveren op maat gemaakte oplossingen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 6. PARTNERS ====== -->
+<section style="padding:6rem 0">
+  <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem">
+    <div style="text-align:center;margin-bottom:4rem">
+      <h2 style="font-size:clamp(2rem,4vw,3rem);font-weight:900;margin:0 0 .5rem">Premium <span class="gradient-text">Partners</span></h2>
+      <p style="font-size:1.125rem;color:var(--text-secondary)">Wij werken samen met de beste merken</p>
+    </div>
+    <div class="partners-grid">
+      <div class="glass t partner-card" style="border-radius:1rem;padding:1.5rem">
+        <span style="font-size:1rem;font-weight:700;text-align:center">Sunred</span>
+      </div>
+      <div class="glass t partner-card" style="border-radius:1rem;padding:1.5rem">
+        <span style="font-size:1rem;font-weight:700;text-align:center">Eurom</span>
+      </div>
+      <div class="glass t partner-card" style="border-radius:1rem;padding:1.5rem">
+        <span style="font-size:1rem;font-weight:700;text-align:center">Kratki</span>
+      </div>
+      <div class="glass t partner-card" style="border-radius:1rem;padding:1.5rem">
+        <span style="font-size:1rem;font-weight:700;text-align:center">Burda</span>
+      </div>
+      <div class="glass t partner-card" style="border-radius:1rem;padding:1.5rem">
+        <span style="font-size:1rem;font-weight:700;text-align:center">Fargau</span>
+      </div>
+      <div class="glass t partner-card" style="border-radius:1rem;padding:1.5rem">
+        <span style="font-size:1rem;font-weight:700;text-align:center">Bromic</span>
+      </div>
+      <div class="glass t partner-card" style="border-radius:1rem;padding:1.5rem">
+        <span style="font-size:1rem;font-weight:700;text-align:center">Herschel</span>
+      </div>
+      <div class="glass t partner-card" style="border-radius:1rem;padding:1.5rem">
+        <span style="font-size:1rem;font-weight:700;text-align:center">Tansun</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="site-ftr">
+  <div style="max-width:1400px;margin:0 auto;padding:4rem 1.5rem">
+    <div class="ftr-grid" style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem">
+      <div>
+        <img src="assets/images/logo-tvs.svg" alt="TVS" style="height:48px;width:auto;margin-bottom:1rem">
+        <p style="color:var(--text-secondary);font-size:.875rem;line-height:1.7;margin:0">Specialist in verwarmingsoplossingen voor terrassen, hallen, kerken en meer.</p>
+      </div>
+      <div>
+        <div class="ftr-heading">Producten</div>
+        <div style="display:flex;flex-direction:column;gap:.625rem"><a href="producten.html" class="ftr-link">Terrasverwarming</a><a href="producten.html" class="ftr-link">Halverwarming</a><a href="producten.html" class="ftr-link">Kerkverwarming</a></div>
+      </div>
+      <div>
+        <div class="ftr-heading">Navigatie</div>
+        <div style="display:flex;flex-direction:column;gap:.625rem"><a href="index.html" class="ftr-link">Home</a><a href="producten.html" class="ftr-link">Producten</a><a href="over-ons.html" class="ftr-link">Over Ons</a><a href="index.html#contact" class="ftr-link">Contact</a></div>
+      </div>
+      <div>
+        <div class="ftr-heading">Contact</div>
+        <div style="display:flex;flex-direction:column;gap:.625rem;font-size:.875rem;color:var(--text-secondary)">
+          <span>Nijverheidsweg 16B</span><span>3481 MB Harmelen</span>
+          <a href="tel:0348220338" class="ftr-link" style="margin-top:.5rem">0348-220338</a>
+          <a href="mailto:info@terrasverwarmer.nu" class="ftr-link">info@terrasverwarmer.nu</a>
+        </div>
+      </div>
+    </div>
+    <div style="padding-top:2rem;border-top:1px solid var(--border);text-align:center">
+      <p style="color:var(--text-muted);font-size:.875rem;margin:0">&copy; 2026 Terras Verwarmings Specialisten B.V. Alle rechten voorbehouden.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('theme-toggle').addEventListener('click', function() {
+  var html = document.documentElement;
+  html.classList.toggle('dark');
+  var isDark = html.classList.contains('dark');
+  localStorage.setItem('tvs-theme', isDark ? 'dark' : 'light');
+  var meta = document.getElementById('meta-theme-color');
+  if (meta) meta.content = isDark ? '#000000' : '#f9fafb';
+});
+</script>
+</body>
+</html>

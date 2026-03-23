@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 50" fill="none">
+  <defs>
+    <linearGradient id="flame1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#FBBF24"/>
+    </linearGradient>
+    <linearGradient id="flame2" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="50%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#E31E24"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E31E24"/>
+      <stop offset="100%" stop-color="#F97316"/>
+    </linearGradient>
+  </defs>
+  <!-- Flame outer -->
+  <path d="M16 38C16 38 6 29 6 20C6 11 11 7 16 3C21 7 26 11 26 20C26 29 16 38 16 38Z" fill="url(#flame1)" opacity="0.9"/>
+  <!-- Flame inner -->
+  <path d="M16 33C16 33 10.5 26 10.5 20.5C10.5 15 13.5 13 16 8.5C18.5 13 21.5 15 21.5 20.5C21.5 26 16 33 16 33Z" fill="url(#flame2)"/>
+  <!-- TVS text -->
+  <text x="36" y="30" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="900" letter-spacing="-0.5" fill="url(#textGrad)">TVS</text>
+  <!-- Subtitle -->
+  <text x="36" y="44" font-family="Inter, system-ui, sans-serif" font-size="7" font-weight="600" letter-spacing="1.5" fill="#9CA3AF">TERRAS VERWARMINGS SPECIALISTEN</text>
+</svg>
