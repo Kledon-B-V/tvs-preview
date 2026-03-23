@@ -90,24 +90,47 @@ html:not(.dark) .icon-sun { display: none; } html:not(.dark) .icon-moon { displa
 .nav-item > .nav-link { display: inline-flex; align-items: center; gap: .25rem; }
 .nav-arrow { width: 12px; height: 12px; transition: transform .25s; }
 .nav-item:hover > .nav-link .nav-arrow { transform: rotate(180deg); }
+/* Mega dropdown with sub-panels */
 .mega-dd {
-  position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(8px);
-  min-width: 220px; padding: .5rem 0;
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: .75rem;
-  box-shadow: 0 12px 32px rgba(0,0,0,.12);
-  opacity: 0; visibility: hidden;
-  transition: opacity .2s, transform .2s, visibility .2s;
+  position: absolute; top: 100%; left: 0; margin-top: .5rem;
+  width: 280px; padding: .5rem; border-radius: 1rem;
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: all .2s ease;
   z-index: 200;
 }
+.nav-item:hover > .mega-dd { opacity: 1; visibility: visible; transform: translateY(0); }
+
 html.dark .mega-dd { background: rgba(17,17,17,.95); border: 1px solid rgba(255,255,255,.15); box-shadow: 0 12px 32px rgba(0,0,0,.6); }
-.nav-item:hover > .mega-dd {
-  opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+html:not(.dark) .mega-dd { background: rgba(255,255,255,.98); border: 1px solid #e5e7eb; box-shadow: 0 12px 32px rgba(0,0,0,.1); }
+
+/* Dropdown item */
+.dd-item {
+  position: relative; display: block; padding: .75rem 1rem;
+  border-radius: .5rem; transition: all .15s;
 }
-.mega-dd a {
-  display: block; padding: .5rem 1.25rem; font-size: .875rem; font-weight: 500;
-  color: var(--text-secondary); transition: color .15s, background .15s; white-space: nowrap;
+html.dark .dd-item:hover { background: rgba(255,255,255,.08); }
+html:not(.dark) .dd-item:hover { background: rgba(0,0,0,.04); }
+.dd-item .dd-title { font-weight: 700; font-size: .9375rem; }
+.dd-item .dd-sub { font-size: .75rem; color: var(--text-muted); margin-top: .125rem; }
+
+/* Sub-dropdown (flies out to the right) */
+.dd-sub-panel {
+  position: absolute; left: 100%; top: -.5rem;
+  width: 220px; padding: .5rem; border-radius: 1rem;
+  opacity: 0; visibility: hidden; transform: translateX(8px);
+  transition: all .2s ease;
 }
-.mega-dd a:hover { color: var(--text); background: var(--bg-card-hover); }
+.dd-item:hover > .dd-sub-panel { opacity: 1; visibility: visible; transform: translateX(0); }
+
+html.dark .dd-sub-panel { background: rgba(17,17,17,.95); border: 1px solid rgba(255,255,255,.15); box-shadow: 0 12px 32px rgba(0,0,0,.6); }
+html:not(.dark) .dd-sub-panel { background: rgba(255,255,255,.98); border: 1px solid #e5e7eb; box-shadow: 0 12px 32px rgba(0,0,0,.1); }
+
+.dd-sub-panel a {
+  display: block; padding: .5rem .75rem; border-radius: .375rem;
+  font-size: .875rem; color: var(--text-secondary); transition: all .15s;
+}
+html.dark .dd-sub-panel a:hover { background: rgba(255,255,255,.08); color: var(--text); }
+html:not(.dark) .dd-sub-panel a:hover { background: rgba(0,0,0,.04); color: var(--text); }
 
 /* ===== ABOUT PAGE SECTIONS ===== */
 
@@ -281,12 +304,32 @@ html.dark .mega-dd { background: rgba(17,17,17,.95); border: 1px solid rgba(255,
         <div class="nav-item">
           <a href="producten.html" class="nav-link">Producten <svg class="nav-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
           <div class="mega-dd">
-            <a href="producten.html?cat=terrasverwarming-gas">Terrasverwarming</a>
-            <a href="producten.html?cat=loungehaarden">Terras &amp; Loungehaarden</a>
-            <a href="producten.html?cat=halverwarming">Halverwarming</a>
-            <a href="producten.html?cat=kerkverwarming">Kerkverwarming</a>
-            <a href="producten.html?cat=zonnepanelen">Zonnepanelen &amp; LED</a>
-            <a href="producten.html" style="border-top:1px solid var(--border);margin-top:.25rem;padding-top:.75rem;color:var(--text);font-weight:600">Bekijk alle producten &rarr;</a>
+            <div class="dd-item">
+              <a href="productgids.html">
+                <div class="dd-title" style="color:var(--text)">Productgids</div>
+                <div class="dd-sub">Advies &amp; uitleg per categorie</div>
+              </a>
+              <div class="dd-sub-panel">
+                <a href="productgids.html">Terrasverwarming</a>
+                <a href="productgids.html">Loungehaarden</a>
+                <a href="productgids.html">Halverwarming</a>
+                <a href="productgids.html">Kerkverwarming</a>
+                <a href="productgids.html">Zonnepanelen &amp; LED</a>
+              </div>
+            </div>
+            <div class="dd-item">
+              <a href="producten.html">
+                <div class="dd-title" style="color:var(--text)">Productcatalogus</div>
+                <div class="dd-sub">Zoek &amp; filter alle producten</div>
+              </a>
+              <div class="dd-sub-panel">
+                <a href="producten.html?cat=terrasverwarming-gas">Terrasverwarming</a>
+                <a href="producten.html?cat=loungehaarden">Loungehaarden</a>
+                <a href="producten.html?cat=halverwarming">Halverwarming</a>
+                <a href="producten.html?cat=kerkverwarming">Kerkverwarming</a>
+                <a href="producten.html?cat=zonnepanelen">Zonnepanelen &amp; LED</a>
+              </div>
+            </div>
           </div>
         </div>
         <a href="over-ons.html" class="nav-link active">Over Ons</a>
@@ -309,10 +352,11 @@ html.dark .mega-dd { background: rgba(17,17,17,.95); border: 1px solid rgba(255,
 <div class="mobile-menu" id="mobile-menu">
   <div class="mobile-menu-inner">
     <a href="index.html" class="mobile-link">Home</a>
-    <a href="producten.html" class="mobile-link">Producten</a>
+    <a href="productgids.html" class="mobile-link">Productgids</a>
+    <a href="producten.html" class="mobile-link">Productcatalogus</a>
     <div class="mobile-submenu">
       <a href="producten.html?cat=terrasverwarming-gas">Terrasverwarming</a>
-      <a href="producten.html?cat=loungehaarden">Terras & Loungehaarden</a>
+      <a href="producten.html?cat=loungehaarden">Loungehaarden</a>
       <a href="producten.html?cat=halverwarming">Halverwarming</a>
       <a href="producten.html?cat=kerkverwarming">Kerkverwarming</a>
       <a href="producten.html?cat=zonnepanelen">Zonnepanelen & LED</a>

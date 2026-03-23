@@ -1,0 +1,848 @@
+<!doctype html>
+<html lang="nl" class="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Productgids — TVS Terras Verwarmings Specialisten</title>
+<meta name="theme-color" content="#000000" id="meta-theme-color">
+<script>
+/* Anti-flash: set theme before render */
+(function(){var t=localStorage.getItem('tvs-theme');if(t==='light'){document.documentElement.classList.remove('dark');document.getElementById('meta-theme-color').content='#f9fafb'}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* ===== THEME SYSTEM: CSS Custom Properties ===== */
+:root {
+  --bg: #f9fafb; --bg-card: #ffffff; --bg-card-hover: #f3f4f6;
+  --bg-header: rgba(255,255,255,.6); --bg-glass: rgba(255,255,255,.8);
+  --text: #111827; --text-secondary: #4b5563; --text-muted: #9ca3af;
+  --border: #e5e7eb; --border-hover: #d1d5db;
+  --shadow: 0 1px 3px rgba(0,0,0,.08); --shadow-lg: 0 12px 32px rgba(0,0,0,.08);
+  --orb-opacity: 0.08; --grid-color: rgba(0,0,0,.04);
+  --cta-btn-bg: #111827; --cta-btn-text: #fff;
+  --footer-from: #f9fafb; --footer-to: #f3f4f6;
+}
+html.dark {
+  --bg: #000000; --bg-card: rgba(255,255,255,.05); --bg-card-hover: rgba(255,255,255,.1);
+  --bg-header: rgba(0,0,0,.6); --bg-glass: rgba(255,255,255,.05);
+  --text: #ffffff; --text-secondary: #9ca3af; --text-muted: #6b7280;
+  --border: rgba(255,255,255,.1); --border-hover: rgba(255,255,255,.2);
+  --shadow: none; --shadow-lg: none;
+  --orb-opacity: 0.2; --grid-color: rgba(255,255,255,.02);
+  --cta-btn-bg: #ffffff; --cta-btn-text: #000000;
+  --footer-from: #000000; --footer-to: #030712;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { font-family: 'Inter', system-ui, sans-serif; margin: 0; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; transition: background-color .3s, color .3s; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* Theme transition helper */
+.t { transition: background-color .3s, color .3s, border-color .3s, box-shadow .3s; }
+
+/* Glass card */
+.glass { background: var(--bg-card); border: 1px solid var(--border); border-radius: 1rem; box-shadow: var(--shadow); }
+.glass:hover { border-color: var(--border-hover); box-shadow: var(--shadow-lg); }
+
+/* Background effects */
+.bg-orbs { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: var(--orb-opacity); }
+.bg-grid { position: fixed; inset: 0; z-index: -1; pointer-events: none; background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 64px 64px; }
+
+/* Gradient text */
+.gradient-text { background: linear-gradient(135deg, #E31E24, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+/* Red gradient button */
+.btn-red { display: inline-flex; align-items: center; gap: .5rem; padding: 1rem 2rem; background: linear-gradient(135deg, #E31E24, #ea580c); color: #fff; border-radius: .75rem; font-weight: 700; box-shadow: 0 8px 24px rgba(227,30,36,.25); transition: all .3s; }
+.btn-red:hover { box-shadow: 0 12px 32px rgba(227,30,36,.35); transform: translateY(-1px); }
+
+/* Ghost button */
+.btn-ghost { display: inline-flex; align-items: center; gap: .5rem; padding: 1rem 2rem; background: var(--bg-card); border: 1px solid var(--border); color: var(--text); border-radius: .75rem; font-weight: 700; transition: all .3s; }
+.btn-ghost:hover { background: var(--bg-card-hover); }
+
+/* Header */
+.site-hdr { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 96px; display: flex; align-items: center; background: var(--bg-header); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); border-bottom: 1px solid var(--border); transition: background-color .3s, border-color .3s; }
+
+/* Nav link */
+.nav-link { padding: .625rem 1.25rem; border-radius: .75rem; font-weight: 600; color: var(--text-secondary); transition: all .2s; }
+.nav-link:hover { color: var(--text); }
+.nav-link.active { color: var(--text); background: var(--bg-card); }
+
+/* Toggle button */
+.theme-btn { padding: .75rem; border-radius: .75rem; background: var(--bg-card); border: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .3s; }
+.theme-btn:hover { background: var(--bg-card-hover); }
+.theme-btn svg { width: 20px; height: 20px; }
+html.dark .icon-sun { display: block; } html.dark .icon-moon { display: none; }
+html:not(.dark) .icon-sun { display: none; } html:not(.dark) .icon-moon { display: block; }
+
+/* Footer */
+.site-ftr { background: linear-gradient(to bottom, var(--footer-from), var(--footer-to)); border-top: 1px solid var(--border); transition: background .3s, border-color .3s; }
+.ftr-heading { color: var(--text); font-weight: 600; font-size: .875rem; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 1rem; }
+.ftr-link { color: var(--text-secondary); font-size: .875rem; transition: color .2s; }
+.ftr-link:hover { color: var(--text); }
+
+/* ===== MEGA DROPDOWN NAV ===== */
+.nav-item { position: relative; }
+.nav-item > .nav-link { display: inline-flex; align-items: center; gap: .25rem; }
+.nav-arrow { width: 12px; height: 12px; transition: transform .25s; }
+.nav-item:hover > .nav-link .nav-arrow { transform: rotate(180deg); }
+
+.mega-dd {
+  position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(8px);
+  min-width: 220px; padding: .5rem 0;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: .75rem;
+  box-shadow: 0 12px 32px rgba(0,0,0,.12);
+  opacity: 0; visibility: hidden;
+  transition: opacity .2s, transform .2s, visibility .2s;
+  z-index: 200;
+}
+html.dark .mega-dd { background: rgba(17,17,17,.95); border: 1px solid rgba(255,255,255,.15); box-shadow: 0 12px 32px rgba(0,0,0,.6); }
+.nav-item:hover > .mega-dd {
+  opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+}
+.mega-dd a {
+  display: block; padding: .5rem 1.25rem; font-size: .875rem; font-weight: 500;
+  color: var(--text-secondary); transition: color .15s, background .15s; white-space: nowrap;
+}
+.mega-dd a:hover { color: var(--text); background: var(--bg-card-hover); }
+.mega-dd a.active-dd { color: var(--text); font-weight: 700; }
+
+/* Hamburger - only shown on mobile */
+.hamburger {
+  display: none; cursor: pointer; background: none; border: none;
+  padding: .5rem; flex-direction: column; gap: 5px; z-index: 200;
+}
+.hamburger span {
+  display: block; width: 24px; height: 2px; border-radius: 2px;
+  background: var(--text); transition: all .3s;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  position: fixed; inset: 0; z-index: 150;
+  background: var(--bg);
+  display: none; flex-direction: column;
+  padding: 96px 1.5rem 2rem;
+  overflow-y: auto;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu-inner { display: flex; flex-direction: column; gap: .25rem; }
+.mobile-link {
+  display: block; padding: 1rem; border-radius: .75rem;
+  font-size: 1.125rem; font-weight: 600; color: var(--text-secondary);
+  transition: all .2s;
+}
+.mobile-link:hover, .mobile-link.active { color: var(--text); background: var(--bg-card); }
+.mobile-submenu {
+  display: flex; flex-direction: column; gap: .125rem;
+  padding-left: 1rem; margin-bottom: .5rem;
+}
+.mobile-submenu a {
+  display: block; padding: .625rem 1rem; border-radius: .5rem;
+  font-size: .9375rem; color: var(--text-muted); transition: all .2s;
+}
+.mobile-submenu a:hover { color: var(--text); background: var(--bg-card); }
+.mobile-cta {
+  display: block; text-align: center; margin-top: 1rem;
+  padding: 1rem; border-radius: .75rem; font-weight: 700;
+  background: linear-gradient(135deg, #E31E24, #ea580c); color: #fff;
+}
+
+@media (max-width: 1024px) {
+  .hamburger { display: flex; }
+  .desk-nav { display: none !important; }
+}
+@media(max-width:768px) {
+  .guide-grid { grid-template-columns: 1fr !important; }
+  .compare-grid { grid-template-columns: 1fr !important; }
+  .app-grid { grid-template-columns: 1fr !important; }
+  .ftr-grid { grid-template-columns: 1fr !important; }
+}
+
+/* WhatsApp FAB */
+.whatsapp-fab {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 90;
+  width: 60px; height: 60px; border-radius: 50%;
+  background: #25D366; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(37,211,102,.4);
+  transition: all .3s; text-decoration: none;
+}
+.whatsapp-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 24px rgba(37,211,102,.5);
+}
+@media (max-width: 768px) {
+  .whatsapp-fab { bottom: 1.25rem; right: 1.25rem; width: 52px; height: 52px; }
+}
+
+/* ===== PRODUCTGIDS SPECIFIC ===== */
+
+/* Tab navigation */
+.tab-container {
+  display: inline-flex; gap: .25rem; padding: .375rem;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 9999px; transition: all .3s;
+}
+.tab-btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .75rem 1.5rem; border-radius: 9999px;
+  font-weight: 600; font-size: .9375rem;
+  background: transparent; border: none; cursor: pointer;
+  color: var(--text-secondary); transition: all .25s;
+  font-family: inherit;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active {
+  background: linear-gradient(135deg, #E31E24, #f97316);
+  color: #fff; box-shadow: 0 4px 16px rgba(227,30,36,.3);
+}
+.tab-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+/* Tab content */
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Category card */
+.cat-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 1.5rem;
+  overflow: hidden; transition: all .3s;
+}
+.cat-card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.cat-card-img { position: relative; height: 12rem; overflow: hidden; }
+.cat-card-img img { width: 100%; height: 100%; object-fit: cover; }
+.cat-card-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(to top, rgba(0,0,0,.8), transparent);
+  display: flex; align-items: center; gap: .75rem;
+}
+.cat-card-icon {
+  width: 40px; height: 40px; border-radius: .625rem;
+  background: linear-gradient(135deg, #E31E24, #f97316);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.cat-card-icon svg { width: 20px; height: 20px; }
+.cat-card-body { padding: 1.5rem; }
+
+/* Feature list */
+.feature-item {
+  display: flex; align-items: center; gap: .5rem;
+  font-size: .875rem; color: var(--text-secondary);
+  padding: .25rem 0;
+}
+.feature-dot {
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+}
+.feature-dot-red { background: #E31E24; }
+.feature-dot-green { background: #22c55e; }
+.feature-dot-orange { background: #f97316; }
+.feature-dot-blue { background: #3b82f6; }
+
+/* Ideal section */
+.ideal-box {
+  margin-top: 1rem; padding: .75rem 1rem; border-radius: .75rem;
+  background: linear-gradient(135deg, rgba(227,30,36,.08), rgba(249,115,22,.08));
+  border: 1px solid rgba(227,30,36,.15);
+}
+
+/* Compare card */
+.compare-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 1.5rem;
+  overflow: hidden; transition: all .3s;
+}
+.compare-card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-lg); }
+
+/* Application card */
+.app-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 1.5rem;
+  overflow: hidden; transition: all .3s;
+}
+.app-card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+
+/* Category tag */
+.cat-tag {
+  display: inline-block; padding: .25rem .75rem; border-radius: 9999px;
+  font-size: .75rem; font-weight: 600;
+  background: linear-gradient(135deg, rgba(227,30,36,.1), rgba(249,115,22,.1));
+  color: #E31E24; border: 1px solid rgba(227,30,36,.2);
+}
+html.dark .cat-tag { color: #f97316; }
+
+@media(max-width:640px) {
+  .tab-container { flex-direction: column; border-radius: 1rem; width: 100%; }
+  .tab-btn { justify-content: center; border-radius: .75rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg-orbs" aria-hidden="true">
+  <div style="position:absolute;top:15%;left:10%;width:500px;height:500px;background:#E31E24;border-radius:50%;filter:blur(120px)"></div>
+  <div style="position:absolute;bottom:20%;right:10%;width:400px;height:400px;background:#f97316;border-radius:50%;filter:blur(120px)"></div>
+</div>
+<div class="bg-grid" aria-hidden="true"></div>
+
+<!-- Header -->
+<header class="site-hdr">
+  <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem;width:100%;display:flex;align-items:center;justify-content:space-between">
+    <a href="index.html" style="display:flex;align-items:center">
+      <img src="assets/images/logo-tvs.svg" alt="TVS" style="height:56px;width:auto">
+    </a>
+    <div style="display:flex;align-items:center;gap:.5rem">
+      <nav class="desk-nav" style="display:flex;align-items:center;gap:.25rem">
+        <a href="index.html" class="nav-link">Home</a>
+        <div class="nav-item">
+          <a href="producten.html" class="nav-link active">Producten <svg class="nav-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="mega-dd">
+            <a href="producten.html?cat=terrasverwarming-gas">Terrasverwarming</a>
+            <a href="producten.html?cat=loungehaarden">Terras &amp; Loungehaarden</a>
+            <a href="producten.html?cat=halverwarming">Halverwarming</a>
+            <a href="producten.html?cat=kerkverwarming">Kerkverwarming</a>
+            <a href="producten.html?cat=zonnepanelen">Zonnepanelen &amp; LED</a>
+            <a href="productgids.html" class="active-dd" style="border-top:1px solid var(--border);margin-top:.25rem;padding-top:.75rem;font-weight:700;color:var(--text)">Productgids &rarr;</a>
+            <a href="producten.html" style="color:var(--text);font-weight:600">Bekijk alle producten &rarr;</a>
+          </div>
+        </div>
+        <a href="over-ons.html" class="nav-link">Over Ons</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="contact.html" class="btn-red" style="margin-left:.5rem;padding:.625rem 1.5rem;font-size:.875rem">Offerte Aanvragen</a>
+      </nav>
+      <!-- Hamburger (mobile only) -->
+      <button class="hamburger" id="hamburger" aria-label="Menu" onclick="var m=document.getElementById('mobile-menu');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':''">
+        <span></span><span></span><span></span>
+      </button>
+      <button class="theme-btn" id="theme-toggle" aria-label="Wissel thema">
+        <svg class="icon-sun" fill="none" stroke="#eab308" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-inner">
+    <a href="index.html" class="mobile-link">Home</a>
+    <a href="producten.html" class="mobile-link active">Producten</a>
+    <div class="mobile-submenu">
+      <a href="producten.html?cat=terrasverwarming-gas">Terrasverwarming</a>
+      <a href="producten.html?cat=loungehaarden">Terras & Loungehaarden</a>
+      <a href="producten.html?cat=halverwarming">Halverwarming</a>
+      <a href="producten.html?cat=kerkverwarming">Kerkverwarming</a>
+      <a href="producten.html?cat=zonnepanelen">Zonnepanelen & LED</a>
+      <a href="productgids.html" style="color:var(--text);font-weight:600">Productgids</a>
+    </div>
+    <a href="over-ons.html" class="mobile-link">Over Ons</a>
+    <a href="contact.html" class="mobile-link">Contact</a>
+    <a href="contact.html" class="mobile-cta">Offerte Aanvragen</a>
+  </div>
+</div>
+
+<main style="padding-top:96px">
+
+<!-- ===== HERO HEADER ===== -->
+<section style="padding:4rem 0 2rem">
+  <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem;text-align:center">
+    <div style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;background:linear-gradient(135deg,#E31E24,#f97316);border-radius:1rem;margin-bottom:1.5rem">
+      <svg width="32" height="32" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+    </div>
+    <h1 style="font-size:clamp(2.5rem,5vw,4rem);font-weight:900;margin:0 0 .75rem;line-height:1.1">
+      <span class="gradient-text">Productgids</span>
+    </h1>
+    <p style="font-size:1.25rem;color:var(--text-secondary);max-width:560px;margin:0 auto;line-height:1.7">
+      Ontdek welke verwarming perfect bij u past
+    </p>
+  </div>
+</section>
+
+<!-- ===== TAB NAVIGATION ===== -->
+<section style="padding:1rem 0 3rem">
+  <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:center">
+    <div class="tab-container">
+      <button class="tab-btn active" data-tab="categorieen" onclick="switchTab('categorieen')">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2c1.5 0 3 2.5 3 6 0 2.5-1 4.5-2 5.5v3a1.5 1.5 0 01-3 0v-3c-1-1-2-3-2-5.5 0-3.5 1.5-6 3-6z"/><path d="M10 21h4"/></svg>
+        Categorie&euml;n
+      </button>
+      <button class="tab-btn" data-tab="vergelijking" onclick="switchTab('vergelijking')">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Gas vs Elektrisch
+      </button>
+      <button class="tab-btn" data-tab="toepassingen" onclick="switchTab('toepassingen')">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>
+        Toepassingen
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TAB: CATEGORIEEN ===== -->
+<div class="tab-content active" id="tab-categorieen">
+  <section style="padding:0 0 6rem">
+    <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem">
+      <div class="guide-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem">
+
+        <!-- Card 1: Terrasverwarmer -->
+        <div class="cat-card">
+          <div class="cat-card-img">
+            <img src="assets/images/hero-terras.jpg" alt="Terrasverwarmer">
+            <div class="cat-card-overlay">
+              <div class="cat-card-icon">
+                <svg fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2c1.5 0 3 2.5 3 6 0 2.5-1 4.5-2 5.5v3a1.5 1.5 0 01-3 0v-3c-1-1-2-3-2-5.5 0-3.5 1.5-6 3-6z"/><path d="M10 21h4"/></svg>
+              </div>
+              <div>
+                <div style="color:#fff;font-weight:700;font-size:1.125rem">Terrasverwarmer</div>
+                <div style="color:rgba(255,255,255,.7);font-size:.8125rem">12-14 kW</div>
+              </div>
+            </div>
+          </div>
+          <div class="cat-card-body">
+            <p style="color:var(--text-secondary);font-size:.9375rem;margin:0 0 1rem;line-height:1.7">
+              De klassieke staande terrasverwarmer. Ideaal voor open terrassen.
+            </p>
+            <div style="display:flex;flex-direction:column;gap:.25rem;margin-bottom:1rem">
+              <div class="feature-item"><span class="feature-dot feature-dot-red"></span> 360&deg; warmteverspreiding</div>
+              <div class="feature-item"><span class="feature-dot feature-dot-red"></span> 12-14 kW vermogen</div>
+              <div class="feature-item"><span class="feature-dot feature-dot-red"></span> Bereik 15-25 m&sup2;</div>
+              <div class="feature-item"><span class="feature-dot feature-dot-red"></span> Mobiel en flexibel</div>
+            </div>
+            <div class="ideal-box">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Ideaal voor</div>
+              <div style="font-size:.875rem;color:var(--text-secondary)">Horeca terrassen, evenementen</div>
+            </div>
+            <a href="producten.html" class="btn-red" style="width:100%;justify-content:center;margin-top:1.25rem;padding:.875rem 1.5rem;font-size:.875rem">
+              Bekijk Terrasverwarmer Producten
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2: Hangende Verwarmer -->
+        <div class="cat-card">
+          <div class="cat-card-img">
+            <img src="assets/images/cat-halverwarming.jpg" alt="Hangende Verwarmer">
+            <div class="cat-card-overlay">
+              <div class="cat-card-icon">
+                <svg fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v6"/><circle cx="12" cy="12" r="4"/><path d="M12 16v6"/><path d="M4 12h4"/><path d="M16 12h4"/></svg>
+              </div>
+              <div>
+                <div style="color:#fff;font-weight:700;font-size:1.125rem">Hangende Verwarmer</div>
+                <div style="color:rgba(255,255,255,.7);font-size:.8125rem">2-3 kW</div>
+              </div>
+            </div>
+          </div>
+          <div class="cat-card-body">
+            <p style="color:var(--text-secondary);font-size:.9375rem;margin:0 0 1rem;line-height:1.7">
+              Hangende elektrische of gas verwarmers voor optimaal ruimtegebruik.
+            </p>
+            <div style="display:flex;flex-direction:column;gap:.25rem;margin-bottom:1rem">
+              <div class="feature-item"><span class="feature-dot feature-dot-red"></span> Ruimtebesparend</div>
+              <div class="feature-item"><span class="feature-dot feature-dot-red"></span> Gerichte warmte</div>
+              <div class="feature-item"><span class="feature-dot feature-dot-red"></span> Moderne uitstraling</div>
+              <div class="feature-item"><span class="feature-dot feature-dot-red"></span> Eenvoudige montage</div>
+            </div>
+            <div class="ideal-box">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Ideaal voor</div>
+              <div style="font-size:.875rem;color:var(--text-secondary)">Overdekte terrassen, pergola's</div>
+            </div>
+            <a href="producten.html" class="btn-red" style="width:100%;justify-content:center;margin-top:1.25rem;padding:.875rem 1.5rem;font-size:.875rem">
+              Bekijk Hangende Verwarmer Producten
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 3: Infrared Verwarmer -->
+        <div class="cat-card">
+          <div class="cat-card-img">
+            <img src="assets/images/product-modern-interior.jpg" alt="Infrared Verwarmer">
+            <div class="cat-card-overlay">
+              <div class="cat-card-icon">
+                <svg fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+              </div>
+              <div>
+                <div style="color:#fff;font-weight:700;font-size:1.125rem">Infrared Verwarmer</div>
+                <div style="color:rgba(255,255,255,.7);font-size:.8125rem">1.5-3 kW</div>
+              </div>
+            </div>
+          </div>
+          <div class="cat-card-body">
+            <p style="color:var(--text-secondary);font-size:.9375rem;margin:0 0 1rem;line-height:1.7">
+              Directe infrarood warmtestraling, vergelijkbaar met zonnestraling.
+            </p>
+            <div style="display:flex;flex-direction:column;gap:.25rem;margin-bottom:1rem">
+              <div class="feature-item"><span class="feature-dot feature-dot-red"></span> Direct warmte-effect</div>
+              <div class="feature-item"><span class="feature-dot feature-dot-red"></span> Zeer energiezuinig</div>
+              <div class="feature-item"><span class="feature-dot feature-dot-red"></span> Geen voorverwarming</div>
+              <div class="feature-item"><span class="feature-dot feature-dot-red"></span> Windbestendig</div>
+            </div>
+            <div class="ideal-box">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Ideaal voor</div>
+              <div style="font-size:.875rem;color:var(--text-secondary)">Overdekte terrassen</div>
+            </div>
+            <a href="producten.html" class="btn-red" style="width:100%;justify-content:center;margin-top:1.25rem;padding:.875rem 1.5rem;font-size:.875rem">
+              Bekijk Infrared Verwarmer Producten
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 4: Piramide Verwarmer -->
+        <div class="cat-card">
+          <div class="cat-card-img">
+            <img src="assets/images/product-outdoor-dining.jpg" alt="Piramide Verwarmer">
+            <div class="cat-card-overlay">
+              <div class="cat-card-icon">
+                <svg fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 22 22 2 22"/></svg>
+              </div>
+              <div>
+                <div style="color:#fff;font-weight:700;font-size:1.125rem">Piramide Verwarmer</div>
+                <div style="color:rgba(255,255,255,.7);font-size:.8125rem">10-13 kW</div>
+              </div>
+            </div>
+          </div>
+          <div class="cat-card-body">
+            <p style="color:var(--text-secondary);font-size:.9375rem;margin:0 0 1rem;line-height:1.7">
+              Design verwarmer met glazen vuurkolom voor sfeer &eacute;n warmte.
+            </p>
+            <div style="display:flex;flex-direction:column;gap:.25rem;margin-bottom:1rem">
+              <div class="feature-item"><span class="feature-dot feature-dot-red"></span> Decoratief element</div>
+              <div class="feature-item"><span class="feature-dot feature-dot-red"></span> 360&deg; warmte</div>
+              <div class="feature-item"><span class="feature-dot feature-dot-red"></span> Sfeervolle vlam</div>
+              <div class="feature-item"><span class="feature-dot feature-dot-red"></span> Robuuste constructie</div>
+            </div>
+            <div class="ideal-box">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Ideaal voor</div>
+              <div style="font-size:.875rem;color:var(--text-secondary)">Luxe terrassen, hotels</div>
+            </div>
+            <a href="producten.html" class="btn-red" style="width:100%;justify-content:center;margin-top:1.25rem;padding:.875rem 1.5rem;font-size:.875rem">
+              Bekijk Piramide Verwarmer Producten
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== TAB: GAS VS ELEKTRISCH ===== -->
+<div class="tab-content" id="tab-vergelijking">
+  <section style="padding:0 0 6rem">
+    <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem">
+      <div class="compare-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem">
+
+        <!-- Gas -->
+        <div class="compare-card">
+          <div style="position:relative;height:14rem;overflow:hidden">
+            <img src="assets/images/hero-terras.jpg" alt="Gas Verwarming" style="width:100%;height:100%;object-fit:cover">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7),transparent)"></div>
+            <div style="position:absolute;bottom:1.5rem;left:1.5rem">
+              <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border-radius:9999px">
+                <svg width="20" height="20" fill="none" stroke="#f97316" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2c1.5 0 3 2.5 3 6 0 2.5-1 4.5-2 5.5v3a1.5 1.5 0 01-3 0v-3c-1-1-2-3-2-5.5 0-3.5 1.5-6 3-6z"/></svg>
+                <span style="color:#fff;font-weight:700;font-size:1.125rem">Gas Verwarming</span>
+              </div>
+            </div>
+          </div>
+          <div style="padding:2rem">
+            <!-- Voordelen -->
+            <div style="margin-bottom:1.5rem">
+              <div style="font-size:.8125rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#22c55e;margin-bottom:.75rem">Voordelen</div>
+              <div style="display:flex;flex-direction:column;gap:.375rem">
+                <div class="feature-item"><span class="feature-dot feature-dot-green"></span> Zeer krachtig 10-14 kW</div>
+                <div class="feature-item"><span class="feature-dot feature-dot-green"></span> Mobiel</div>
+                <div class="feature-item"><span class="feature-dot feature-dot-green"></span> Geen stroom nodig</div>
+                <div class="feature-item"><span class="feature-dot feature-dot-green"></span> Grote radius 15-25 m&sup2;</div>
+                <div class="feature-item"><span class="feature-dot feature-dot-green"></span> Lage kosten</div>
+              </div>
+            </div>
+            <!-- Aandachtspunten -->
+            <div style="margin-bottom:1.5rem">
+              <div style="font-size:.8125rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#f97316;margin-bottom:.75rem">Aandachtspunten</div>
+              <div style="display:flex;flex-direction:column;gap:.375rem">
+                <div class="feature-item"><span class="feature-dot feature-dot-orange"></span> Gasfles nodig</div>
+                <div class="feature-item"><span class="feature-dot feature-dot-orange"></span> Alleen buiten</div>
+                <div class="feature-item"><span class="feature-dot feature-dot-orange"></span> Regelmatige flesvervanging</div>
+              </div>
+            </div>
+            <!-- Kosten -->
+            <div style="margin-bottom:1.5rem;padding:1rem;background:var(--bg-card-hover);border-radius:.75rem">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);margin-bottom:.25rem">Kosten per uur</div>
+              <div class="gradient-text" style="font-size:1.5rem;font-weight:900">&euro;0.80 - &euro;1.20</div>
+            </div>
+            <!-- Best voor -->
+            <div class="ideal-box" style="margin-top:0;margin-bottom:1.5rem">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Best voor</div>
+              <div style="font-size:.875rem;color:var(--text-secondary)">Grote open terrassen, horeca, evenementen</div>
+            </div>
+            <a href="producten.html?type=gas" class="btn-red" style="width:100%;justify-content:center;padding:.875rem 1.5rem;font-size:.875rem">
+              Bekijk Gas Producten
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Elektrisch -->
+        <div class="compare-card">
+          <div style="position:relative;height:14rem;overflow:hidden">
+            <img src="assets/images/cat-halverwarming.jpg" alt="Elektrische Verwarming" style="width:100%;height:100%;object-fit:cover">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7),transparent)"></div>
+            <div style="position:absolute;bottom:1.5rem;left:1.5rem">
+              <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border-radius:9999px">
+                <svg width="20" height="20" fill="none" stroke="#3b82f6" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                <span style="color:#fff;font-weight:700;font-size:1.125rem">Elektrische Verwarming</span>
+              </div>
+            </div>
+          </div>
+          <div style="padding:2rem">
+            <!-- Voordelen -->
+            <div style="margin-bottom:1.5rem">
+              <div style="font-size:.8125rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#22c55e;margin-bottom:.75rem">Voordelen</div>
+              <div style="display:flex;flex-direction:column;gap:.375rem">
+                <div class="feature-item"><span class="feature-dot feature-dot-green"></span> Eenvoudige installatie</div>
+                <div class="feature-item"><span class="feature-dot feature-dot-green"></span> Geen gasflessen</div>
+                <div class="feature-item"><span class="feature-dot feature-dot-green"></span> Ook binnen</div>
+                <div class="feature-item"><span class="feature-dot feature-dot-green"></span> Directe warmte</div>
+                <div class="feature-item"><span class="feature-dot feature-dot-green"></span> Onderhoudsarm</div>
+              </div>
+            </div>
+            <!-- Aandachtspunten -->
+            <div style="margin-bottom:1.5rem">
+              <div style="font-size:.8125rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#f97316;margin-bottom:.75rem">Aandachtspunten</div>
+              <div style="display:flex;flex-direction:column;gap:.375rem">
+                <div class="feature-item"><span class="feature-dot feature-dot-orange"></span> Stroomaansluiting vereist</div>
+                <div class="feature-item"><span class="feature-dot feature-dot-orange"></span> Lager vermogen</div>
+                <div class="feature-item"><span class="feature-dot feature-dot-orange"></span> Hogere energiekosten</div>
+                <div class="feature-item"><span class="feature-dot feature-dot-orange"></span> Kleiner bereik</div>
+              </div>
+            </div>
+            <!-- Kosten -->
+            <div style="margin-bottom:1.5rem;padding:1rem;background:var(--bg-card-hover);border-radius:.75rem">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);margin-bottom:.25rem">Kosten per uur</div>
+              <div class="gradient-text" style="font-size:1.5rem;font-weight:900">&euro;0.40 - &euro;0.75</div>
+            </div>
+            <!-- Best voor -->
+            <div class="ideal-box" style="margin-top:0;margin-bottom:1.5rem">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Best voor</div>
+              <div style="font-size:.875rem;color:var(--text-secondary)">Overdekte terrassen, kleine ruimtes</div>
+            </div>
+            <a href="producten.html?type=elektrisch" class="btn-red" style="width:100%;justify-content:center;padding:.875rem 1.5rem;font-size:.875rem">
+              Bekijk Elektrische Producten
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== TAB: TOEPASSINGEN ===== -->
+<div class="tab-content" id="tab-toepassingen">
+  <section style="padding:0 0 6rem">
+    <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem">
+      <div class="app-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem">
+
+        <!-- Horeca & Restaurants -->
+        <div class="app-card">
+          <div style="position:relative;height:14rem;overflow:hidden">
+            <img src="assets/images/product-outdoor-dining.jpg" alt="Horeca & Restaurants" style="width:100%;height:100%;object-fit:cover">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7),transparent)"></div>
+            <div style="position:absolute;bottom:1.5rem;left:1.5rem">
+              <div style="color:#fff;font-weight:800;font-size:1.25rem">Horeca &amp; Restaurants</div>
+            </div>
+          </div>
+          <div style="padding:2rem">
+            <!-- Behoeften -->
+            <div style="margin-bottom:1.5rem">
+              <div style="font-size:.8125rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);margin-bottom:.75rem">Behoeften</div>
+              <div style="display:flex;flex-direction:column;gap:.375rem">
+                <div class="feature-item"><span class="feature-dot feature-dot-blue"></span> Hoog vermogen</div>
+                <div class="feature-item"><span class="feature-dot feature-dot-blue"></span> Robuust</div>
+                <div class="feature-item"><span class="feature-dot feature-dot-blue"></span> Snel opwarmen</div>
+                <div class="feature-item"><span class="feature-dot feature-dot-blue"></span> Representatief</div>
+              </div>
+            </div>
+            <!-- Advies -->
+            <div style="margin-bottom:1.5rem;padding:1rem;background:var(--bg-card-hover);border-radius:.75rem">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);margin-bottom:.5rem">Ons advies</div>
+              <p style="font-size:.9375rem;color:var(--text-secondary);margin:0;line-height:1.7">Gas terrasverwarmer 12-14 kW of hangende gas heaters</p>
+            </div>
+            <!-- Categories -->
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+              <span class="cat-tag">Terrasverwarmer</span>
+              <span class="cat-tag">Hangende Verwarmer</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Industrieel & Hallen -->
+        <div class="app-card">
+          <div style="position:relative;height:14rem;overflow:hidden">
+            <img src="assets/images/product-warehouse.jpg" alt="Industrieel & Hallen" style="width:100%;height:100%;object-fit:cover">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7),transparent)"></div>
+            <div style="position:absolute;bottom:1.5rem;left:1.5rem">
+              <div style="color:#fff;font-weight:800;font-size:1.25rem">Industrieel &amp; Hallen</div>
+            </div>
+          </div>
+          <div style="padding:2rem">
+            <!-- Behoeften -->
+            <div style="margin-bottom:1.5rem">
+              <div style="font-size:.8125rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);margin-bottom:.75rem">Behoeften</div>
+              <div style="display:flex;flex-direction:column;gap:.375rem">
+                <div class="feature-item"><span class="feature-dot feature-dot-blue"></span> Grote ruimtes verwarmen</div>
+                <div class="feature-item"><span class="feature-dot feature-dot-blue"></span> Energiezuinig</div>
+                <div class="feature-item"><span class="feature-dot feature-dot-blue"></span> Continue verwarming</div>
+              </div>
+            </div>
+            <!-- Advies -->
+            <div style="margin-bottom:1.5rem;padding:1rem;background:var(--bg-card-hover);border-radius:.75rem">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);margin-bottom:.5rem">Ons advies</div>
+              <p style="font-size:.9375rem;color:var(--text-secondary);margin:0;line-height:1.7">Halverwarming systemen met hoog vermogen</p>
+            </div>
+            <!-- Categories -->
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+              <span class="cat-tag">Halverwarming</span>
+              <span class="cat-tag">Donkerstralers</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== CTA SECTION ===== -->
+<section style="padding:0 0 6rem">
+  <div style="max-width:900px;margin:0 auto;padding:0 1.5rem">
+    <div class="glass t" style="border-radius:3rem;padding:4rem;text-align:center;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:25%;width:256px;height:256px;background:rgba(227,30,36,.1);border-radius:50%;filter:blur(80px)" aria-hidden="true"></div>
+      <div style="position:relative;z-index:1">
+        <h2 style="font-size:clamp(2rem,4vw,3rem);font-weight:900;margin:0 0 1rem">Klaar Om Te Zoeken?</h2>
+        <p style="font-size:1.125rem;color:var(--text-secondary);max-width:560px;margin:0 auto 2.5rem">Bekijk ons complete assortiment en vind de perfecte verwarming voor uw situatie.</p>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+          <a href="producten.html" class="btn-red">
+            Bekijk Producten
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="contact.html" class="btn-ghost">Offerte Aanvragen</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="site-ftr">
+  <div style="max-width:1400px;margin:0 auto;padding:4rem 1.5rem">
+    <div class="ftr-grid" style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 1fr 1fr;gap:2rem;margin-bottom:3rem">
+      <div>
+        <img src="assets/images/logo-tvs.svg" alt="TVS" style="height:48px;width:auto;margin-bottom:1rem">
+        <p style="color:var(--text-secondary);font-size:.875rem;line-height:1.7;margin:0">Specialist in verwarmingsoplossingen voor terrassen, hallen, kerken en meer.</p>
+      </div>
+      <div>
+        <div class="ftr-heading">Terrasverwarming</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem">
+          <a href="producten.html" class="ftr-link">Gas Terrasverwarming</a>
+          <a href="producten.html" class="ftr-link">Elektrische Terrasverwarming</a>
+          <a href="producten.html" class="ftr-link">Verplaatsbare Terrasverwarming</a>
+          <a href="producten.html" class="ftr-link">Parasolverwarming</a>
+          <a href="producten.html" class="ftr-link">Donkerstralers</a>
+          <a href="producten.html" class="ftr-link">Partytent Heaters</a>
+        </div>
+      </div>
+      <div>
+        <div class="ftr-heading">Haarden</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem">
+          <a href="producten.html" class="ftr-link">Vuurtafels</a>
+          <a href="producten.html" class="ftr-link">Loungehaarden</a>
+          <a href="producten.html" class="ftr-link">Accessoires</a>
+        </div>
+      </div>
+      <div>
+        <div class="ftr-heading">Meer Diensten</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem">
+          <a href="producten.html" class="ftr-link">Halverwarming</a>
+          <a href="producten.html" class="ftr-link">Kerkverwarming</a>
+          <a href="producten.html" class="ftr-link">Zonnepanelen</a>
+          <a href="producten.html" class="ftr-link">LED Programma</a>
+          <a href="producten.html" class="ftr-link">Terrasoverkappingen</a>
+          <a href="producten.html" class="ftr-link">Elektrawerkzaamheden</a>
+        </div>
+      </div>
+      <div>
+        <div class="ftr-heading">Navigatie</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem">
+          <a href="index.html" class="ftr-link">Home</a>
+          <a href="over-ons.html" class="ftr-link">Over Ons</a>
+          <a href="contact.html" class="ftr-link">Contact</a>
+          <a href="productgids.html" class="ftr-link">Productgids</a>
+          <a href="contact.html" class="ftr-link">Offerte Aanvragen</a>
+        </div>
+      </div>
+      <div>
+        <div class="ftr-heading">Contact</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem;font-size:.875rem;color:var(--text-secondary)">
+          <span>Nijverheidsweg 16B</span>
+          <span>3481 MB Harmelen</span>
+          <a href="tel:0348220338" class="ftr-link" style="margin-top:.5rem">0348-220338</a>
+          <a href="mailto:info@terrasverwarmer.nu" class="ftr-link">info@terrasverwarmer.nu</a>
+        </div>
+      </div>
+    </div>
+    <div style="padding-top:2rem;border-top:1px solid var(--border);text-align:center">
+      <p style="color:var(--text-muted);font-size:.875rem;margin:0">&copy; 2026 TVS NL B.V. Alle rechten voorbehouden.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Widget -->
+<a href="https://wa.me/31348220338?text=Hallo%2C%20ik%20heb%20een%20vraag%20over%20uw%20verwarmingsoplossingen"
+   target="_blank" rel="noopener noreferrer"
+   class="whatsapp-fab" aria-label="Chat via WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+/* Theme toggle */
+document.getElementById('theme-toggle').addEventListener('click', function() {
+  var html = document.documentElement;
+  html.classList.toggle('dark');
+  var isDark = html.classList.contains('dark');
+  localStorage.setItem('tvs-theme', isDark ? 'dark' : 'light');
+  var meta = document.getElementById('meta-theme-color');
+  if (meta) meta.content = isDark ? '#000000' : '#f9fafb';
+});
+
+/* Close mobile menu on link click */
+document.querySelectorAll('.mobile-link, .mobile-submenu a, .mobile-cta').forEach(function(link) {
+  link.addEventListener('click', function() {
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+/* Tab switching */
+function switchTab(tabId) {
+  /* Deactivate all tabs */
+  document.querySelectorAll('.tab-btn').forEach(function(btn) {
+    btn.classList.remove('active');
+  });
+  document.querySelectorAll('.tab-content').forEach(function(content) {
+    content.classList.remove('active');
+  });
+
+  /* Activate selected tab */
+  document.querySelector('[data-tab="' + tabId + '"]').classList.add('active');
+  document.getElementById('tab-' + tabId).classList.add('active');
+}
+</script>
+</body>
+</html>
