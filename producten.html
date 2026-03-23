@@ -324,15 +324,44 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
   transition: all .2s;
 }
 .mobile-link:hover, .mobile-link.active { color: var(--text); background: var(--bg-card); }
-.mobile-submenu {
-  display: flex; flex-direction: column; gap: .125rem;
-  padding-left: 1rem; margin-bottom: .5rem;
+/* Mobile accordion */
+.mobile-accordion { }
+.mobile-accordion-btn {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; text-align: left; background: none; border: none;
+  cursor: pointer; font-family: inherit;
 }
-.mobile-submenu a {
-  display: block; padding: .625rem 1rem; border-radius: .5rem;
-  font-size: .9375rem; color: var(--text-muted); transition: all .2s;
+.mobile-chevron {
+  transition: transform .2s;
 }
-.mobile-submenu a:hover { color: var(--text); background: var(--bg-card); }
+.mobile-accordion.open .mobile-chevron {
+  transform: rotate(180deg);
+}
+.mobile-accordion-content {
+  display: none; padding: .25rem 0 .5rem;
+}
+.mobile-accordion.open .mobile-accordion-content {
+  display: block;
+}
+.mobile-accordion-group {
+  padding: .5rem 0;
+}
+.mobile-accordion-group + .mobile-accordion-group {
+  border-top: 1px solid var(--border);
+}
+.mobile-group-label {
+  padding: .375rem 1rem .375rem 1.5rem;
+  font-size: .6875rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .08em; color: var(--text-muted);
+}
+.mobile-accordion-content a {
+  display: block; padding: .5rem 1rem .5rem 1.5rem;
+  font-size: .9375rem; color: var(--text-secondary);
+  border-radius: .5rem; transition: all .15s;
+}
+.mobile-accordion-content a:hover {
+  color: var(--text); background: var(--bg-card);
+}
 .mobile-cta {
   display: block; text-align: center; margin-top: 1rem;
   padding: 1rem; border-radius: .75rem; font-weight: 700;
@@ -441,15 +470,33 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
 <div class="mobile-menu" id="mobile-menu">
   <div class="mobile-menu-inner">
     <a href="index.html" class="mobile-link">Home</a>
-    <a href="productgids.html" class="mobile-link">Productgids</a>
-    <a href="producten.html" class="mobile-link active">Productcatalogus</a>
-    <div class="mobile-submenu">
-      <a href="producten.html?cat=terrasverwarming-gas">Terrasverwarming</a>
-      <a href="producten.html?cat=loungehaarden">Loungehaarden</a>
-      <a href="producten.html?cat=halverwarming">Halverwarming</a>
-      <a href="producten.html?cat=kerkverwarming">Kerkverwarming</a>
-      <a href="producten.html?cat=zonnepanelen">Zonnepanelen & LED</a>
+
+    <!-- Producten accordion -->
+    <div class="mobile-accordion open">
+      <button class="mobile-link mobile-accordion-btn" onclick="this.parentElement.classList.toggle('open')">
+        Producten
+        <svg class="mobile-chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="mobile-accordion-content">
+        <div class="mobile-accordion-group">
+          <div class="mobile-group-label">Productgids</div>
+          <a href="productgids.html">Alle categorieën</a>
+          <a href="productgids.html">Terrasverwarming</a>
+          <a href="productgids.html">Loungehaarden</a>
+          <a href="productgids.html">Halverwarming</a>
+        </div>
+        <div class="mobile-accordion-group">
+          <div class="mobile-group-label">Productcatalogus</div>
+          <a href="producten.html">Alle producten</a>
+          <a href="producten.html?cat=terrasverwarming-gas">Terrasverwarming</a>
+          <a href="producten.html?cat=loungehaarden">Loungehaarden</a>
+          <a href="producten.html?cat=halverwarming">Halverwarming</a>
+          <a href="producten.html?cat=kerkverwarming">Kerkverwarming</a>
+          <a href="producten.html?cat=zonnepanelen">Zonnepanelen & LED</a>
+        </div>
+      </div>
     </div>
+
     <a href="over-ons.html" class="mobile-link">Over Ons</a>
     <a href="contact.html" class="mobile-link">Contact</a>
     <a href="contact.html" class="mobile-cta">Offerte Aanvragen</a>
@@ -789,7 +836,7 @@ document.getElementById('theme-toggle').addEventListener('click', function() {
 });
 
 // Close mobile menu on link click
-document.querySelectorAll('.mobile-link, .mobile-submenu a, .mobile-cta').forEach(function(link) {
+document.querySelectorAll('.mobile-link, .mobile-accordion-content a, .mobile-cta').forEach(function(link) {
   link.addEventListener('click', function() {
     document.getElementById('mobile-menu').classList.remove('open');
     document.body.style.overflow = '';
