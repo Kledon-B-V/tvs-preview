@@ -8,6 +8,7 @@ return [
     'show_products'      => true,
     'show_testimonials'  => false,
     'show_contact_form'  => true,
+    'show_verduurzaming' => true,
   ],
 
   'contact' => [
@@ -31,6 +32,13 @@ return [
       'slug'  => 'terrasverwarming',
       'label' => 'Terrasverwarming',
       'desc'  => 'Gas en elektrische verwarmingsoplossingen',
+      'children' => [
+        'parasolverwarming' => [
+          'slug'  => 'parasolverwarming',
+          'label' => 'Parasolverwarming',
+          'desc'  => 'Compacte verwarmingsoplossingen voor parasols',
+        ],
+      ],
     ],
     'halverwarming' => [
       'slug'  => 'halverwarming',
@@ -65,6 +73,28 @@ return [
       'producten'  => 'Bekijk ons complete assortiment professionele verwarmingsoplossingen. Terrasverwarming, halverwarming en kerkverwarming van A-merken.',
       'over-ons'   => 'Terras Verwarmings Specialisten: 20+ jaar ervaring in professionele verwarmingsoplossingen voor horeca, kerken, hallen en meer.',
       'contact'    => 'Neem contact op met TVS voor vrijblijvend advies of een offerte op maat voor uw verwarmingsproject.',
+    ],
+  ],
+
+  'verduurzaming' => [
+    'title'    => 'Verduurzaming',
+    'subtitle' => 'Duurzame oplossingen voor een groene toekomst',
+    'color'    => '#22c55e',
+    'diensten' => [
+      'zonnepanelen' => [
+        'label'    => 'Zonnepanelen',
+        'desc'     => 'Bespaar op energiekosten met zonnepanelen op maat. Wij verzorgen advies, installatie en monitoring voor bedrijven en particulieren.',
+        'icon'     => 'sun',
+        'image'    => 'products/zonnepanelen.jpg',
+        'features' => ['Op maat advies', 'Professionele installatie', 'Subsidie-check', 'Monitoring & onderhoud'],
+      ],
+      'laadpalen' => [
+        'label'    => 'Laadpalen',
+        'desc'     => 'Oplaadoplossingen voor thuis en zakelijk. Van advies tot installatie en slimme laadoplossingen.',
+        'icon'     => 'battery-charging',
+        'image'    => '',
+        'features' => ['Thuis & zakelijk', 'Slimme laadoplossingen', 'Installatie & onderhoud', 'Subsidie-check'],
+      ],
     ],
   ],
 

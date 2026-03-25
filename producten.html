@@ -64,6 +64,10 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* Header */
 .site-hdr { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 96px; display: flex; align-items: center; background: var(--bg-header); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); border-bottom: 1px solid var(--border); transition: background-color .3s, border-color .3s; }
+html.dark .logo-light, html.dark .ftr-brand .logo-light { display: none !important; }
+html.dark .logo-dark, html.dark .ftr-brand .logo-dark { display: block !important; }
+.logo-dark { display: none; }
+.logo-light { display: block; }
 
 /* Nav link */
 .nav-link { padding: .625rem 1.25rem; border-radius: .75rem; font-weight: 600; color: var(--text-secondary); transition: all .2s; }
@@ -259,19 +263,22 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
 /* Left: image */
 .modal-left {
   position: relative; overflow: hidden;
-  background: #000; min-height: 400px;
+  background: #0a0a0a; min-height: 400px;
+  display: flex; align-items: center; justify-content: center;
 }
 .modal-left img.modal-main-img {
-  width: 100%; height: 100%; object-fit: cover;
+  width: 100%; height: 100%; object-fit: contain;
   display: block; min-height: 400px;
+  padding: 1rem 1rem 3.5rem;
 }
 .modal-thumbs {
   position: absolute; bottom: 0; left: 0; right: 0;
-  display: flex; gap: .5rem; padding: .75rem 1rem;
-  background: linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,.4), transparent);
+  display: flex; gap: .375rem; padding: .5rem .75rem;
+  background: linear-gradient(to top, rgba(0,0,0,.95), rgba(0,0,0,.5), transparent);
+  justify-content: center;
 }
 .modal-thumb {
-  width: 56px; height: 56px; border-radius: .375rem; overflow: hidden;
+  width: 48px; height: 48px; border-radius: .375rem; overflow: hidden;
   cursor: pointer; border: 2px solid rgba(255,255,255,.25);
   transition: all .2s; flex-shrink: 0; opacity: .7;
 }
@@ -289,10 +296,10 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
 
 /* Mobile modal */
 @media(max-width:900px) {
-  .modal-card { grid-template-columns: 1fr; width: calc(100% - 2rem); max-height: 92vh; }
-  .modal-left { min-height: 250px; max-height: 40vh; }
-  .modal-left img.modal-main-img { min-height: 250px; }
-  .modal-right { max-height: 52vh; }
+  .modal-card { grid-template-columns: 1fr; width: calc(100% - 1rem); max-height: 95vh; border-radius: 1rem; }
+  .modal-left { min-height: 220px; max-height: 35vh; }
+  .modal-left img.modal-main-img { min-height: 220px; padding: .5rem .5rem 3rem; }
+  .modal-right { max-height: none; overflow-y: auto; padding: 1.25rem; }
   .modal-nav.prev { left: .5rem; }
   .modal-nav.next { right: .5rem; }
   .modal-close { top: .75rem; right: .75rem; }
@@ -377,8 +384,9 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
 @media(max-width:768px) {
   .product-grid { grid-template-columns: 1fr !important; }
   .modal-card { grid-template-columns: 1fr !important; }
-  .modal-card .modal-left { min-height: 300px !important; }
-  .modal-card .modal-right { max-height: 60vh; }
+  .modal-card .modal-left { min-height: 200px !important; max-height: 30vh; }
+  .modal-card .modal-left img.modal-main-img { min-height: 200px !important; padding: .5rem .5rem 3rem; }
+  .modal-card .modal-right { max-height: none; padding: 1rem; }
   .ftr-grid { grid-template-columns: 1fr !important; }
 }
 @media(max-width:480px) {
@@ -414,7 +422,8 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
 <header class="site-hdr">
   <div style="max-width:1400px;margin:0 auto;padding:0 1.5rem;width:100%;display:flex;align-items:center;justify-content:space-between">
     <a href="index.html" style="display:flex;align-items:center">
-      <img src="assets/images/logo-tvs.svg" alt="TVS" style="height:56px;width:auto">
+      <img src="assets/images/logo-tvs-header.png" alt="TVS" class="logo-light" style="height:56px;width:auto">
+      <img src="assets/images/logo-tvs-header-dark.png" alt="TVS" class="logo-dark" style="height:56px;width:auto">
     </a>
     <div style="display:flex;align-items:center;gap:.5rem">
       <nav class="desk-nav" style="display:flex;align-items:center;gap:.25rem">
@@ -557,9 +566,9 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
               <button class="filter-pill active" data-filter="category" data-value="all">Alle</button>
               <button class="filter-pill" data-filter="category" data-value="terrasverwarming-gas">Terrasverwarming Gas</button>
               <button class="filter-pill" data-filter="category" data-value="terrasverwarming-elektrisch">Terrasverwarming Elektrisch</button>
-              <button class="filter-pill" data-filter="category" data-value="verplaatsbaar">Verplaatsbaar</button>
               <button class="filter-pill" data-filter="category" data-value="parasolverwarming">Parasolverwarming</button>
-              <button class="filter-pill" data-filter="category" data-value="donkerstralers">Donkerstralers</button>
+              <button class="filter-pill" data-filter="category" data-value="halverwarming">Halverwarming</button>
+              <button class="filter-pill" data-filter="category" data-value="kerkverwarming">Kerkverwarming</button>
               <button class="filter-pill" data-filter="category" data-value="loungehaarden">Loungehaarden</button>
             </div>
           </div>
@@ -628,7 +637,7 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
           <!-- Product 1: TVS Heatstrip 2000W -->
           <div class="product-card" data-category="terrasverwarming-elektrisch" data-type="elektrisch" data-brand="tvs" data-application="horeca" data-name="tvs heatstrip 2000w tvs terrasverwarming elektrisch" data-price="459" onclick="openModal(0)">
             <div class="card-img">
-              <img src="assets/images/product-outdoor-dining.jpg" alt="TVS Heatstrip 2000W">
+              <img src="assets/images/products/goldsun-elite/finch-1.jpg" alt="TVS Heatstrip 2000W">
               <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent)"></div>
               <span style="position:absolute;top:.75rem;left:.75rem;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.2)">Elektrisch</span>
             </div>
@@ -646,7 +655,7 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
           <!-- Product 2: Patioheater TVS-514 RVS -->
           <div class="product-card" data-category="terrasverwarming-gas" data-type="gas" data-brand="tvs" data-application="horeca" data-name="patioheater tvs-514 rvs tvs terrasverwarming gas" data-price="899" onclick="openModal(1)">
             <div class="card-img">
-              <img src="assets/images/hero-terras.jpg" alt="Patioheater TVS-514 RVS">
+              <img src="assets/images/products/goldsun-elite/goldsun-elite-5.jpg" alt="Patioheater TVS-514 RVS">
               <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent)"></div>
               <span style="position:absolute;top:.75rem;left:.75rem;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.2)">Gas</span>
               <span style="position:absolute;top:.75rem;right:.75rem;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:700;background:linear-gradient(135deg,#eab308,#ea580c);color:#fff;display:flex;align-items:center;gap:.25rem">
@@ -668,7 +677,7 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
           <!-- Product 3: TVS Aqua LG 3000W Zwart -->
           <div class="product-card" data-category="terrasverwarming-elektrisch" data-type="infrarood" data-brand="goldsun" data-application="horeca" data-name="tvs aqua lg 3000w zwart goldsun terrasverwarming elektrisch" data-price="679" onclick="openModal(2)">
             <div class="card-img">
-              <img src="assets/images/cat-halverwarming.jpg" alt="TVS Aqua LG 3000W Zwart">
+              <img src="assets/images/products/goldsun-elite/finch-2.jpg" alt="TVS Aqua LG 3000W Zwart">
               <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent)"></div>
               <span style="position:absolute;top:.75rem;left:.75rem;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.2)">Infrarood</span>
             </div>
@@ -684,14 +693,14 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
           </div>
 
           <!-- Product 4: Elektrische Donkerstraler 3200W -->
-          <div class="product-card" data-category="donkerstralers" data-type="infrarood" data-brand="tvs" data-application="industrieel" data-name="elektrische donkerstraler 3200w tvs donkerstralers" data-price="549" onclick="openModal(3)">
+          <div class="product-card" data-category="halverwarming" data-type="infrarood" data-brand="tvs" data-application="industrieel" data-name="elektrische donkerstraler 3200w tvs halverwarming" data-price="549" onclick="openModal(3)">
             <div class="card-img">
-              <img src="assets/images/product-warehouse.jpg" alt="Elektrische Donkerstraler 3200W">
+              <img src="assets/images/products/hlq-elektrisch/hlq-7.jpg" alt="Elektrische Donkerstraler 3200W">
               <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent)"></div>
               <span style="position:absolute;top:.75rem;left:.75rem;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.2)">Infrarood</span>
             </div>
             <div style="padding:1.25rem">
-              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Donkerstralers</div>
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Halverwarming</div>
               <h3 style="font-size:1rem;font-weight:700;margin:0 0 .5rem;transition:color .2s">Elektrische Donkerstraler 3200W</h3>
               <p style="font-size:.875rem;color:var(--text-muted);margin:0 0 1rem">TVS &bull; 3200W</p>
               <div style="display:flex;align-items:center;justify-content:space-between">
@@ -704,7 +713,7 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
           <!-- Product 5: Vuurtafel Rechthoek -->
           <div class="product-card" data-category="loungehaarden" data-type="gas" data-brand="tvs" data-application="horeca" data-name="vuurtafel rechthoek terras loungehaarden tvs gas" data-price="1299" onclick="openModal(4)">
             <div class="card-img">
-              <img src="assets/images/cta-terrace.jpg" alt="Vuurtafel Rechthoek">
+              <img src="assets/images/products/loungehaarden/vuurtafel-rechthoek.jpg" alt="Vuurtafel Rechthoek">
               <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent)"></div>
               <span style="position:absolute;top:.75rem;left:.75rem;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.2)">Gas</span>
               <span style="position:absolute;top:.75rem;right:.75rem;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:700;background:linear-gradient(135deg,#eab308,#ea580c);color:#fff;display:flex;align-items:center;gap:.25rem">
@@ -726,7 +735,7 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
           <!-- Product 6: TVS Halverwarmer 18kW -->
           <div class="product-card" data-category="halverwarming" data-type="gas" data-brand="tvs" data-application="industrieel" data-name="tvs halverwarmer 18kw tvs halverwarming gas" data-price="1599" onclick="openModal(5)">
             <div class="card-img">
-              <img src="assets/images/product-warehouse.jpg" alt="TVS Halverwarmer 18kW">
+              <img src="assets/images/products/hlq-elektrisch/donkerstraler-ht.jpg" alt="TVS Halverwarmer 18kW">
               <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent)"></div>
               <span style="position:absolute;top:.75rem;left:.75rem;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.2)">Gas</span>
             </div>
@@ -744,7 +753,7 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
           <!-- Product 7: TVS Parasolset Aqua 1500W -->
           <div class="product-card" data-category="parasolverwarming" data-type="infrarood" data-brand="goldsun" data-application="horeca" data-name="tvs parasolset aqua 1500w goldsun parasolverwarming" data-price="349" onclick="openModal(6)">
             <div class="card-img">
-              <img src="assets/images/product-outdoor-dining.jpg" alt="TVS Parasolset Aqua 1500W">
+              <img src="assets/images/products/parasolverwarming/parasol-verwarming-met-led.jpg" alt="TVS Parasolset Aqua 1500W">
               <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent)"></div>
               <span style="position:absolute;top:.75rem;left:.75rem;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.2)">Infrarood</span>
             </div>
@@ -798,7 +807,8 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
   <div style="max-width:1400px;margin:0 auto;padding:4rem 1.5rem">
     <div class="ftr-grid" style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem">
       <div>
-        <img src="assets/images/logo-tvs.svg" alt="TVS" style="height:48px;width:auto;margin-bottom:1rem">
+        <img src="assets/images/logo-tvs-header.png" alt="TVS" class="logo-light" style="height:48px;width:auto;margin-bottom:1rem">
+        <img src="assets/images/logo-tvs-header-dark.png" alt="TVS" class="logo-dark" style="height:48px;width:auto;margin-bottom:1rem">
         <p style="color:var(--text-secondary);font-size:.875rem;line-height:1.7;margin:0">Specialist in verwarmingsoplossingen voor terrassen, hallen, kerken en meer.</p>
       </div>
       <div>
@@ -849,8 +859,8 @@ var products = [
     name: 'TVS Heatstrip 2000W',
     category: 'Terrasverwarming Elektrisch', type: 'Elektrisch', brand: 'TVS', power: '2000W',
     price: 459, application: 'Horeca', featured: false,
-    image: 'assets/images/product-outdoor-dining.jpg',
-    images: ['assets/images/product-outdoor-dining.jpg','assets/images/hero-terras.jpg','assets/images/cta-terrace.jpg','assets/images/hero-restaurant.jpg'],
+    image: 'assets/images/products/goldsun-elite/finch-1.jpg',
+    images: ['assets/images/products/goldsun-elite/finch-1.jpg','assets/images/products/goldsun-elite/finch-2.jpg','assets/images/products/goldsun-elite/goldsun-elite-7.jpg','assets/images/products/goldsun-elite/goldsun-10.jpg'],
     description: 'Slanke elektrische heatstrip met infrarood technologie voor directe warmte op het terras. Ideaal voor montage onder overkappingen en luifels. IP65 waterdicht en geruisloos.',
     features: ['IP65 waterdicht','Infrarood warmte','Geruisloos','Slank design','Muur-/plafondmontage','Geen CO2 uitstoot'],
     specs: {Vermogen:'2000W',Aansluiting:'230V',Bereik:'14 m\u00B2',Lengte:'60 cm',Gewicht:'3.2 kg',Garantie:'2 jaar',Kleur:'Antraciet',Certificering:'CE / IP65'}
@@ -859,8 +869,8 @@ var products = [
     name: 'Patioheater TVS-514 RVS',
     category: 'Terrasverwarming Gas', type: 'Gas', brand: 'TVS', power: '12kW',
     price: 899, application: 'Horeca', featured: true,
-    image: 'assets/images/hero-terras.jpg',
-    images: ['assets/images/hero-terras.jpg','assets/images/product-outdoor-dining.jpg','assets/images/hero-restaurant.jpg','assets/images/cta-terrace.jpg'],
+    image: 'assets/images/products/goldsun-elite/goldsun-elite-5.jpg',
+    images: ['assets/images/products/goldsun-elite/goldsun-elite-5.jpg','assets/images/products/goldsun-elite/goldsun-elite-6.jpg','assets/images/products/goldsun-elite/goldsun-elite-7.jpg','assets/images/products/goldsun-elite/goldsun-15.jpg'],
     description: 'De TVS-514 is onze bestseller patioheater in volledig RVS uitvoering. Met 12kW vermogen verwarmt deze staande terrasverwarmer een bereik tot 21 m\u00B2. Voorzien van piezo-ontsteking en kantelbeveiliging.',
     features: ['Piezo-ontsteking','Kantelbeveiliging','Volledige RVS uitvoering','Wielen voor mobiliteit','Thermokoppel beveiliging','Windbestendig ontwerp'],
     specs: {Vermogen:'12kW',Brandstof:'Propaan/Butaan',Bereik:'21 m\u00B2',Hoogte:'220 cm',Gewicht:'18 kg',Garantie:'3 jaar',Kleur:'RVS',Certificering:'CE / TUV'}
@@ -869,18 +879,18 @@ var products = [
     name: 'TVS Aqua LG 3000W Zwart',
     category: 'Terrasverwarming Elektrisch', type: 'Infrarood', brand: 'Goldsun', power: '3000W',
     price: 679, application: 'Horeca', featured: false,
-    image: 'assets/images/cat-halverwarming.jpg',
-    images: ['assets/images/cat-halverwarming.jpg','assets/images/hero-terras.jpg','assets/images/product-outdoor-dining.jpg','assets/images/cta-terrace.jpg'],
+    image: 'assets/images/products/goldsun-elite/finch-2.jpg',
+    images: ['assets/images/products/goldsun-elite/finch-2.jpg','assets/images/products/goldsun-elite/finch-1.jpg','assets/images/products/goldsun-elite/goldsun-elite-5.jpg','assets/images/products/goldsun-elite/goldsun-15.jpg'],
     description: 'Premium infrarood terrasverwarmer van Goldsun met low-glare element voor minimale lichtemissie. Waterbestendig (IP55) en geschikt voor intensief horeca gebruik. Levert gerichte stralingswarmte.',
     features: ['Low-glare element','IP55 waterbestendig','3 warmtestanden','Afstandsbediening','Instant warmte','Ultra-stil'],
     specs: {Vermogen:'3000W',Aansluiting:'230V',Bereik:'20 m\u00B2',Lengte:'105 cm',Gewicht:'5.8 kg',Garantie:'3 jaar',Kleur:'Zwart',Certificering:'CE / IP55'}
   },
   {
     name: 'Elektrische Donkerstraler 3200W',
-    category: 'Donkerstralers', type: 'Infrarood', brand: 'TVS', power: '3200W',
+    category: 'Halverwarming', type: 'Infrarood', brand: 'TVS', power: '3200W',
     price: 549, application: 'Industrieel', featured: false,
-    image: 'assets/images/product-warehouse.jpg',
-    images: ['assets/images/product-warehouse.jpg','assets/images/cat-halverwarming.jpg','assets/images/product-modern-interior.jpg','assets/images/hero-restaurant.jpg'],
+    image: 'assets/images/products/hlq-elektrisch/hlq-7.jpg',
+    images: ['assets/images/products/hlq-elektrisch/hlq-7.jpg','assets/images/products/hlq-elektrisch/hlq-1.jpg','assets/images/products/hlq-elektrisch/hlq-6000-watt.jpg','assets/images/products/hlq-elektrisch/hlq-rotterdam.jpg'],
     description: 'Krachtige donkerstraler voor industri\u00EBle toepassingen. Produceert geen zichtbaar licht, enkel infraroodstraling voor effici\u00EBnte en gerichte verwarming van werkplekken en magazijnen.',
     features: ['Geen zichtbaar licht','Gerichte verwarming','Dimbaar 0-100%','IP44 beschermd','Koppelbaar in zones','Lange levensduur'],
     specs: {Vermogen:'3200W',Aansluiting:'230V',Bereik:'24 m\u00B2',Lengte:'120 cm',Gewicht:'6.5 kg',Garantie:'3 jaar',Kleur:'Antraciet',Certificering:'CE / IP44'}
@@ -889,8 +899,8 @@ var products = [
     name: 'Vuurtafel Rechthoek',
     category: 'Loungehaarden', type: 'Gas', brand: 'TVS', power: 'n.v.t.',
     price: 1299, application: 'Horeca', featured: true,
-    image: 'assets/images/cta-terrace.jpg',
-    images: ['assets/images/cta-terrace.jpg','assets/images/hero-terras.jpg','assets/images/product-outdoor-dining.jpg','assets/images/hero-restaurant.jpg'],
+    image: 'assets/images/products/loungehaarden/vuurtafel-rechthoek.jpg',
+    images: ['assets/images/products/loungehaarden/vuurtafel-rechthoek.jpg','assets/images/products/loungehaarden/teak-lounge-dining.jpg','assets/images/products/loungehaarden/nice-nasty-rechthoek.jpg','assets/images/products/loungehaarden/vuurtafel-bowl.jpg'],
     description: 'Stijlvolle rechthoekige vuurtafel. Creëert een warme en gezellige sfeer op uw terras of in de tuin. Werkt op gas en is eenvoudig te bedienen met de bijgeleverde afstandsbediening.',
     features: ['Betonlook afwerking','Afstandsbediening','Vlamhoogte regelbaar','Glasvenster bescherming','Weerbestendig','Eenvoudige installatie'],
     specs: {Vermogen:'10kW',Brandstof:'Propaan',Afmetingen:'107x80x50 cm',Gewicht:'65 kg',Garantie:'2 jaar',Kleur:'Grijs/Antraciet',Materiaal:'Vezelversterkt beton',Certificering:'CE'}
@@ -899,8 +909,8 @@ var products = [
     name: 'TVS Halverwarmer 18kW',
     category: 'Halverwarming', type: 'Gas', brand: 'TVS', power: '18kW',
     price: 1599, application: 'Industrieel', featured: false,
-    image: 'assets/images/product-warehouse.jpg',
-    images: ['assets/images/product-warehouse.jpg','assets/images/cat-halverwarming.jpg','assets/images/product-modern-interior.jpg','assets/images/hero-restaurant.jpg'],
+    image: 'assets/images/products/hlq-elektrisch/donkerstraler-ht.jpg',
+    images: ['assets/images/products/hlq-elektrisch/donkerstraler-ht.jpg','assets/images/products/hlq-elektrisch/hlq-7.jpg','assets/images/products/hlq-elektrisch/hlq-6000-watt.jpg','assets/images/products/hlq-elektrisch/hlq-1.jpg'],
     description: 'Krachtige industriële halverwarmer met 18kW vermogen voor grote ruimtes zoals magazijnen, werkplaatsen en sporthallen. Hoog rendement van 95% en modulerend vermogen voor optimale effici\u00EBntie.',
     features: ['Hoog rendement (95%)','Thermostaat aansluiting','Modulerend vermogen','Lage geluidsproductie','Robuuste constructie','Geschikt voor grote ruimtes'],
     specs: {Vermogen:'18kW',Brandstof:'Aardgas',Bereik:'120 m\u00B2',Afmetingen:'85x45x35 cm',Gewicht:'28 kg',Garantie:'5 jaar',Kleur:'Grijs',Certificering:'CE / EN 13842'}
@@ -909,8 +919,8 @@ var products = [
     name: 'TVS Parasolset Aqua 1500W',
     category: 'Parasolverwarming', type: 'Infrarood', brand: 'Goldsun', power: '1500W',
     price: 349, application: 'Horeca', featured: false,
-    image: 'assets/images/product-outdoor-dining.jpg',
-    images: ['assets/images/product-outdoor-dining.jpg','assets/images/hero-terras.jpg','assets/images/cta-terrace.jpg','assets/images/hero-restaurant.jpg'],
+    image: 'assets/images/products/parasolverwarming/parasol-verwarming-met-led.jpg',
+    images: ['assets/images/products/parasolverwarming/parasol-verwarming-met-led.jpg','assets/images/products/parasolverwarming/parasol-lely-1.jpg','assets/images/products/parasolverwarming/parasol-lely-2.jpg','assets/images/products/parasolverwarming/parasolverwarming-black.jpg'],
     description: 'Compacte infrarood parasolverwarmer die eenvoudig aan de parasolstok bevestigd wordt. Ideaal voor horecaterrassen waar ruimte schaars is. Waterbestendig en direct warmte na het inschakelen.',
     features: ['Parasolmontage','IP55 waterbestendig','Compact design','Instant warmte','Geen CO2 uitstoot','Eenvoudige installatie'],
     specs: {Vermogen:'1500W',Aansluiting:'230V',Bereik:'9 m\u00B2',Diameter:'42 cm',Gewicht:'2.1 kg',Garantie:'2 jaar',Kleur:'Zwart',Certificering:'CE / IP55'}

@@ -94,6 +94,7 @@ $tvs_includes = [
   __DIR__ . '/inc/contact.php',
   __DIR__ . '/inc/seo.php',
   __DIR__ . '/inc/cookie-consent.php',
+  __DIR__ . '/inc/seed-products.php',
 ];
 
 foreach ($tvs_includes as $file) {

@@ -78,7 +78,7 @@ $img        = get_template_directory_uri() . '/assets/images/';
       <div class="grid grid-cols-2 gap-4">
         <!-- Large image spanning 2 cols -->
         <div class="col-span-2 relative h-80 rounded-3xl overflow-hidden group">
-          <img src="<?php echo esc_url($img . 'hero-terras.jpg'); ?>" alt="Terrasverwarming"
+          <img src="<?php echo esc_url($img . 'products/goldsun-elite/goldsun-elite-5.jpg'); ?>" alt="Terrasverwarming"
                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
           <div class="absolute bottom-6 left-6">
@@ -88,20 +88,20 @@ $img        = get_template_directory_uri() . '/assets/images/';
         </div>
         <!-- Smaller image 1 -->
         <div class="relative h-52 rounded-3xl overflow-hidden group">
-          <img src="<?php echo esc_url($img . 'cat-halverwarming.jpg'); ?>" alt="Halverwarming"
+          <img src="<?php echo esc_url($img . 'products/hlq-elektrisch/hlq-7.jpg'); ?>" alt="HLQ Elektrisch"
                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
           <div class="absolute bottom-4 left-4">
-            <span class="text-white font-semibold">Halverwarming</span>
+            <span class="text-white font-semibold">Elektrisch</span>
           </div>
         </div>
         <!-- Smaller image 2 -->
         <div class="relative h-52 rounded-3xl overflow-hidden group">
-          <img src="<?php echo esc_url($img . 'cat-kerkverwarming.jpg'); ?>" alt="Kerkverwarming"
+          <img src="<?php echo esc_url($img . 'products/parasolverwarming/parasolverlichting-lely.jpg'); ?>" alt="Parasolverwarming"
                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
           <div class="absolute bottom-4 left-4">
-            <span class="text-white font-semibold">Kerkverwarming</span>
+            <span class="text-white font-semibold">Parasolverwarming</span>
           </div>
         </div>
       </div>
@@ -126,11 +126,12 @@ $img        = get_template_directory_uri() . '/assets/images/';
     <!-- Category grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       <?php
-      // Fallback images for categories
+      // Fallback images for categories (using new product photos)
       $cat_images = [
-        $img . 'hero-terras.jpg',
-        $img . 'cat-halverwarming.jpg',
+        $img . 'products/goldsun-elite/goldsun-elite-6.jpg',
+        $img . 'products/hlq-elektrisch/hlq-6000-watt.jpg',
         $img . 'cat-kerkverwarming.jpg',
+        $img . 'products/parasolverwarming/parasol-verwarming-met-led.jpg',
       ];
 
       $terms = get_terms([
@@ -257,6 +258,84 @@ $img        = get_template_directory_uri() . '/assets/images/';
     </div>
   </div>
 </section>
+
+<?php if (tvs_cfg('modules.show_verduurzaming', false)) :
+  $vd       = tvs_cfg('verduurzaming', []);
+  $vd_title = $vd['title'] ?? 'Verduurzaming';
+  $vd_sub   = $vd['subtitle'] ?? '';
+  $diensten = $vd['diensten'] ?? [];
+?>
+<!-- ========== VERDUURZAMING SECTION ========== -->
+<section class="relative py-24 dark:bg-black bg-gray-50 transition-colors duration-300" id="verduurzaming">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Section header -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 dark:bg-emerald-500/10 dark:border-emerald-500/20 bg-emerald-50 border-emerald-200 shadow-sm border rounded-full px-5 py-2.5 mb-6">
+        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 1 0 20 10 10 0 0 1 0-20z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        <span class="text-sm text-emerald-700 dark:text-emerald-400 font-medium uppercase tracking-wider"><?php echo esc_html($vd_title); ?></span>
+      </div>
+      <h2 class="text-4xl sm:text-5xl font-black dark:text-white text-gray-900"><?php echo esc_html($vd_sub); ?></h2>
+    </div>
+
+    <!-- Diensten cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      <?php foreach ($diensten as $key => $dienst) :
+        $d_img = !empty($dienst['image']) ? $img . $dienst['image'] : '';
+      ?>
+      <div class="dark:bg-white/5 dark:border-white/10 bg-white border-gray-200 shadow-sm border rounded-2xl overflow-hidden backdrop-blur-xl transition-all duration-300 dark:hover:bg-white/10 hover:shadow-lg">
+        <?php if ($d_img) : ?>
+        <div class="relative h-48 overflow-hidden">
+          <img src="<?php echo esc_url($d_img); ?>" alt="<?php echo esc_attr($dienst['label']); ?>"
+               class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+          <div class="absolute top-4 left-4">
+            <span class="inline-flex items-center gap-1 bg-emerald-500/90 text-white text-xs font-bold px-3 py-1 rounded-full">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/><circle cx="12" cy="12" r="4"/></svg>
+              <?php echo esc_html($vd_title); ?>
+            </span>
+          </div>
+        </div>
+        <?php else : ?>
+        <div class="relative h-48 overflow-hidden" style="background:linear-gradient(135deg,#064e3b 0%,#065f46 50%,#047857 100%)">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <svg class="w-16 h-16 text-emerald-300/30" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <div class="absolute top-4 left-4">
+            <span class="inline-flex items-center gap-1 bg-emerald-500/90 text-white text-xs font-bold px-3 py-1 rounded-full">
+              <?php echo esc_html($vd_title); ?>
+            </span>
+          </div>
+        </div>
+        <?php endif; ?>
+
+        <div class="p-6 space-y-4">
+          <h3 class="dark:text-white text-gray-900 font-bold text-xl"><?php echo esc_html($dienst['label']); ?></h3>
+          <p class="dark:text-gray-400 text-gray-600 text-sm leading-relaxed"><?php echo esc_html($dienst['desc']); ?></p>
+
+          <?php if (!empty($dienst['features'])) : ?>
+          <ul class="space-y-2">
+            <?php foreach ($dienst['features'] as $feature) : ?>
+            <li class="flex items-center gap-2 text-sm dark:text-gray-300 text-gray-700">
+              <svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              <?php echo esc_html($feature); ?>
+            </li>
+            <?php endforeach; ?>
+          </ul>
+          <?php endif; ?>
+
+          <a href="<?php echo esc_url(home_url('/contact/')); ?>"
+             class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 text-sm">
+            Vraag advies aan
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
 
 <!-- ========== CTA SECTION ========== -->
 <section class="relative py-24 dark:bg-black bg-gray-50 transition-colors duration-300">

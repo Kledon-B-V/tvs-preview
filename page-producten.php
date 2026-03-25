@@ -173,32 +173,6 @@ html.dark {
 .prod-select:focus { outline: none; border-color: rgba(227,30,36,.5); }
 .prod-select option { background: var(--modal-bg); color: var(--text); }
 
-/* Price range slider */
-.prod-price-group { display: flex; flex-direction: column; gap: .75rem; }
-.prod-price-values {
-  display: flex; justify-content: space-between;
-  font-size: .8125rem; color: var(--text-secondary); font-weight: 500;
-}
-.prod-range-slider {
-  -webkit-appearance: none; appearance: none;
-  width: 100%; height: 6px; border-radius: 3px;
-  background: var(--slider-track); outline: none;
-  cursor: pointer;
-}
-.prod-range-slider::-webkit-slider-thumb {
-  -webkit-appearance: none; appearance: none;
-  width: 20px; height: 20px; border-radius: 50%;
-  background: var(--slider-fill); cursor: pointer;
-  border: 3px solid var(--bg-card);
-  box-shadow: 0 2px 6px rgba(0,0,0,.2);
-}
-.prod-range-slider::-moz-range-thumb {
-  width: 20px; height: 20px; border-radius: 50%;
-  background: var(--slider-fill); cursor: pointer;
-  border: 3px solid var(--bg-card);
-  box-shadow: 0 2px 6px rgba(0,0,0,.2);
-}
-
 /* Reset button */
 .prod-reset-btn {
   width: 100%; padding: .625rem 1rem;
@@ -352,8 +326,9 @@ html.dark .prod-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,.4); }
 }
 .prod-modal__close:hover { background: var(--bg-card-hover); }
 .prod-modal__img {
-  width: 100%; height: 320px; object-fit: cover;
+  width: 100%; height: 320px; object-fit: contain;
   border-radius: 1.5rem 1.5rem 0 0;
+  background: #0a0a0a; padding: 1rem;
 }
 .prod-modal__img-placeholder {
   width: 100%; height: 320px;
@@ -526,18 +501,6 @@ html.dark .prod-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,.4); }
               </select>
             </div>
 
-            <!-- Price range slider -->
-            <div class="prod-sidebar__section">
-              <span class="prod-sidebar__label">Prijsbereik</span>
-              <div class="prod-price-group">
-                <div class="prod-price-values">
-                  <span id="price-display-min">&euro;0</span>
-                  <span id="price-display-max">&euro;10.000+</span>
-                </div>
-                <input type="range" class="prod-range-slider" id="filter-price-max" min="0" max="10000" step="100" value="10000">
-              </div>
-            </div>
-
             <!-- Reset -->
             <div class="prod-sidebar__section">
               <button type="button" class="prod-reset-btn" id="reset-filters">
@@ -706,8 +669,6 @@ html.dark .prod-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,.4); }
   var pills        = document.querySelectorAll('.prod-pill');
   var brandSelect  = document.getElementById('filter-brand');
   var appSelect    = document.getElementById('filter-application');
-  var priceSlider  = document.getElementById('filter-price-max');
-  var priceDisplay = document.getElementById('price-display-max');
   var countEl      = document.getElementById('products-count');
   var heroCountEl  = document.getElementById('hero-count');
   var activeEl     = document.getElementById('active-filters');
@@ -730,7 +691,7 @@ html.dark .prod-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,.4); }
   var modalCta     = document.getElementById('modal-cta');
 
   /* ===== STATE ===== */
-  var filters = { category: '', type: '', brand: '', application: '', search: '', priceMax: 10000 };
+  var filters = { category: '', type: '', brand: '', application: '', search: '' };
   var visibleCards = [];
   var currentModalIndex = -1;
 
@@ -761,23 +722,13 @@ html.dark .prod-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,.4); }
   brandSelect.addEventListener('change', function() { filters.brand = this.value; applyFilters(); });
   appSelect.addEventListener('change', function() { filters.application = this.value; applyFilters(); });
 
-  /* ===== PRICE RANGE SLIDER ===== */
-  priceSlider.addEventListener('input', function() {
-    var val = parseInt(this.value);
-    filters.priceMax = val;
-    priceDisplay.textContent = val >= 10000 ? '\u20AC10.000+' : '\u20AC' + val.toLocaleString('nl-NL');
-    applyFilters();
-  });
-
   /* ===== RESET ===== */
   resetBtn.addEventListener('click', function() {
-    filters = { category: '', type: '', brand: '', application: '', search: '', priceMax: 10000 };
+    filters = { category: '', type: '', brand: '', application: '', search: '' };
     pills.forEach(function(p) { p.classList.remove('active'); });
     searchInput.value = '';
     brandSelect.value = '';
     appSelect.value = '';
-    priceSlider.value = 10000;
-    priceDisplay.textContent = '\u20AC10.000+';
     applyFilters();
   });
 
@@ -792,10 +743,6 @@ html.dark .prod-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,.4); }
       if (filters.brand && card.dataset.brand !== filters.brand) show = false;
       if (filters.application && card.dataset.application !== filters.application) show = false;
       if (filters.search && card.dataset.name.indexOf(filters.search) === -1) show = false;
-      if (card.dataset.price) {
-        var p = parseFloat(card.dataset.price);
-        if (!isNaN(p) && filters.priceMax < 10000 && p > filters.priceMax) show = false;
-      }
       card.style.display = show ? '' : 'none';
       if (show) { visible++; visibleCards.push(card); }
     });
@@ -814,7 +761,6 @@ html.dark .prod-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,.4); }
     if (filters.brand) count++;
     if (filters.application) count++;
     if (filters.search) count++;
-    if (filters.priceMax < 10000) count++;
     filterCount.textContent = count > 0 ? count : '';
     filterCount.setAttribute('data-count', count);
   }
@@ -830,7 +776,6 @@ html.dark .prod-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,.4); }
     }
     if (filters.application) html += tag('application', filters.application);
     if (filters.search) html += tag('search', '"' + filters.search + '"');
-    if (filters.priceMax < 10000) html += tag('priceMax', 'Max \u20AC' + filters.priceMax.toLocaleString('nl-NL'));
     activeEl.innerHTML = html;
 
     activeEl.querySelectorAll('button').forEach(function(btn) {
@@ -842,7 +787,6 @@ html.dark .prod-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,.4); }
         } else if (key === 'brand') { filters.brand = ''; brandSelect.value = ''; }
         else if (key === 'application') { filters.application = ''; appSelect.value = ''; }
         else if (key === 'search') { filters.search = ''; searchInput.value = ''; }
-        else if (key === 'priceMax') { filters.priceMax = 10000; priceSlider.value = 10000; priceDisplay.textContent = '\u20AC10.000+'; }
         applyFilters();
       });
     });

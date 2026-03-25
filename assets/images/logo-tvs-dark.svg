@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 70" fill="none">
+  <!-- Lightning bolt - outer (red) -->
+  <path d="M8 42 L22 2 L32 2 L26 24 L42 24 L18 68 L24 42 Z" fill="#E31E24" stroke="#E31E24" stroke-width="1" stroke-linejoin="round"/>
+  <!-- Lightning bolt - inner stroke (white overlay for depth) -->
+  <path d="M12 40 L24 6 L30 6 L24 26 L38 26 L20 62 L25 40 Z" fill="none" stroke="white" stroke-width="1.5" stroke-linejoin="round" opacity="0.3"/>
+
+  <!-- TVS text (white for dark backgrounds) -->
+  <text x="52" y="46" font-family="'Arial Black', 'Inter', system-ui, sans-serif" font-size="48" font-weight="900" letter-spacing="-1" fill="#ffffff">TVS</text>
+
+  <!-- NL text (with gap) -->
+  <text x="192" y="46" font-family="'Arial Black', 'Inter', system-ui, sans-serif" font-size="48" font-weight="900" letter-spacing="-1" fill="#ffffff">NL</text>
+
+  <!-- Subtitle -->
+  <text x="54" y="63" font-family="'Arial', 'Inter', system-ui, sans-serif" font-size="13" font-weight="700" letter-spacing="1.5" fill="#9ca3af">INSTALLATIE &amp; ELEKTROTECHNIEK</text>
+</svg>

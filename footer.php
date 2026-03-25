@@ -17,11 +17,8 @@ $company = (string) tvs_cfg('company.full_name', 'Terras Verwarmings Specialiste
 
       <div class="footer-col">
         <div class="footer-brand flex items-center gap-3 mb-4">
-          <span class="footer-logo inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-red-500 to-orange-500 text-white font-black text-sm tracking-tight select-none" aria-hidden="true">TVS</span>
-          <span class="footer-brand-text flex flex-col leading-tight">
-            <span class="text-gray-900 dark:text-white font-black text-base">Terras Verwarmings</span>
-            <span class="text-gray-600 dark:text-gray-400 text-sm">Specialisten</span>
-          </span>
+          <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-tvs-footer.png" alt="TVS NL - Installatie &amp; Elektrotechniek" class="h-10 w-auto block dark:hidden">
+          <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-tvs-footer-dark.png" alt="TVS NL - Installatie &amp; Elektrotechniek" class="h-10 w-auto hidden dark:block">
         </div>
         <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed max-w-xs">
           Specialist in verwarmingsoplossingen voor terrassen, hallen, kerken en meer.
@@ -32,10 +29,21 @@ $company = (string) tvs_cfg('company.full_name', 'Terras Verwarmings Specialiste
         <h3 class="text-gray-900 dark:text-white font-semibold text-sm uppercase tracking-wider mb-4">Producten</h3>
         <ul class="footer-links list-none m-0 p-0 flex flex-col gap-2.5">
           <li><a class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 text-sm no-underline" href="<?php echo esc_url(home_url('/producten/')); ?>">Terrasverwarming</a></li>
+          <li><a class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 text-sm no-underline" href="<?php echo esc_url(home_url('/producten/')); ?>">Parasolverwarming</a></li>
           <li><a class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 text-sm no-underline" href="<?php echo esc_url(home_url('/producten/')); ?>">Halverwarming</a></li>
           <li><a class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 text-sm no-underline" href="<?php echo esc_url(home_url('/producten/')); ?>">Kerkverwarming</a></li>
         </ul>
       </div>
+
+      <?php if (tvs_cfg('modules.show_verduurzaming', false)) : ?>
+      <div class="footer-col">
+        <h3 class="text-gray-900 dark:text-white font-semibold text-sm uppercase tracking-wider mb-4">Verduurzaming</h3>
+        <ul class="footer-links list-none m-0 p-0 flex flex-col gap-2.5">
+          <li><a class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 text-sm no-underline" href="<?php echo esc_url(home_url('/#verduurzaming')); ?>">Zonnepanelen</a></li>
+          <li><a class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 text-sm no-underline" href="<?php echo esc_url(home_url('/#verduurzaming')); ?>">Laadpalen</a></li>
+        </ul>
+      </div>
+      <?php endif; ?>
 
       <div class="footer-col">
         <h3 class="text-gray-900 dark:text-white font-semibold text-sm uppercase tracking-wider mb-4">Navigatie</h3>

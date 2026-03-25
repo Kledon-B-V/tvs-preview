@@ -75,19 +75,24 @@ if (!function_exists('tvs_nav_fallback')) {
 }
 
 /**
- * Primary nav renderer
+ * Primary nav renderer — desktop + mobile
  */
 if (!function_exists('tvs_render_primary_nav')) {
   function tvs_render_primary_nav() {
     $current = tvs_current_page();
+    $home    = esc_url(home_url('/'));
+    $prod    = esc_url(home_url('/producten/'));
+    $over    = esc_url(home_url('/over-ons/'));
+    $contact = esc_url(home_url('/contact/'));
 
+    // === DESKTOP NAV ===
     echo '<nav class="menu hidden lg:flex items-center gap-1" aria-label="Primary"><ul class="menu-items flex items-center gap-1 list-none m-0 p-0">';
 
     $links = [
-      ['url' => home_url('/'), 'label' => 'Home', 'key' => 'home'],
-      ['url' => home_url('/producten/'), 'label' => 'Producten', 'key' => 'producten'],
-      ['url' => home_url('/over-ons/'), 'label' => 'Over Ons', 'key' => 'over-ons'],
-      ['url' => home_url('/contact/'), 'label' => 'Contact', 'key' => 'contact'],
+      ['url' => $home, 'label' => 'Home', 'key' => 'home'],
+      ['url' => $prod, 'label' => 'Producten', 'key' => 'producten'],
+      ['url' => $over, 'label' => 'Over Ons', 'key' => 'over-ons'],
+      ['url' => $contact, 'label' => 'Contact', 'key' => 'contact'],
     ];
 
     foreach ($links as $link) {
@@ -97,8 +102,48 @@ if (!function_exists('tvs_render_primary_nav')) {
       echo '<li class="menu-item"><a class="relative px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 no-underline' . $active_cls . '" href="' . esc_url($link['url']) . '">' . esc_html($link['label']) . '</a></li>';
     }
 
-    echo '<li class="menu-item menu-item--cta ml-2"><div class="relative group"><div class="absolute -inset-0.5 bg-gradient-to-r from-red-500 to-orange-600 rounded-xl opacity-75 group-hover:opacity-100 blur transition duration-300"></div><a class="relative block bg-gradient-to-r from-red-500 to-orange-600 px-6 py-2.5 rounded-xl text-white font-bold no-underline" href="' . esc_url(home_url('/contact/')) . '">Offerte Aanvragen</a></div></li>';
+    echo '<li class="menu-item menu-item--cta ml-2"><div class="relative group"><div class="absolute -inset-0.5 bg-gradient-to-r from-red-500 to-orange-600 rounded-xl opacity-75 group-hover:opacity-100 blur transition duration-300"></div><a class="relative block bg-gradient-to-r from-red-500 to-orange-600 px-6 py-2.5 rounded-xl text-white font-bold no-underline" href="' . $contact . '">Offerte Aanvragen</a></div></li>';
     echo '</ul></nav>';
+
+    // === MOBILE MENU ===
+    $active = function($key) use ($current) {
+      return $current === $key ? ' mobile-link--active' : '';
+    };
+    ?>
+    <div class="mobile-menu" id="mobile-menu">
+      <div class="mobile-menu-inner">
+        <a href="<?php echo $home; ?>" class="mobile-link<?php echo $active('home'); ?>">Home</a>
+
+        <div class="mobile-accordion">
+          <button class="mobile-link mobile-accordion-btn" onclick="this.parentElement.classList.toggle('open')">
+            Producten
+            <svg class="mobile-chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="mobile-accordion-content">
+            <div class="mobile-accordion-group">
+              <div class="mobile-group-label">Elektrotechniek</div>
+              <a href="<?php echo $prod; ?>">Alle producten</a>
+              <a href="<?php echo esc_url(home_url('/categorie/terrasverwarming/')); ?>">Terrasverwarming</a>
+              <a href="<?php echo esc_url(home_url('/categorie/parasolverwarming/')); ?>">Parasolverwarming</a>
+              <a href="<?php echo esc_url(home_url('/categorie/halverwarming/')); ?>">Halverwarming</a>
+              <a href="<?php echo esc_url(home_url('/categorie/kerkverwarming/')); ?>">Kerkverwarming</a>
+            </div>
+            <?php if (tvs_cfg('modules.show_verduurzaming', false)) : ?>
+            <div class="mobile-accordion-group">
+              <div class="mobile-group-label">Verduurzaming</div>
+              <a href="<?php echo esc_url(home_url('/#verduurzaming')); ?>">Zonnepanelen</a>
+              <a href="<?php echo esc_url(home_url('/#verduurzaming')); ?>">Laadpalen</a>
+            </div>
+            <?php endif; ?>
+          </div>
+        </div>
+
+        <a href="<?php echo $over; ?>" class="mobile-link<?php echo $active('over-ons'); ?>">Over Ons</a>
+        <a href="<?php echo $contact; ?>" class="mobile-link<?php echo $active('contact'); ?>">Contact</a>
+        <a href="<?php echo $contact; ?>" class="mobile-cta">Offerte Aanvragen</a>
+      </div>
+    </div>
+    <?php
   }
 }
 
