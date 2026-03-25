@@ -18,7 +18,6 @@ function tvs_handle_contact() {
   $email   = sanitize_email($_POST['email'] ?? '');
   $phone   = sanitize_text_field($_POST['phone'] ?? '');
   $subject = sanitize_text_field($_POST['subject'] ?? '');
-  $branch  = sanitize_key($_POST['branch'] ?? '');
   $message = sanitize_textarea_field($_POST['message'] ?? '');
 
   if (!$name || !$email || !$subject || !$message) {
@@ -40,10 +39,7 @@ function tvs_handle_contact() {
   $to = tvs_cfg('contact.email', 'info@terrasverwarmer.nu');
   $email_subject = 'Offerte aanvraag: ' . $subject . ' — ' . $company;
 
-  $branch_label = $branch ? ucfirst($branch) : 'Algemeen';
-
   $body  = "Nieuw contactformulier bericht:\n\n";
-  $body .= "Tak: {$branch_label}\n";
   $body .= "Bedrijf: {$company}\n";
   $body .= "Naam: {$name}\n";
   $body .= "Email: {$email}\n";
