@@ -1,12 +1,11 @@
 <?php
 get_header();
 
-$email      = (string) tvs_cfg('contact.email', 'info@terrasverwarmer.nu');
-$phone      = (string) tvs_cfg('contact.phone', '');
-$address    = (string) tvs_cfg('contact.address', '');
-$city       = (string) tvs_cfg('contact.city', '');
-$categories = tvs_cfg('categories', []);
-$img        = get_template_directory_uri() . '/assets/images/';
+$img     = get_template_directory_uri() . '/assets/images/';
+$tagline = (string) tvs_cfg('company.tagline', 'Uw specialist in verwarming en verduurzaming');
+$vw      = tvs_cfg('branches.verwarming', []);
+$vd      = tvs_cfg('branches.verduurzaming', []);
+$vd_on   = !empty($vd['enabled']);
 ?>
 
 <!-- Fixed background orbs + grid pattern -->
@@ -19,325 +18,210 @@ $img        = get_template_directory_uri() . '/assets/images/';
   <div class="absolute inset-0 hidden dark:block" style="background-image: linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px); background-size: 64px 64px;"></div>
 </div>
 
-<!-- ========== HERO SECTION ========== -->
-<section class="relative min-h-screen flex items-center dark:bg-black bg-gray-50 pt-32 pb-20 transition-colors duration-300">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+<!-- ========== SECTION 1: HERO ========== -->
+<section class="relative min-h-screen flex items-center justify-center dark:bg-black bg-gray-50 pt-24 pb-20 transition-colors duration-300">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
 
-      <!-- LEFT COLUMN -->
-      <div class="space-y-8">
-        <!-- Badge -->
-        <div class="inline-flex items-center gap-2 dark:bg-white/5 dark:border-white/10 bg-white border-gray-200 shadow-sm backdrop-blur-xl border rounded-full px-5 py-2.5">
-          <svg class="w-4 h-4 text-red-500" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.09 6.26L20.18 9.27l-5 4.87L16.36 21 12 17.77 7.64 21l1.18-6.86-5-4.87 6.09-1.01L12 2z"/></svg>
-          <span class="text-sm dark:text-gray-300 text-gray-600 font-medium">Premium B2B Verwarmingsoplossingen</span>
-        </div>
-
-        <!-- Heading -->
-        <h1 class="font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.05] tracking-tight">
-          <span class="dark:text-white text-gray-900">Innovatieve</span><br>
-          <span class="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">Verwarming</span>
-        </h1>
-
-        <!-- Lead text -->
-        <p class="text-xl dark:text-gray-400 text-gray-600 max-w-lg leading-relaxed">
-          Specialist in terrasverwarming, halverwarming en kerkverwarming.
-          Ontdek onze uitgebreide catalogus met A-merken.
-        </p>
-
-        <!-- CTAs -->
-        <div class="flex flex-wrap gap-4">
-          <a href="<?php echo esc_url(home_url('/producten/')); ?>"
-             class="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-500 hover:to-orange-400 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg shadow-red-600/25">
-            Ontdek Producten
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-          <a href="<?php echo esc_url(home_url('/contact/')); ?>"
-             class="inline-flex items-center gap-2 dark:bg-white/5 dark:border-white/10 dark:text-white bg-white border-gray-200 text-gray-900 shadow-sm hover:bg-white/10 border font-semibold px-8 py-4 rounded-xl backdrop-blur-xl transition-all duration-300">
-            Offerte Aanvragen
-          </a>
-        </div>
-
-        <!-- Stats -->
-        <div class="grid grid-cols-3 gap-4 pt-4">
-          <div class="dark:bg-white/5 dark:border-white/10 bg-white border-gray-200 shadow-sm border rounded-2xl p-5 text-center backdrop-blur-xl transition-colors duration-300">
-            <span class="block text-2xl font-black dark:text-white text-gray-900">20+</span>
-            <span class="text-sm dark:text-gray-400 text-gray-600">Jaar Ervaring</span>
-          </div>
-          <div class="dark:bg-white/5 dark:border-white/10 bg-white border-gray-200 shadow-sm border rounded-2xl p-5 text-center backdrop-blur-xl transition-colors duration-300">
-            <span class="block text-2xl font-black dark:text-white text-gray-900">1000+</span>
-            <span class="text-sm dark:text-gray-400 text-gray-600">Tevreden Klanten</span>
-          </div>
-          <div class="dark:bg-white/5 dark:border-white/10 bg-white border-gray-200 shadow-sm border rounded-2xl p-5 text-center backdrop-blur-xl transition-colors duration-300">
-            <span class="block text-2xl font-black dark:text-white text-gray-900">100%</span>
-            <span class="text-sm dark:text-gray-400 text-gray-600">Kwaliteit</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT COLUMN: Image grid -->
-      <div class="grid grid-cols-2 gap-4">
-        <!-- Large image spanning 2 cols -->
-        <div class="col-span-2 relative h-80 rounded-3xl overflow-hidden group">
-          <img src="<?php echo esc_url($img . 'products/goldsun-elite/goldsun-elite-5.jpg'); ?>" alt="Terrasverwarming"
-               class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-          <div class="absolute bottom-6 left-6">
-            <span class="text-white font-bold text-lg">Terrasverwarming</span>
-            <p class="text-gray-300 text-sm mt-1">Premium buitenverwarming</p>
-          </div>
-        </div>
-        <!-- Smaller image 1 -->
-        <div class="relative h-52 rounded-3xl overflow-hidden group">
-          <img src="<?php echo esc_url($img . 'products/hlq-elektrisch/hlq-7.jpg'); ?>" alt="HLQ Elektrisch"
-               class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-          <div class="absolute bottom-4 left-4">
-            <span class="text-white font-semibold">Elektrisch</span>
-          </div>
-        </div>
-        <!-- Smaller image 2 -->
-        <div class="relative h-52 rounded-3xl overflow-hidden group">
-          <img src="<?php echo esc_url($img . 'products/parasolverwarming/parasolverlichting-lely.jpg'); ?>" alt="Parasolverwarming"
-               class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-          <div class="absolute bottom-4 left-4">
-            <span class="text-white font-semibold">Parasolverwarming</span>
-          </div>
-        </div>
-      </div>
-
+    <!-- Logo -->
+    <div class="mb-8">
+      <img src="<?php echo esc_url($img . 'logo-tvs-header.png'); ?>"
+           alt="<?php echo esc_attr(tvs_cfg('company.short_name', 'TVS NL')); ?>"
+           class="h-20 sm:h-24 mx-auto dark:hidden">
+      <img src="<?php echo esc_url($img . 'logo-tvs-header-dark.png'); ?>"
+           alt="<?php echo esc_attr(tvs_cfg('company.short_name', 'TVS NL')); ?>"
+           class="h-20 sm:h-24 mx-auto hidden dark:block">
     </div>
+
+    <!-- Company name -->
+    <h1 class="font-black text-5xl sm:text-6xl lg:text-7xl tracking-tight dark:text-white text-gray-900 mb-4">
+      <?php echo esc_html(tvs_cfg('company.short_name', 'TVS NL')); ?>
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="text-xl sm:text-2xl font-semibold bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent mb-6">
+      Installatie &amp; Elektrotechniek
+    </p>
+
+    <!-- Tagline -->
+    <p class="text-lg sm:text-xl dark:text-gray-400 text-gray-600 max-w-2xl mx-auto leading-relaxed">
+      <?php echo esc_html($tagline); ?>
+    </p>
+
+    <!-- Scroll indicator -->
+    <div class="mt-16 animate-bounce">
+      <svg class="w-6 h-6 mx-auto dark:text-gray-500 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </div>
+
   </div>
 </section>
 
-<!-- ========== CATEGORIES SECTION ========== -->
-<section class="relative py-24 dark:bg-black bg-gray-50 transition-colors duration-300" id="categorien">
+<!-- ========== SECTION 2: TWO DOORS ========== -->
+<section class="relative dark:bg-black bg-gray-50 transition-colors duration-300 py-12 sm:py-16 lg:py-24" id="takken">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <!-- Section header -->
-    <div class="text-center mb-16">
-      <div class="inline-flex items-center gap-2 dark:bg-white/5 dark:border-white/10 bg-white border-gray-200 shadow-sm border rounded-full px-5 py-2.5 mb-6">
-        <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-        <span class="text-sm dark:text-gray-300 text-gray-600 font-medium uppercase tracking-wider">Onze Productlijnen</span>
-      </div>
-      <h2 class="text-4xl sm:text-5xl font-black dark:text-white text-gray-900">Premium Oplossingen</h2>
+    <div class="text-center mb-12 sm:mb-16">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black dark:text-white text-gray-900">Wat kunnen wij voor u doen?</h2>
+      <p class="mt-4 text-lg dark:text-gray-400 text-gray-600 max-w-2xl mx-auto">Kies uw richting en ontdek onze oplossingen</p>
     </div>
 
-    <!-- Category grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <?php
-      // Fallback images for categories (using new product photos)
-      $cat_images = [
-        $img . 'products/goldsun-elite/goldsun-elite-6.jpg',
-        $img . 'products/hlq-elektrisch/hlq-6000-watt.jpg',
-        $img . 'cat-kerkverwarming.jpg',
-        $img . 'products/parasolverwarming/parasol-verwarming-met-led.jpg',
-      ];
+    <div class="grid grid-cols-1 <?php echo $vd_on ? 'lg:grid-cols-2' : ''; ?> gap-6 lg:gap-8">
 
-      $terms = get_terms([
-        'taxonomy'   => 'product_categorie',
-        'hide_empty' => false,
-        'number'     => 4,
-      ]);
+      <!-- LEFT DOOR: Verwarming -->
+      <a href="<?php echo esc_url(home_url('/verwarming/')); ?>"
+         class="<?php echo !$vd_on ? 'lg:col-span-2 max-w-4xl mx-auto w-full' : ''; ?> group relative block rounded-3xl overflow-hidden h-[40vh] sm:h-[45vh] lg:h-[50vh] transition-all duration-500">
+        <!-- Background image -->
+        <?php if (!empty($vw['hero_image'])) : ?>
+        <img src="<?php echo esc_url($img . $vw['hero_image']); ?>"
+             alt="<?php echo esc_attr($vw['label'] ?? 'Verwarming'); ?>"
+             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+        <?php endif; ?>
+        <!-- Red gradient overlay -->
+        <div class="absolute inset-0 bg-gradient-to-br from-red-900/80 to-red-600/60 transition-opacity duration-500 group-hover:from-red-900/70 group-hover:to-red-600/50"></div>
 
-      if (!is_wp_error($terms) && !empty($terms)) :
-        foreach ($terms as $i => $term) :
-          $count = $term->count;
-          $thumb = get_term_meta($term->term_id, 'thumbnail_url', true);
-          $card_img = $thumb ? $thumb : ($cat_images[$i] ?? $cat_images[0]);
-      ?>
-        <a href="<?php echo esc_url(get_term_link($term)); ?>"
-           class="group dark:bg-white/5 dark:border-white/10 bg-white border-gray-200 shadow-sm border rounded-2xl overflow-hidden backdrop-blur-xl transition-all duration-300 dark:hover:bg-white/10 dark:hover:border-white/20 hover:border-gray-300 hover:shadow-lg">
-          <!-- Image -->
-          <div class="relative h-64 overflow-hidden">
-            <img src="<?php echo esc_url($card_img); ?>" alt="<?php echo esc_attr($term->name); ?>"
-                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        <!-- Content -->
+        <div class="relative z-10 flex flex-col items-center justify-center h-full px-6 sm:px-10 text-center">
+          <!-- Icon -->
+          <div class="mb-6 p-4 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+            <svg class="w-10 h-10 sm:w-12 sm:h-12 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M12 2c0 4-4 6-4 10a4 4 0 0 0 8 0c0-4-4-6-4-10z"/>
+              <path d="M12 22v-2"/>
+            </svg>
           </div>
-          <!-- Content -->
-          <div class="p-6 space-y-3">
-            <span class="inline-block bg-gradient-to-r from-red-600/20 to-orange-500/20 text-red-400 text-xs font-semibold px-3 py-1 rounded-full border border-red-500/20">
-              <?php echo esc_html($count); ?> producten
-            </span>
-            <h3 class="dark:text-white text-gray-900 font-bold text-lg group-hover:text-red-400 transition-colors duration-300">
-              <?php echo esc_html($term->name); ?>
-            </h3>
-            <p class="dark:text-gray-400 text-gray-600 text-sm leading-relaxed line-clamp-2">
-              <?php echo esc_html($term->description); ?>
-            </p>
-            <span class="inline-flex items-center gap-1 text-red-400 text-sm font-medium">
-              Bekijk producten
-              <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
+
+          <!-- Title -->
+          <h3 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-3">
+            <?php echo esc_html($vw['label'] ?? 'Verwarming'); ?>
+          </h3>
+
+          <!-- Description -->
+          <p class="text-white/80 text-base sm:text-lg max-w-md mb-6 leading-relaxed">
+            <?php echo esc_html($vw['tagline'] ?? 'Professionele verwarmingsoplossingen'); ?>
+          </p>
+
+          <!-- Preview badges -->
+          <div class="flex flex-wrap justify-center gap-2 mb-8">
+            <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-white/15 text-white backdrop-blur-sm border border-white/20">Terrasverwarming</span>
+            <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-white/15 text-white backdrop-blur-sm border border-white/20">Halverwarming</span>
+            <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-white/15 text-white backdrop-blur-sm border border-white/20">Kerkverwarming</span>
           </div>
-        </a>
-      <?php
-        endforeach;
-      else :
-        // Fallback: categories from config
-        foreach ($categories as $i => $cat) :
-          $card_img = $cat_images[$i] ?? $cat_images[0];
-      ?>
-        <a href="<?php echo esc_url(home_url('/producten/')); ?>"
-           class="group dark:bg-white/5 dark:border-white/10 bg-white border-gray-200 shadow-sm border rounded-2xl overflow-hidden backdrop-blur-xl transition-all duration-300 dark:hover:bg-white/10 dark:hover:border-white/20 hover:border-gray-300 hover:shadow-lg">
-          <!-- Image -->
-          <div class="relative h-64 overflow-hidden">
-            <img src="<?php echo esc_url($card_img); ?>" alt="<?php echo esc_attr($cat['label']); ?>"
-                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+
+          <!-- CTA button -->
+          <span class="inline-flex items-center gap-2 bg-white text-red-700 font-semibold px-8 py-4 rounded-xl transition-all duration-300 group-hover:bg-red-50 group-hover:shadow-lg group-hover:shadow-red-900/20 text-base">
+            Ontdek Verwarming
+            <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <?php if ($vd_on) : ?>
+      <!-- RIGHT DOOR: Verduurzaming -->
+      <a href="<?php echo esc_url(home_url('/verduurzaming/')); ?>"
+         class="group relative block rounded-3xl overflow-hidden h-[40vh] sm:h-[45vh] lg:h-[50vh] transition-all duration-500">
+        <!-- Background image -->
+        <?php if (!empty($vd['hero_image'])) : ?>
+        <img src="<?php echo esc_url($img . $vd['hero_image']); ?>"
+             alt="<?php echo esc_attr($vd['label'] ?? 'Verduurzaming'); ?>"
+             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+        <?php endif; ?>
+        <!-- Green gradient overlay -->
+        <div class="absolute inset-0 bg-gradient-to-br from-emerald-900/80 to-emerald-600/60 transition-opacity duration-500 group-hover:from-emerald-900/70 group-hover:to-emerald-600/50"></div>
+
+        <!-- Content -->
+        <div class="relative z-10 flex flex-col items-center justify-center h-full px-6 sm:px-10 text-center">
+          <!-- Icon -->
+          <div class="mb-6 p-4 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+            <svg class="w-10 h-10 sm:w-12 sm:h-12 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 3z"/>
+              <path d="M17 4a2 2 0 0 0 2 2 2 2 0 0 0-2 2 2 2 0 0 0-2-2 2 2 0 0 0 2-2"/>
+              <path d="M21 10h1"/>
+            </svg>
           </div>
-          <!-- Content -->
-          <div class="p-6 space-y-3">
-            <h3 class="dark:text-white text-gray-900 font-bold text-lg group-hover:text-red-400 transition-colors duration-300">
-              <?php echo esc_html($cat['label']); ?>
-            </h3>
-            <p class="dark:text-gray-400 text-gray-600 text-sm leading-relaxed line-clamp-2">
-              <?php echo esc_html($cat['desc']); ?>
-            </p>
-            <span class="inline-flex items-center gap-1 text-red-400 text-sm font-medium">
-              Bekijk producten
-              <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
+
+          <!-- Title -->
+          <h3 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-3">
+            <?php echo esc_html($vd['label'] ?? 'Verduurzaming'); ?>
+          </h3>
+
+          <!-- Description -->
+          <p class="text-white/80 text-base sm:text-lg max-w-md mb-6 leading-relaxed">
+            <?php echo esc_html($vd['tagline'] ?? 'Duurzame oplossingen voor een groene toekomst'); ?>
+          </p>
+
+          <!-- Preview badges -->
+          <div class="flex flex-wrap justify-center gap-2 mb-8">
+            <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-white/15 text-white backdrop-blur-sm border border-white/20">Zonnepanelen</span>
+            <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-white/15 text-white backdrop-blur-sm border border-white/20">Laadpalen</span>
+            <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-white/15 text-white backdrop-blur-sm border border-white/20">Accu's</span>
           </div>
-        </a>
-      <?php
-        endforeach;
-      endif;
-      ?>
+
+          <!-- CTA button -->
+          <span class="inline-flex items-center gap-2 bg-white text-emerald-700 font-semibold px-8 py-4 rounded-xl transition-all duration-300 group-hover:bg-emerald-50 group-hover:shadow-lg group-hover:shadow-emerald-900/20 text-base">
+            Ontdek Verduurzaming
+            <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+      <?php endif; ?>
+
     </div>
   </div>
 </section>
 
-<!-- ========== USP SECTION ========== -->
+<!-- ========== SECTION 3: USPs ========== -->
 <section class="relative py-24 dark:bg-black bg-gray-50 transition-colors duration-300" id="waarom-tvs">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <!-- Section header -->
     <div class="text-center mb-16">
       <div class="inline-flex items-center gap-2 dark:bg-white/5 dark:border-white/10 bg-white border-gray-200 shadow-sm border rounded-full px-5 py-2.5 mb-6">
-        <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span class="text-sm dark:text-gray-300 text-gray-600 font-medium uppercase tracking-wider">Waarom TVS</span>
+        <svg class="w-4 h-4 dark:text-gray-400 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span class="text-sm dark:text-gray-300 text-gray-600 font-medium uppercase tracking-wider">Waarom TVS NL</span>
       </div>
-      <h2 class="text-4xl sm:text-5xl font-black dark:text-white text-gray-900">Jouw Partner in Verwarming</h2>
+      <h2 class="text-4xl sm:text-5xl font-black dark:text-white text-gray-900">Uw Betrouwbare Partner</h2>
     </div>
 
-    <!-- USP cards -->
+    <!-- USP cards (branch-neutral) -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
       <!-- Card 1: Ervaring -->
       <div class="dark:bg-white/5 dark:border-white/10 bg-white border-gray-200 shadow-sm border rounded-2xl p-8 backdrop-blur-xl text-center space-y-4 dark:hover:bg-white/10 dark:hover:border-white/20 hover:border-gray-300 hover:shadow-lg transition-all duration-300">
-        <div class="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-red-600 to-orange-500 rounded-2xl mx-auto">
-          <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="inline-flex items-center justify-center w-14 h-14 dark:bg-white/10 bg-gray-100 rounded-2xl mx-auto">
+          <svg class="w-7 h-7 dark:text-white text-gray-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <h3 class="dark:text-white text-gray-900 font-bold text-xl">20+ Jaar Ervaring</h3>
         <p class="dark:text-gray-400 text-gray-600 leading-relaxed">
-          Betrouwbare partner met uitgebreide kennis van verwarmingsoplossingen voor diverse sectoren.
+          Al meer dan twee decennia uw betrouwbare partner in installatie en elektrotechniek.
         </p>
       </div>
 
-      <!-- Card 2: A-Merken -->
+      <!-- Card 2: Vakmanschap -->
       <div class="dark:bg-white/5 dark:border-white/10 bg-white border-gray-200 shadow-sm border rounded-2xl p-8 backdrop-blur-xl text-center space-y-4 dark:hover:bg-white/10 dark:hover:border-white/20 hover:border-gray-300 hover:shadow-lg transition-all duration-300">
-        <div class="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-red-600 to-orange-500 rounded-2xl mx-auto">
-          <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+        <div class="inline-flex items-center justify-center w-14 h-14 dark:bg-white/10 bg-gray-100 rounded-2xl mx-auto">
+          <svg class="w-7 h-7 dark:text-white text-gray-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
         </div>
-        <h3 class="dark:text-white text-gray-900 font-bold text-xl">Premium A-Merken</h3>
+        <h3 class="dark:text-white text-gray-900 font-bold text-xl">Vakmanschap</h3>
         <p class="dark:text-gray-400 text-gray-600 leading-relaxed">
-          Alleen hoogwaardige producten met uitstekende garanties van gerenommeerde fabrikanten.
+          Gecertificeerde vakmensen met uitgebreide technische kennis en oog voor detail.
         </p>
       </div>
 
-      <!-- Card 3: Maatwerk -->
+      <!-- Card 3: Maatwerk Advies -->
       <div class="dark:bg-white/5 dark:border-white/10 bg-white border-gray-200 shadow-sm border rounded-2xl p-8 backdrop-blur-xl text-center space-y-4 dark:hover:bg-white/10 dark:hover:border-white/20 hover:border-gray-300 hover:shadow-lg transition-all duration-300">
-        <div class="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-red-600 to-orange-500 rounded-2xl mx-auto">
-          <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <div class="inline-flex items-center justify-center w-14 h-14 dark:bg-white/10 bg-gray-100 rounded-2xl mx-auto">
+          <svg class="w-7 h-7 dark:text-white text-gray-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
         <h3 class="dark:text-white text-gray-900 font-bold text-xl">Maatwerk Advies</h3>
         <p class="dark:text-gray-400 text-gray-600 leading-relaxed">
-          Persoonlijk advies en support op maat voor uw specifieke situatie en wensen.
+          Persoonlijk advies en oplossingen die precies aansluiten bij uw situatie en wensen.
         </p>
       </div>
+
     </div>
   </div>
 </section>
 
-<?php if (tvs_cfg('modules.show_verduurzaming', false)) :
-  $vd       = tvs_cfg('verduurzaming', []);
-  $vd_title = $vd['title'] ?? 'Verduurzaming';
-  $vd_sub   = $vd['subtitle'] ?? '';
-  $diensten = $vd['diensten'] ?? [];
-?>
-<!-- ========== VERDUURZAMING SECTION ========== -->
-<section class="relative py-24 dark:bg-black bg-gray-50 transition-colors duration-300" id="verduurzaming">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-    <!-- Section header -->
-    <div class="text-center mb-16">
-      <div class="inline-flex items-center gap-2 dark:bg-emerald-500/10 dark:border-emerald-500/20 bg-emerald-50 border-emerald-200 shadow-sm border rounded-full px-5 py-2.5 mb-6">
-        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 1 0 20 10 10 0 0 1 0-20z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-        <span class="text-sm text-emerald-700 dark:text-emerald-400 font-medium uppercase tracking-wider"><?php echo esc_html($vd_title); ?></span>
-      </div>
-      <h2 class="text-4xl sm:text-5xl font-black dark:text-white text-gray-900"><?php echo esc_html($vd_sub); ?></h2>
-    </div>
-
-    <!-- Diensten cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-      <?php foreach ($diensten as $key => $dienst) :
-        $d_img = !empty($dienst['image']) ? $img . $dienst['image'] : '';
-      ?>
-      <div class="dark:bg-white/5 dark:border-white/10 bg-white border-gray-200 shadow-sm border rounded-2xl overflow-hidden backdrop-blur-xl transition-all duration-300 dark:hover:bg-white/10 hover:shadow-lg">
-        <?php if ($d_img) : ?>
-        <div class="relative h-48 overflow-hidden">
-          <img src="<?php echo esc_url($d_img); ?>" alt="<?php echo esc_attr($dienst['label']); ?>"
-               class="w-full h-full object-cover">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-          <div class="absolute top-4 left-4">
-            <span class="inline-flex items-center gap-1 bg-emerald-500/90 text-white text-xs font-bold px-3 py-1 rounded-full">
-              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/><circle cx="12" cy="12" r="4"/></svg>
-              <?php echo esc_html($vd_title); ?>
-            </span>
-          </div>
-        </div>
-        <?php else : ?>
-        <div class="relative h-48 overflow-hidden" style="background:linear-gradient(135deg,#064e3b 0%,#065f46 50%,#047857 100%)">
-          <div class="absolute inset-0 flex items-center justify-center">
-            <svg class="w-16 h-16 text-emerald-300/30" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-          </div>
-          <div class="absolute top-4 left-4">
-            <span class="inline-flex items-center gap-1 bg-emerald-500/90 text-white text-xs font-bold px-3 py-1 rounded-full">
-              <?php echo esc_html($vd_title); ?>
-            </span>
-          </div>
-        </div>
-        <?php endif; ?>
-
-        <div class="p-6 space-y-4">
-          <h3 class="dark:text-white text-gray-900 font-bold text-xl"><?php echo esc_html($dienst['label']); ?></h3>
-          <p class="dark:text-gray-400 text-gray-600 text-sm leading-relaxed"><?php echo esc_html($dienst['desc']); ?></p>
-
-          <?php if (!empty($dienst['features'])) : ?>
-          <ul class="space-y-2">
-            <?php foreach ($dienst['features'] as $feature) : ?>
-            <li class="flex items-center gap-2 text-sm dark:text-gray-300 text-gray-700">
-              <svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              <?php echo esc_html($feature); ?>
-            </li>
-            <?php endforeach; ?>
-          </ul>
-          <?php endif; ?>
-
-          <a href="<?php echo esc_url(home_url('/contact/')); ?>"
-             class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 text-sm">
-            Vraag advies aan
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </div>
-      </div>
-      <?php endforeach; ?>
-    </div>
-  </div>
-</section>
-<?php endif; ?>
-
-<!-- ========== CTA SECTION ========== -->
+<!-- ========== SECTION 4: CTA ========== -->
 <section class="relative py-24 dark:bg-black bg-gray-50 transition-colors duration-300">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="relative dark:bg-white/5 dark:border-white/10 bg-white border-gray-200 shadow-xl backdrop-blur-3xl border rounded-[3rem] p-12 sm:p-16 text-center overflow-hidden transition-colors duration-300">
@@ -349,18 +233,19 @@ $img        = get_template_directory_uri() . '/assets/images/';
       <div class="relative z-10 space-y-8">
         <h2 class="text-4xl sm:text-5xl font-black dark:text-white text-gray-900">Klaar Om Te Starten?</h2>
         <p class="text-xl dark:text-gray-400 text-gray-600 max-w-2xl mx-auto leading-relaxed">
-          Gebruik ons geavanceerde filtersysteem om snel het juiste product te vinden,
-          of neem direct contact op voor professioneel advies op maat.
+          Neem vrijblijvend contact op voor persoonlijk advies of een offerte op maat.
+          Wij helpen u graag verder.
         </p>
         <div class="flex flex-wrap justify-center gap-4">
-          <a href="<?php echo esc_url(home_url('/producten/')); ?>"
+          <a href="<?php echo esc_url(home_url('/contact/')); ?>"
              class="inline-flex items-center gap-2 dark:bg-white dark:text-black dark:hover:bg-gray-100 bg-gray-900 text-white hover:bg-gray-800 font-semibold px-8 py-4 rounded-xl transition-all duration-300">
-            Bekijk Alle Producten
+            Neem Contact Op
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <a href="<?php echo esc_url(home_url('/contact/')); ?>"
+          <a href="tel:<?php echo esc_attr(str_replace(' ', '', tvs_cfg('contact.phone', ''))); ?>"
              class="inline-flex items-center gap-2 dark:bg-white/10 dark:border-white/20 dark:text-white dark:hover:bg-white/15 bg-white border-gray-300 text-gray-900 hover:bg-gray-50 border font-semibold px-8 py-4 rounded-xl backdrop-blur-xl transition-all duration-300">
-            Vraag Offerte Aan
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <?php echo esc_html(tvs_cfg('contact.phone', '+31 (0)348 220338')); ?>
           </a>
         </div>
       </div>

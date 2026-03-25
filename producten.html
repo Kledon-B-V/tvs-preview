@@ -212,7 +212,6 @@ input[type="range"]::-moz-range-thumb {
 
 /* Prevent layout shift */
 html { overflow-y: scroll; }
-body.modal-open { overflow: hidden; }
 
 /* Custom scrollbars */
 ::-webkit-scrollbar { width: 8px; }
@@ -220,89 +219,46 @@ body.modal-open { overflow: hidden; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
-/* ===== MODAL — clean single implementation ===== */
-.modal-overlay {
-  position: fixed; inset: 0; z-index: 200;
-  background: rgba(0,0,0,.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  display: none; overflow: hidden;
-}
-.modal-overlay.open { display: block; }
-
-/* Close btn */
-.modal-close {
-  position: fixed; top: 1.5rem; right: 1.5rem; z-index: 220;
-  width: 48px; height: 48px; border-radius: 50%;
-  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
-  color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
-  font-size: 1.25rem; transition: all .2s;
-}
-.modal-close:hover { background: rgba(255,255,255,.2); }
-
-/* Nav buttons on overlay */
-.modal-nav {
-  position: fixed; top: 50%; transform: translateY(-50%); z-index: 220;
-  width: 48px; height: 48px; border-radius: 50%;
-  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
-  color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
-  transition: all .2s;
-}
-.modal-nav:hover { background: rgba(255,255,255,.25); }
-.modal-nav.prev { left: 1.5rem; }
-.modal-nav.next { right: 1.5rem; }
-
-/* Card container */
-.modal-card {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  width: calc(100% - 8rem); max-width: 64rem; max-height: 85vh;
-  border-radius: 1.5rem; overflow: hidden;
-  display: grid; grid-template-columns: 45% 55%;
-}
-html.dark .modal-card { background: #111; border: 1px solid rgba(255,255,255,.1); }
-html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
-
-/* Left: image */
-.modal-left {
-  position: relative; overflow: hidden;
-  background: #0a0a0a; min-height: 400px;
-  display: flex; align-items: center; justify-content: center;
-}
-.modal-left img.modal-main-img {
-  width: 100%; height: 100%; object-fit: contain;
-  display: block; min-height: 400px;
-  padding: 1rem 1rem 3.5rem;
-}
-.modal-thumbs {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  display: flex; gap: .375rem; padding: .5rem .75rem;
-  background: linear-gradient(to top, rgba(0,0,0,.95), rgba(0,0,0,.5), transparent);
-  justify-content: center;
-}
-.modal-thumb {
-  width: 48px; height: 48px; border-radius: .375rem; overflow: hidden;
-  cursor: pointer; border: 2px solid rgba(255,255,255,.25);
-  transition: all .2s; flex-shrink: 0; opacity: .7;
-}
-.modal-thumb:hover { opacity: 1; border-color: rgba(255,255,255,.5); }
-.modal-thumb.active { border-color: #E31E24; opacity: 1; }
-.modal-thumb img { width: 100%; height: 100%; object-fit: cover; }
-
-/* Right: info — this is the ONLY scrollable area */
-.modal-right {
-  overflow-y: auto; max-height: 85vh; padding: 2rem;
-}
-.modal-right::-webkit-scrollbar { width: 5px; }
-.modal-right::-webkit-scrollbar-track { background: transparent; }
-.modal-right::-webkit-scrollbar-thumb { background: rgba(128,128,128,.3); border-radius: 3px; }
-
-/* Mobile modal */
+/* ===== PHOTO MODAL — fullscreen photo viewer ===== */
+.photo-modal { position:fixed;inset:0;z-index:9999;display:none;background:#000 }
+.photo-modal.is-open { display:flex;flex-direction:column }
+.photo-modal__overlay { position:absolute;inset:0 }
+.photo-modal__close { position:fixed;top:1.25rem;right:1.25rem;z-index:10010;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s }
+.photo-modal__close:hover { background:rgba(255,255,255,.25) }
+.photo-modal__nav { position:fixed;top:50%;transform:translateY(-50%);z-index:10010;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.08);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s }
+.photo-modal__nav:hover { background:rgba(255,255,255,.2) }
+.photo-modal__nav--prev { left:1.25rem }
+.photo-modal__nav--next { right:1.25rem }
+.photo-modal__stage { position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;cursor:zoom-in;padding:2rem 5rem }
+.photo-modal__img { max-width:100%;max-height:100%;object-fit:contain;border-radius:.5rem;transition:transform .3s }
+.photo-modal.fullscreen .photo-modal__close,.photo-modal.fullscreen .photo-modal__nav,.photo-modal.fullscreen .photo-modal__thumbs,.photo-modal.fullscreen .photo-modal__info { opacity:0;pointer-events:none }
+.photo-modal.fullscreen .photo-modal__stage { cursor:zoom-out;padding:0 }
+.photo-modal__thumbs { position:fixed;bottom:0;left:0;right:0;z-index:10005;display:flex;gap:.5rem;padding:.75rem;justify-content:center;background:linear-gradient(to top,rgba(0,0,0,.85),transparent) }
+.photo-modal__thumb { width:56px;height:56px;border-radius:.5rem;overflow:hidden;cursor:pointer;border:2px solid rgba(255,255,255,.2);opacity:.6;transition:all .2s;flex-shrink:0 }
+.photo-modal__thumb:hover { opacity:.9;border-color:rgba(255,255,255,.5) }
+.photo-modal__thumb.active { border-color:var(--modal-accent,#E31E24);opacity:1 }
+.photo-modal__thumb img { width:100%;height:100%;object-fit:cover }
+.photo-modal__info { position:fixed;bottom:0;left:0;right:0;z-index:10008;background:linear-gradient(to top,rgba(0,0,0,.9) 50%,transparent);padding:5rem 2rem 2rem;transition:transform .3s,opacity .3s }
+.photo-modal__info-inner { max-width:640px;margin:0 auto }
+.photo-modal__badge { display:inline-block;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:var(--modal-accent,#E31E24);color:#fff;margin-bottom:.5rem }
+.photo-modal__title { font-size:1.75rem;font-weight:800;color:#fff;margin:0 0 .5rem;line-height:1.2 }
+.photo-modal__desc { font-size:.9375rem;color:rgba(255,255,255,.7);line-height:1.6;margin:0 0 1rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden }
+.photo-modal__features { display:flex;flex-wrap:wrap;gap:.375rem;margin-bottom:1rem }
+.photo-modal__feature { display:inline-flex;align-items:center;gap:.25rem;padding:.25rem .625rem;border-radius:9999px;font-size:.75rem;color:rgba(255,255,255,.8);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1) }
+.photo-modal__cta { display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.75rem;border-radius:.75rem;font-size:.9375rem;font-weight:700;background:var(--modal-accent,#E31E24);color:#fff;text-decoration:none;transition:all .2s;box-shadow:0 4px 16px rgba(0,0,0,.3) }
+.photo-modal__cta:hover { opacity:.9;transform:translateY(-1px) }
+.photo-modal[data-branch="verwarming"] { --modal-accent:#E31E24 }
+.photo-modal[data-branch="verduurzaming"] { --modal-accent:#22c55e }
 @media(max-width:900px) {
-  .modal-card { grid-template-columns: 1fr; width: calc(100% - 1rem); max-height: 95vh; border-radius: 1rem; }
-  .modal-left { min-height: 220px; max-height: 35vh; }
-  .modal-left img.modal-main-img { min-height: 220px; padding: .5rem .5rem 3rem; }
-  .modal-right { max-height: none; overflow-y: auto; padding: 1.25rem; }
-  .modal-nav.prev { left: .5rem; }
-  .modal-nav.next { right: .5rem; }
-  .modal-close { top: .75rem; right: .75rem; }
+  .photo-modal__nav { display:none }
+  .photo-modal__close { top:.75rem;right:.75rem;width:40px;height:40px }
+  .photo-modal__stage { padding:.5rem }
+  .photo-modal__info { padding:3rem 1.25rem 1.25rem;border-radius:1.5rem 1.5rem 0 0;max-height:45vh;overflow-y:auto;-webkit-overflow-scrolling:touch }
+  .photo-modal__info::before { content:'';display:block;width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,.3);margin:0 auto .75rem;position:absolute;top:.75rem;left:50%;transform:translateX(-50%) }
+  .photo-modal__thumbs { padding:.5rem;gap:.375rem }
+  .photo-modal__thumb { width:48px;height:48px }
+  .photo-modal__title { font-size:1.25rem }
+  .photo-modal__desc { font-size:.875rem;-webkit-line-clamp:2 }
 }
 
 /* Hamburger - only shown on mobile */
@@ -383,10 +339,6 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
 }
 @media(max-width:768px) {
   .product-grid { grid-template-columns: 1fr !important; }
-  .modal-card { grid-template-columns: 1fr !important; }
-  .modal-card .modal-left { min-height: 200px !important; max-height: 30vh; }
-  .modal-card .modal-left img.modal-main-img { min-height: 200px !important; padding: .5rem .5rem 3rem; }
-  .modal-card .modal-right { max-height: none; padding: 1rem; }
   .ftr-grid { grid-template-columns: 1fr !important; }
 }
 @media(max-width:480px) {
@@ -612,16 +564,6 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
             </select>
           </div>
 
-          <!-- Price range slider -->
-          <div style="margin-bottom:1.5rem">
-            <div class="filter-label">Maximale prijs</div>
-            <input type="range" id="filter-price" min="0" max="3000" value="3000" step="50">
-            <div style="display:flex;justify-content:space-between;margin-top:.5rem;font-size:.75rem;color:var(--text-muted)">
-              <span>&euro;0</span>
-              <span style="font-weight:700;color:var(--text)" id="price-display">&euro;3000</span>
-            </div>
-          </div>
-
           <!-- Reset button -->
           <button id="reset-filters" style="width:100%;padding:.75rem 1rem;border-radius:.75rem;background:var(--bg-card-hover);border:1px solid var(--border);color:var(--text-secondary);font-size:.875rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:.5rem">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
@@ -644,10 +586,9 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
             <div style="padding:1.25rem">
               <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Terrasverwarming Elektrisch</div>
               <h3 style="font-size:1rem;font-weight:700;margin:0 0 .5rem;transition:color .2s">TVS Heatstrip 2000W</h3>
-              <p style="font-size:.875rem;color:var(--text-muted);margin:0 0 1rem">TVS &bull; 2000W</p>
-              <div style="display:flex;align-items:center;justify-content:space-between">
-                <span style="font-size:1.5rem;font-weight:900">&euro;459</span>
-                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Bekijk</span>
+              <p style="font-size:.8125rem;color:var(--text-secondary);margin:0 0 1rem;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Slanke elektrische heatstrip met infrarood technologie voor directe warmte op het terras.</p>
+              <div style="display:flex;align-items:center;justify-content:flex-end">
+                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Meer info</span>
               </div>
             </div>
           </div>
@@ -666,10 +607,9 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
             <div style="padding:1.25rem">
               <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Terrasverwarming Gas</div>
               <h3 style="font-size:1rem;font-weight:700;margin:0 0 .5rem;transition:color .2s">Patioheater TVS-514 RVS</h3>
-              <p style="font-size:.875rem;color:var(--text-muted);margin:0 0 1rem">TVS &bull; 12kW</p>
-              <div style="display:flex;align-items:center;justify-content:space-between">
-                <span style="font-size:1.5rem;font-weight:900">&euro;899</span>
-                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Bekijk</span>
+              <p style="font-size:.8125rem;color:var(--text-secondary);margin:0 0 1rem;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">De TVS-514 is onze bestseller patioheater in volledig RVS uitvoering. Met 12kW vermogen.</p>
+              <div style="display:flex;align-items:center;justify-content:flex-end">
+                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Meer info</span>
               </div>
             </div>
           </div>
@@ -684,10 +624,9 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
             <div style="padding:1.25rem">
               <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Terrasverwarming Elektrisch</div>
               <h3 style="font-size:1rem;font-weight:700;margin:0 0 .5rem;transition:color .2s">TVS Aqua LG 3000W Zwart</h3>
-              <p style="font-size:.875rem;color:var(--text-muted);margin:0 0 1rem">Goldsun &bull; 3000W</p>
-              <div style="display:flex;align-items:center;justify-content:space-between">
-                <span style="font-size:1.5rem;font-weight:900">&euro;679</span>
-                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Bekijk</span>
+              <p style="font-size:.8125rem;color:var(--text-secondary);margin:0 0 1rem;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Premium infrarood terrasverwarmer van Goldsun met low-glare element voor minimale lichtemissie.</p>
+              <div style="display:flex;align-items:center;justify-content:flex-end">
+                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Meer info</span>
               </div>
             </div>
           </div>
@@ -702,10 +641,9 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
             <div style="padding:1.25rem">
               <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Halverwarming</div>
               <h3 style="font-size:1rem;font-weight:700;margin:0 0 .5rem;transition:color .2s">Elektrische Donkerstraler 3200W</h3>
-              <p style="font-size:.875rem;color:var(--text-muted);margin:0 0 1rem">TVS &bull; 3200W</p>
-              <div style="display:flex;align-items:center;justify-content:space-between">
-                <span style="font-size:1.5rem;font-weight:900">&euro;549</span>
-                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Bekijk</span>
+              <p style="font-size:.8125rem;color:var(--text-secondary);margin:0 0 1rem;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Krachtige donkerstraler voor industri\u00EBle toepassingen. Produceert geen zichtbaar licht.</p>
+              <div style="display:flex;align-items:center;justify-content:flex-end">
+                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Meer info</span>
               </div>
             </div>
           </div>
@@ -724,10 +662,9 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
             <div style="padding:1.25rem">
               <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Loungehaarden</div>
               <h3 style="font-size:1rem;font-weight:700;margin:0 0 .5rem;transition:color .2s">Vuurtafel Rechthoek</h3>
-              <p style="font-size:.875rem;color:var(--text-muted);margin:0 0 1rem">TVS</p>
-              <div style="display:flex;align-items:center;justify-content:space-between">
-                <span style="font-size:1.5rem;font-weight:900">&euro;1.299</span>
-                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Bekijk</span>
+              <p style="font-size:.8125rem;color:var(--text-secondary);margin:0 0 1rem;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Stijlvolle rechthoekige vuurtafel. Cre\u00EBert een warme en gezellige sfeer op uw terras.</p>
+              <div style="display:flex;align-items:center;justify-content:flex-end">
+                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Meer info</span>
               </div>
             </div>
           </div>
@@ -742,10 +679,9 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
             <div style="padding:1.25rem">
               <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Halverwarming</div>
               <h3 style="font-size:1rem;font-weight:700;margin:0 0 .5rem;transition:color .2s">TVS Halverwarmer 18kW</h3>
-              <p style="font-size:.875rem;color:var(--text-muted);margin:0 0 1rem">TVS &bull; 18kW</p>
-              <div style="display:flex;align-items:center;justify-content:space-between">
-                <span style="font-size:1.5rem;font-weight:900">&euro;1.599</span>
-                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Bekijk</span>
+              <p style="font-size:.8125rem;color:var(--text-secondary);margin:0 0 1rem;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Krachtige industri\u00EBle halverwarmer met 18kW vermogen voor grote ruimtes zoals magazijnen.</p>
+              <div style="display:flex;align-items:center;justify-content:flex-end">
+                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Meer info</span>
               </div>
             </div>
           </div>
@@ -760,10 +696,9 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
             <div style="padding:1.25rem">
               <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#E31E24;margin-bottom:.375rem">Parasolverwarming</div>
               <h3 style="font-size:1rem;font-weight:700;margin:0 0 .5rem;transition:color .2s">TVS Parasolset Aqua 1500W</h3>
-              <p style="font-size:.875rem;color:var(--text-muted);margin:0 0 1rem">Goldsun &bull; 1500W</p>
-              <div style="display:flex;align-items:center;justify-content:space-between">
-                <span style="font-size:1.5rem;font-weight:900">&euro;349</span>
-                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Bekijk</span>
+              <p style="font-size:.8125rem;color:var(--text-secondary);margin:0 0 1rem;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Compacte infrarood parasolverwarmer die eenvoudig aan de parasolstok bevestigd wordt.</p>
+              <div style="display:flex;align-items:center;justify-content:flex-end">
+                <span class="btn-red" style="padding:.5rem 1rem;font-size:.875rem;border-radius:.625rem;box-shadow:none">Meer info</span>
               </div>
             </div>
           </div>
@@ -785,20 +720,30 @@ html:not(.dark) .modal-card { background: #fff; border: 1px solid #e5e7eb; }
 
 </main>
 
-<!-- Product Modal -->
-<div class="modal-overlay" id="product-modal">
-  <button class="modal-close" onclick="closeModal()">
+<!-- Fullscreen Photo Modal -->
+<div class="photo-modal" id="product-modal">
+  <div class="photo-modal__overlay" onclick="closeModal()"></div>
+  <button class="photo-modal__close" onclick="closeModal()">
     <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
   </button>
-  <button class="modal-nav prev" onclick="navigateModal(-1)">
+  <button class="photo-modal__nav photo-modal__nav--prev" onclick="navModal(-1)">
     <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
   </button>
-  <button class="modal-nav next" onclick="navigateModal(1)">
+  <button class="photo-modal__nav photo-modal__nav--next" onclick="navModal(1)">
     <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
   </button>
-  <div class="modal-card" id="modal-card">
-    <div class="modal-left" id="modal-left"></div>
-    <div class="modal-right" id="modal-right"></div>
+  <div class="photo-modal__stage" onclick="this.parentElement.classList.toggle('fullscreen')">
+    <img class="photo-modal__img" id="modal-img" src="" alt="">
+  </div>
+  <div class="photo-modal__thumbs" id="modal-thumbs"></div>
+  <div class="photo-modal__info" id="modal-info">
+    <div class="photo-modal__info-inner">
+      <span class="photo-modal__badge" id="modal-badge"></span>
+      <h2 class="photo-modal__title" id="modal-title"></h2>
+      <p class="photo-modal__desc" id="modal-desc"></p>
+      <div class="photo-modal__features" id="modal-features"></div>
+      <a href="contact.html" class="photo-modal__cta" id="modal-cta">Vraag advies aan <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
   </div>
 </div>
 
@@ -936,8 +881,7 @@ var activeFilters = {
   type: 'all',
   brand: 'all',
   application: 'all',
-  search: '',
-  maxPrice: 3000
+  search: ''
 };
 
 function applyFilters() {
@@ -952,14 +896,12 @@ function applyFilters() {
     var brand = card.getAttribute('data-brand');
     var app = card.getAttribute('data-application');
     var name = card.getAttribute('data-name').toLowerCase();
-    var price = parseInt(card.getAttribute('data-price'));
 
     if (activeFilters.category !== 'all' && cat !== activeFilters.category) show = false;
     if (activeFilters.type !== 'all' && type !== activeFilters.type) show = false;
     if (activeFilters.brand !== 'all' && brand !== activeFilters.brand) show = false;
     if (activeFilters.application !== 'all' && app !== activeFilters.application) show = false;
     if (activeFilters.search && name.indexOf(activeFilters.search.toLowerCase()) === -1) show = false;
-    if (price > activeFilters.maxPrice) show = false;
 
     card.style.display = show ? '' : 'none';
     if (show) {
@@ -1004,16 +946,9 @@ document.getElementById('filter-application').addEventListener('change', functio
   applyFilters();
 });
 
-/* Price range */
-document.getElementById('filter-price').addEventListener('input', function() {
-  activeFilters.maxPrice = parseInt(this.value);
-  document.getElementById('price-display').textContent = '\u20AC' + parseInt(this.value).toLocaleString('nl-NL');
-  applyFilters();
-});
-
 /* Reset */
 function resetFilters() {
-  activeFilters = { category:'all', type:'all', brand:'all', application:'all', search:'', maxPrice:3000 };
+  activeFilters = { category:'all', type:'all', brand:'all', application:'all', search:'' };
   document.querySelectorAll('.filter-pill').forEach(function(p) {
     p.classList.remove('active');
     if (p.getAttribute('data-value') === 'all') p.classList.add('active');
@@ -1021,8 +956,6 @@ function resetFilters() {
   document.getElementById('filter-search').value = '';
   document.getElementById('filter-brand').value = 'all';
   document.getElementById('filter-application').value = 'all';
-  document.getElementById('filter-price').value = 3000;
-  document.getElementById('price-display').textContent = '\u20AC3000';
   applyFilters();
 }
 document.getElementById('reset-filters').addEventListener('click', resetFilters);
@@ -1051,105 +984,157 @@ document.getElementById('reset-filters').addEventListener('click', resetFilters)
   });
 })();
 
-/* ===== MODAL ===== */
-function formatPrice(p) {
-  return '\u20AC' + p.toLocaleString('nl-NL');
+/* ===== PHOTO MODAL ===== */
+var currentImageIndex = 0;
+
+function getBranch(category) {
+  var cat = category.toLowerCase();
+  if (cat.indexOf('zonnepanelen') !== -1 || cat.indexOf('laadpalen') !== -1 || cat.indexOf('led') !== -1) {
+    return 'verduurzaming';
+  }
+  return 'verwarming';
 }
 
 function openModal(index) {
   currentModalIndex = index;
+  currentImageIndex = 0;
   var p = products[index];
   var modal = document.getElementById('product-modal');
-  var left = document.getElementById('modal-left');
-  var right = document.getElementById('modal-right');
+
+  // Set branch accent
+  modal.setAttribute('data-branch', getBranch(p.category));
+
+  // Main image
+  document.getElementById('modal-img').src = p.images[0];
+  document.getElementById('modal-img').alt = p.name;
 
   // Thumbnails
-  var thumbsHtml = '';
+  var thumbsEl = document.getElementById('modal-thumbs');
+  thumbsEl.innerHTML = '';
   p.images.forEach(function(img, i) {
-    thumbsHtml += '<div class="modal-thumb' + (i === 0 ? ' active' : '') + '" onclick="changeModalImage(\'' + img + '\', this)"><img src="' + img + '" alt=""></div>';
+    var thumb = document.createElement('div');
+    thumb.className = 'photo-modal__thumb' + (i === 0 ? ' active' : '');
+    thumb.innerHTML = '<img src="' + img + '" alt="">';
+    thumb.addEventListener('click', function() { switchImage(i); });
+    thumbsEl.appendChild(thumb);
   });
 
-  // Left panel: image + thumbs
-  left.innerHTML =
-    '<img class="modal-main-img" id="modal-main-img" src="' + p.images[0] + '" alt="' + p.name + '">' +
-    '<div class="modal-thumbs">' + thumbsHtml + '</div>';
+  // Badge
+  document.getElementById('modal-badge').textContent = p.category;
+
+  // Title
+  document.getElementById('modal-title').textContent = p.name;
+
+  // Description
+  document.getElementById('modal-desc').textContent = p.description;
 
   // Features
-  var featuresHtml = '';
+  var featuresEl = document.getElementById('modal-features');
+  featuresEl.innerHTML = '';
   p.features.forEach(function(f) {
-    featuresHtml += '<div style="display:flex;align-items:center;gap:.5rem"><svg width="16" height="16" fill="none" stroke="#22c55e" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span style="font-size:.875rem">' + f + '</span></div>';
+    var span = document.createElement('span');
+    span.className = 'photo-modal__feature';
+    span.textContent = f;
+    featuresEl.appendChild(span);
   });
 
-  // Specs
-  var specsHtml = '';
-  Object.keys(p.specs).forEach(function(key) {
-    specsHtml += '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:.75rem;padding:.75rem 1rem"><div style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.25rem">' + key + '</div><div style="font-size:.875rem;font-weight:600">' + p.specs[key] + '</div></div>';
-  });
-
-  // Featured badge
-  var featured = p.featured ? '<span style="padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:700;background:linear-gradient(135deg,#eab308,#ea580c);color:#fff">Top Product</span>' : '';
-
-  // Right panel: info
-  right.innerHTML =
-    '<div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem">' +
-      '<span style="padding:.375rem .875rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:rgba(227,30,36,.12);color:#E31E24">' + p.category + '</span>' +
-      '<span style="padding:.375rem .875rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:var(--bg-card);border:1px solid var(--border);color:var(--text-secondary)">' + p.type + '</span>' +
-      featured +
-    '</div>' +
-    '<h2 style="font-size:1.75rem;font-weight:800;margin:0 0 .5rem;line-height:1.25">' + p.name + '</h2>' +
-    '<div class="gradient-text" style="font-size:2.5rem;font-weight:900;margin-bottom:1.25rem">' + formatPrice(p.price) + '</div>' +
-    '<p style="color:var(--text-secondary);line-height:1.7;margin:0 0 1.5rem;font-size:.9375rem">' + p.description + '</p>' +
-    '<h3 style="font-weight:700;margin:0 0 .75rem;font-size:1rem">Kenmerken</h3>' +
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem .75rem;margin-bottom:1.5rem">' + featuresHtml + '</div>' +
-    '<h3 style="font-weight:700;margin:0 0 .75rem;font-size:1rem">Specificaties</h3>' +
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1.5rem">' + specsHtml + '</div>' +
-    '<div style="display:flex;gap:.75rem;flex-wrap:wrap;padding-top:.5rem">' +
-      '<a href="contact.html" class="btn-red" style="flex:1;justify-content:center;font-size:.875rem;padding:.875rem 1.5rem">Offerte Aanvragen</a>' +
-      '<button class="btn-ghost" style="cursor:pointer;font-family:inherit;font-size:.875rem;padding:.875rem 1.5rem">Brochure</button>' +
-    '</div>';
-
-  // Scroll right panel to top
-  right.scrollTop = 0;
-
-  modal.classList.add('open');
-  document.body.classList.add('modal-open');
+  // Show
+  modal.classList.add('is-open');
+  modal.classList.remove('fullscreen');
+  document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
   var modal = document.getElementById('product-modal');
-  modal.classList.remove('open');
-  document.body.classList.remove('modal-open');
+  if (modal.classList.contains('fullscreen')) {
+    modal.classList.remove('fullscreen');
+    return;
+  }
+  modal.classList.remove('is-open');
+  modal.classList.remove('fullscreen');
+  document.body.style.overflow = '';
   currentModalIndex = -1;
 }
 
-function navigateModal(direction) {
+function navModal(dir) {
   if (visibleProducts.length === 0) return;
   var currentPos = visibleProducts.indexOf(currentModalIndex);
   if (currentPos === -1) currentPos = 0;
-  var newPos = (currentPos + direction + visibleProducts.length) % visibleProducts.length;
+  var newPos = (currentPos + dir + visibleProducts.length) % visibleProducts.length;
   openModal(visibleProducts[newPos]);
 }
 
-function changeModalImage(src, thumbEl) {
-  document.getElementById('modal-main-img').src = src;
-  var thumbs = thumbEl.parentElement.querySelectorAll('.modal-thumb');
-  thumbs.forEach(function(t) { t.classList.remove('active'); });
-  thumbEl.classList.add('active');
+function switchImage(index) {
+  var p = products[currentModalIndex];
+  if (!p || index < 0 || index >= p.images.length) return;
+  currentImageIndex = index;
+  document.getElementById('modal-img').src = p.images[index];
+  var thumbs = document.querySelectorAll('.photo-modal__thumb');
+  thumbs.forEach(function(t, i) {
+    t.classList.toggle('active', i === index);
+  });
 }
-
-/* Click overlay background to close (not the card) */
-document.getElementById('product-modal').addEventListener('click', function(e) {
-  if (e.target === this || e.target.classList.contains('modal-overlay')) closeModal();
-});
 
 /* Keyboard navigation */
 document.addEventListener('keydown', function(e) {
   var modal = document.getElementById('product-modal');
-  if (!modal.classList.contains('open')) return;
-  if (e.key === 'Escape') closeModal();
-  if (e.key === 'ArrowLeft') navigateModal(-1);
-  if (e.key === 'ArrowRight') navigateModal(1);
+  if (!modal.classList.contains('is-open')) return;
+
+  if (e.key === 'Escape') {
+    if (modal.classList.contains('fullscreen')) {
+      modal.classList.remove('fullscreen');
+    } else {
+      closeModal();
+    }
+  }
+  if (e.key === 'ArrowLeft') {
+    var p = products[currentModalIndex];
+    if (p && currentImageIndex > 0) {
+      switchImage(currentImageIndex - 1);
+    } else {
+      navModal(-1);
+    }
+  }
+  if (e.key === 'ArrowRight') {
+    var p2 = products[currentModalIndex];
+    if (p2 && currentImageIndex < p2.images.length - 1) {
+      switchImage(currentImageIndex + 1);
+    } else {
+      navModal(1);
+    }
+  }
 });
+
+/* Touch swipe support */
+(function() {
+  var touchStartX = 0;
+  var touchEndX = 0;
+  var modal = document.getElementById('product-modal');
+
+  modal.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  modal.addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    var diff = touchStartX - touchEndX;
+    if (Math.abs(diff) < 50) return;
+    var p = products[currentModalIndex];
+    if (!p) return;
+
+    if (diff > 0) {
+      // Swipe left — next image
+      if (currentImageIndex < p.images.length - 1) {
+        switchImage(currentImageIndex + 1);
+      }
+    } else {
+      // Swipe right — prev image
+      if (currentImageIndex > 0) {
+        switchImage(currentImageIndex - 1);
+      }
+    }
+  }, { passive: true });
+})();
 </script>
 
 <!-- WhatsApp Widget -->

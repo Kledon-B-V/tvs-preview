@@ -86,6 +86,74 @@ if (!function_exists('tvs_page_url')) {
   }
 }
 
+// ===== BRANCH HELPERS =====
+
+/**
+ * Get a specific branch config by slug
+ */
+if (!function_exists('tvs_get_branch')) {
+  function tvs_get_branch($slug) {
+    return tvs_cfg('branches.' . $slug, null);
+  }
+}
+
+/**
+ * Get all active/visible branches (respects enabled toggle)
+ */
+if (!function_exists('tvs_get_active_branches')) {
+  function tvs_get_active_branches() {
+    $branches = tvs_cfg('branches', []);
+    return array_filter($branches, function ($b) {
+      return !empty($b['enabled']);
+    });
+  }
+}
+
+/**
+ * Detect which branch the current page belongs to
+ */
+if (!function_exists('tvs_current_branch')) {
+  function tvs_current_branch() {
+    if (function_exists('is_singular')) {
+      if (is_singular('tvs_product') || is_post_type_archive('tvs_product') || is_tax('product_categorie') || is_tax('product_merk')) {
+        return 'verwarming';
+      }
+      if (is_singular('tvs_dienst') || is_post_type_archive('tvs_dienst') || is_tax('dienst_categorie')) {
+        return 'verduurzaming';
+      }
+    }
+    if (function_exists('is_page')) {
+      if (is_page('verwarming') || is_page('producten')) return 'verwarming';
+      if (is_page('verduurzaming')) return 'verduurzaming';
+    }
+    if (function_exists('is_page') && is_page('contact') && isset($_GET['branch'])) {
+      $requested = sanitize_key($_GET['branch']);
+      if (tvs_cfg('branches.' . $requested)) return $requested;
+    }
+    return '';
+  }
+}
+
+/**
+ * Get branch color
+ */
+if (!function_exists('tvs_branch_color')) {
+  function tvs_branch_color($property = 'color_primary', $branch = null) {
+    $branch = $branch ?: tvs_current_branch() ?: 'verwarming';
+    return tvs_cfg('branches.' . $branch . '.' . $property, '#E31E24');
+  }
+}
+
+/**
+ * Get Tailwind gradient classes for a branch
+ */
+if (!function_exists('tvs_branch_gradient')) {
+  function tvs_branch_gradient($branch = null) {
+    $branch = $branch ?: tvs_current_branch() ?: 'verwarming';
+    return tvs_cfg('branches.' . $branch . '.color_gradient', 'from-red-600 to-orange-500');
+  }
+}
+
 $tvs_includes = [
   __DIR__ . '/inc/setup.php',
   __DIR__ . '/inc/assets.php',

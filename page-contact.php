@@ -4,6 +4,16 @@
  */
 get_header();
 
+// Branch detection
+$branch_slug = isset($_GET['branch']) ? sanitize_key($_GET['branch']) : '';
+$branch = $branch_slug ? tvs_cfg('branches.' . $branch_slug, null) : null;
+$branch_color = $branch ? $branch['color_primary'] : '#E31E24';
+$branch_gradient = $branch ? $branch['color_gradient'] : 'from-red-600 to-orange-500';
+$contact_subjects = $branch ? ($branch['contact_subjects'] ?? []) : array_merge(
+  tvs_cfg('branches.verwarming.contact_subjects', []),
+  tvs_cfg('branches.verduurzaming.contact_subjects', [])
+);
+
 $email   = (string) tvs_cfg('contact.email', 'info@terrasverwarmer.nu');
 $phone   = (string) tvs_cfg('contact.phone', '');
 $address = (string) tvs_cfg('contact.address', '');
@@ -121,10 +131,9 @@ $hours_wknd = (string) tvs_cfg('opening_hours.weekend', 'Op afspraak');
               <label for="cf-subject">Onderwerp *</label>
               <select id="cf-subject" name="subject" required>
                 <option value="">Selecteer een onderwerp</option>
-                <option value="terrasverwarming">Terrasverwarming</option>
-                <option value="halverwarming">Halverwarming</option>
-                <option value="kerkverwarming">Kerkverwarming</option>
-                <option value="anders">Anders</option>
+                <?php foreach ($contact_subjects as $val => $label) : ?>
+                  <option value="<?php echo esc_attr($val); ?>"><?php echo esc_html($label); ?></option>
+                <?php endforeach; ?>
               </select>
             </div>
 
@@ -133,9 +142,11 @@ $hours_wknd = (string) tvs_cfg('opening_hours.weekend', 'Op afspraak');
               <textarea id="cf-message" name="message" rows="6" required placeholder="Vertel ons over uw wensen en project..."></textarea>
             </div>
 
+            <input type="hidden" name="branch" value="<?php echo esc_attr($branch_slug); ?>">
+
             <div id="form-feedback" class="form-feedback" style="display:none"></div>
 
-            <button type="submit" class="btn btn-primary btn-lg" style="width:100%">
+            <button type="submit" class="btn btn-primary btn-lg" style="width:100%;background:<?php echo esc_attr($branch_color); ?>">
               Verstuur Aanvraag
             </button>
           </form>

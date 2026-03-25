@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TVS NL — Installatie &amp; Elektrotechniek</title>
+<title>Verwarming — TVS NL</title>
 <meta name="theme-color" content="#000000" id="meta-theme-color">
 <script>
 /* Anti-flash: set theme before render */
@@ -92,7 +92,6 @@ html:not(.dark) .icon-sun { display: none; } html:not(.dark) .icon-moon { displa
 .nav-arrow { width: 12px; height: 12px; transition: transform .25s; }
 .nav-item:hover > .nav-link .nav-arrow { transform: rotate(180deg); }
 
-/* Mega dropdown panels */
 .mega-dd {
   position: absolute; top: 100%; left: 50%; margin-top: .5rem;
   width: 520px; padding: .75rem; border-radius: 1rem;
@@ -106,159 +105,62 @@ html:not(.dark) .icon-sun { display: none; } html:not(.dark) .icon-moon { displa
 html.dark .mega-dd { background: rgba(17,17,17,.95); border: 1px solid rgba(255,255,255,.15); box-shadow: 0 12px 32px rgba(0,0,0,.6); }
 html:not(.dark) .mega-dd { background: rgba(255,255,255,.98); border: 1px solid #e5e7eb; box-shadow: 0 12px 32px rgba(0,0,0,.1); }
 
-/* Dropdown panel (Verwarming / Verduurzaming columns) */
-.dd-panel {
-  padding: .75rem; border-radius: .75rem;
-}
-.dd-panel-title {
-  font-size: .6875rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .08em; padding: 0 .5rem .5rem; margin-bottom: .25rem;
-}
+.dd-panel { padding: .75rem; border-radius: .75rem; }
+.dd-panel-title { font-size: .6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; padding: 0 .5rem .5rem; margin-bottom: .25rem; }
 .dd-panel.verwarming { border-left: 3px solid #E31E24; }
 .dd-panel.verwarming .dd-panel-title { color: #E31E24; }
 .dd-panel.verduurzaming { border-left: 3px solid #22c55e; }
 .dd-panel.verduurzaming .dd-panel-title { color: #22c55e; }
 
-.dd-panel a {
-  display: block; padding: .5rem .75rem; border-radius: .375rem;
-  font-size: .875rem; color: var(--text-secondary); transition: all .15s;
-}
+.dd-panel a { display: block; padding: .5rem .75rem; border-radius: .375rem; font-size: .875rem; color: var(--text-secondary); transition: all .15s; }
 html.dark .dd-panel a:hover { background: rgba(255,255,255,.08); color: var(--text); }
 html:not(.dark) .dd-panel a:hover { background: rgba(0,0,0,.04); color: var(--text); }
 
-/* Hamburger - only shown on mobile */
-.hamburger {
-  display: none; cursor: pointer; background: none; border: none;
-  padding: .5rem; flex-direction: column; gap: 5px; z-index: 200;
-}
-.hamburger span {
-  display: block; width: 24px; height: 2px; border-radius: 2px;
-  background: var(--text); transition: all .3s;
-}
+/* Hamburger */
+.hamburger { display: none; cursor: pointer; background: none; border: none; padding: .5rem; flex-direction: column; gap: 5px; z-index: 200; }
+.hamburger span { display: block; width: 24px; height: 2px; border-radius: 2px; background: var(--text); transition: all .3s; }
 
 /* Mobile menu */
-.mobile-menu {
-  position: fixed; inset: 0; z-index: 150;
-  background: var(--bg);
-  display: none; flex-direction: column;
-  padding: 96px 1.5rem 2rem;
-  overflow-y: auto;
-}
+.mobile-menu { position: fixed; inset: 0; z-index: 150; background: var(--bg); display: none; flex-direction: column; padding: 96px 1.5rem 2rem; overflow-y: auto; }
 .mobile-menu.open { display: flex; }
 .mobile-menu-inner { display: flex; flex-direction: column; gap: .25rem; }
-.mobile-link {
-  display: block; padding: 1rem; border-radius: .75rem;
-  font-size: 1.125rem; font-weight: 600; color: var(--text-secondary);
-  transition: all .2s;
-}
+.mobile-link { display: block; padding: 1rem; border-radius: .75rem; font-size: 1.125rem; font-weight: 600; color: var(--text-secondary); transition: all .2s; }
 .mobile-link:hover, .mobile-link.active { color: var(--text); background: var(--bg-card); }
-/* Mobile accordion */
-.mobile-accordion { }
-.mobile-accordion-btn {
-  display: flex; align-items: center; justify-content: space-between;
-  width: 100%; text-align: left; background: none; border: none;
-  cursor: pointer; font-family: inherit;
-}
-.mobile-chevron {
-  transition: transform .2s;
-}
-.mobile-accordion.open .mobile-chevron {
-  transform: rotate(180deg);
-}
-.mobile-accordion-content {
-  display: none; padding: .25rem 0 .5rem;
-}
-.mobile-accordion.open .mobile-accordion-content {
-  display: block;
-}
-.mobile-accordion-content a {
-  display: block; padding: .5rem 1rem .5rem 1.5rem;
-  font-size: .9375rem; color: var(--text-secondary);
-  border-radius: .5rem; transition: all .15s;
-}
-.mobile-accordion-content a:hover {
-  color: var(--text); background: var(--bg-card);
-}
-.mobile-cta {
-  display: block; text-align: center; margin-top: 1rem;
-  padding: 1rem; border-radius: .75rem; font-weight: 700;
-  background: linear-gradient(135deg, #E31E24, #ea580c); color: #fff;
-}
+.mobile-accordion-btn { display: flex; align-items: center; justify-content: space-between; width: 100%; text-align: left; background: none; border: none; cursor: pointer; font-family: inherit; }
+.mobile-chevron { transition: transform .2s; }
+.mobile-accordion.open .mobile-chevron { transform: rotate(180deg); }
+.mobile-accordion-content { display: none; padding: .25rem 0 .5rem; }
+.mobile-accordion.open .mobile-accordion-content { display: block; }
+.mobile-accordion-content a { display: block; padding: .5rem 1rem .5rem 1.5rem; font-size: .9375rem; color: var(--text-secondary); border-radius: .5rem; transition: all .15s; }
+.mobile-accordion-content a:hover { color: var(--text); background: var(--bg-card); }
+.mobile-cta { display: block; text-align: center; margin-top: 1rem; padding: 1rem; border-radius: .75rem; font-weight: 700; background: linear-gradient(135deg, #E31E24, #ea580c); color: #fff; }
 
-/* ===== TWO DOORS SECTION ===== */
-.doors-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
-}
-.door-card {
-  position: relative; display: block; border-radius: 1.5rem; overflow: hidden;
-  height: 45vh; min-height: 360px; transition: all .5s;
-}
-.door-card img {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  transition: transform .7s;
-}
-.door-card:hover img { transform: scale(1.05); }
-.door-overlay {
-  position: absolute; inset: 0; transition: opacity .5s;
-}
-.door-card.verwarming .door-overlay { background: linear-gradient(to br, rgba(127,29,29,.8), rgba(220,38,38,.6)); }
-.door-card.verwarming:hover .door-overlay { background: linear-gradient(to br, rgba(127,29,29,.7), rgba(220,38,38,.5)); }
-.door-card.verduurzaming .door-overlay { background: linear-gradient(to br, rgba(6,78,59,.8), rgba(5,150,105,.6)); }
-.door-card.verduurzaming:hover .door-overlay { background: linear-gradient(to br, rgba(6,78,59,.7), rgba(5,150,105,.5)); }
-.door-content {
-  position: relative; z-index: 10; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; height: 100%;
-  padding: 1.5rem 2.5rem; text-align: center;
-}
-.door-icon {
-  margin-bottom: 1.5rem; padding: 1rem; background: rgba(255,255,255,.1);
-  backdrop-filter: blur(4px); border-radius: 1rem; border: 1px solid rgba(255,255,255,.2);
-}
-.door-icon svg { width: 40px; height: 40px; color: #fff; }
-.door-title { font-size: clamp(1.75rem, 4vw, 3rem); font-weight: 900; color: #fff; margin: 0 0 .75rem; }
-.door-desc { color: rgba(255,255,255,.8); font-size: 1rem; max-width: 400px; margin: 0 0 1.5rem; line-height: 1.6; }
-.door-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin-bottom: 2rem; }
-.door-badge {
-  display: inline-flex; align-items: center; padding: .375rem .75rem;
-  border-radius: 9999px; font-size: .8125rem; font-weight: 500;
-  background: rgba(255,255,255,.15); color: #fff;
-  backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,.2);
-}
-.door-cta {
-  display: inline-flex; align-items: center; gap: .5rem;
-  background: #fff; font-weight: 600; padding: 1rem 2rem;
-  border-radius: .75rem; transition: all .3s; font-size: 1rem;
-}
-.door-card.verwarming .door-cta { color: #b91c1c; }
-.door-card.verwarming:hover .door-cta { background: #fef2f2; box-shadow: 0 12px 32px rgba(127,29,29,.2); }
-.door-card.verduurzaming .door-cta { color: #047857; }
-.door-card.verduurzaming:hover .door-cta { background: #ecfdf5; box-shadow: 0 12px 32px rgba(6,78,59,.2); }
-.door-cta svg { width: 20px; height: 20px; transition: transform .3s; }
-.door-card:hover .door-cta svg { transform: translateX(4px); }
-
-/* ===== USP CARDS (branch-neutral) ===== */
+/* USP cards */
 .usp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-.usp-card {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 1rem; padding: 2rem; text-align: center;
-  backdrop-filter: blur(20px); transition: all .3s;
-}
+.usp-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 1rem; padding: 2rem; text-align: center; backdrop-filter: blur(20px); transition: all .3s; }
 .usp-card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-lg); }
-.usp-icon {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 3.5rem; height: 3.5rem; border-radius: 1rem; margin: 0 auto 1rem;
-}
-html.dark .usp-icon { background: rgba(255,255,255,.1); }
-html:not(.dark) .usp-icon { background: #f3f4f6; }
-html.dark .usp-icon svg { color: #fff; }
-html:not(.dark) .usp-icon svg { color: #374151; }
+.usp-icon { display: inline-flex; align-items: center; justify-content: center; width: 3.5rem; height: 3.5rem; border-radius: 1rem; margin: 0 auto 1rem; }
 
-/* Scroll indicator */
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(8px); }
+/* ===== CATEGORY CARDS ===== */
+.cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.cat-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 1.25rem;
+  overflow: hidden; transition: all .3s;
 }
-.scroll-indicator { animation: bounce 2s infinite; }
+.cat-card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+.cat-card-img { width: 100%; height: 220px; object-fit: cover; }
+.cat-card-body { padding: 1.5rem; }
+.cat-card-title { font-size: 1.25rem; font-weight: 800; margin: 0 0 .5rem; color: var(--text); }
+.cat-card-desc { font-size: .9375rem; color: var(--text-secondary); margin: 0 0 1.25rem; line-height: 1.6; }
+.cat-card-link {
+  display: inline-flex; align-items: center; gap: .375rem;
+  font-weight: 700; font-size: .9375rem; color: #E31E24; transition: gap .2s;
+}
+.cat-card:hover .cat-card-link { gap: .625rem; }
+
+/* WhatsApp FAB */
+.whatsapp-fab { position: fixed; bottom: 2rem; right: 2rem; z-index: 90; width: 60px; height: 60px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(37,211,102,.4); transition: all .3s; }
+.whatsapp-fab:hover { transform: scale(1.1); box-shadow: 0 6px 24px rgba(37,211,102,.5); }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
@@ -266,28 +168,9 @@ html:not(.dark) .usp-icon svg { color: #374151; }
   .desk-nav { display: none !important; }
 }
 @media (max-width: 768px) {
-  .doors-grid { grid-template-columns: 1fr; }
-  .door-card { height: 40vh; min-height: 320px; }
+  .cat-grid { grid-template-columns: 1fr; }
   .usp-grid { grid-template-columns: 1fr; }
   .ftr-grid { grid-template-columns: 1fr !important; }
-}
-@media (max-width: 480px) {
-  .door-card { min-height: 280px; }
-}
-
-/* WhatsApp FAB */
-.whatsapp-fab {
-  position: fixed; bottom: 2rem; right: 2rem; z-index: 90;
-  width: 60px; height: 60px; border-radius: 50%;
-  background: #25D366; display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 16px rgba(37,211,102,.4);
-  transition: all .3s; text-decoration: none;
-}
-.whatsapp-fab:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 24px rgba(37,211,102,.5);
-}
-@media (max-width: 768px) {
   .whatsapp-fab { bottom: 1.25rem; right: 1.25rem; width: 52px; height: 52px; }
 }
 </style>
@@ -310,11 +193,11 @@ html:not(.dark) .usp-icon svg { color: #374151; }
     </a>
     <div style="display:flex;align-items:center;gap:.5rem">
       <nav class="desk-nav" style="display:flex;align-items:center;gap:.25rem">
-        <a href="index.html" class="nav-link active">Home</a>
+        <a href="index.html" class="nav-link">Home</a>
 
         <!-- Verwarming dropdown -->
         <div class="nav-item">
-          <a href="verwarming.html" class="nav-link">Verwarming <svg class="nav-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
+          <a href="verwarming.html" class="nav-link active">Verwarming <svg class="nav-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
           <div class="mega-dd" style="width:280px;display:block">
             <div class="dd-panel verwarming">
               <div class="dd-panel-title">Verwarming</div>
@@ -360,11 +243,11 @@ html:not(.dark) .usp-icon svg { color: #374151; }
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobile-menu">
   <div class="mobile-menu-inner">
-    <a href="index.html" class="mobile-link active">Home</a>
+    <a href="index.html" class="mobile-link">Home</a>
 
     <!-- Verwarming accordion -->
-    <div class="mobile-accordion">
-      <button class="mobile-link mobile-accordion-btn" onclick="this.parentElement.classList.toggle('open')">
+    <div class="mobile-accordion open">
+      <button class="mobile-link mobile-accordion-btn active" onclick="this.parentElement.classList.toggle('open')">
         Verwarming
         <svg class="mobile-chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
       </button>
@@ -398,141 +281,129 @@ html:not(.dark) .usp-icon svg { color: #374151; }
 </div>
 
 <!-- ========== SECTION 1: HERO ========== -->
-<section style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6rem 0 5rem">
+<section style="padding:10rem 0 4rem">
   <div style="max-width:56rem;margin:0 auto;padding:0 1.5rem;width:100%;text-align:center">
 
-    <!-- Logo -->
-    <div style="margin-bottom:2rem">
-      <img src="assets/images/logo-tvs-header.png" alt="TVS NL" class="logo-light" style="height:5rem;margin:0 auto">
-      <img src="assets/images/logo-tvs-header-dark.png" alt="TVS NL" class="logo-dark" style="height:5rem;margin:0 auto">
+    <!-- Badge -->
+    <div class="glass t" style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.25rem;border-radius:9999px;margin-bottom:1.5rem">
+      <svg style="width:16px;height:16px;color:#E31E24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2c0 4-4 6-4 10a4 4 0 0 0 8 0c0-4-4-6-4-10z"/></svg>
+      <span style="font-size:.8125rem;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.05em">Premium B2B Verwarmingsoplossingen</span>
     </div>
 
-    <!-- Company name -->
-    <h1 style="font-size:clamp(3rem,7vw,4.5rem);font-weight:900;letter-spacing:-.025em;margin:0 0 1rem;color:var(--text)">TVS NL</h1>
-
-    <!-- Subtitle -->
-    <p class="gradient-text" style="font-size:clamp(1.25rem,3vw,1.5rem);font-weight:700;margin:0 0 1.5rem">Installatie &amp; Elektrotechniek</p>
+    <!-- Title -->
+    <h1 style="font-size:clamp(3rem,7vw,4.5rem);font-weight:900;letter-spacing:-.025em;margin:0 0 1rem">
+      <span class="gradient-text">Verwarming</span>
+    </h1>
 
     <!-- Tagline -->
     <p style="font-size:clamp(1rem,2.5vw,1.25rem);color:var(--text-secondary);max-width:36rem;margin:0 auto;line-height:1.7">
-      Uw specialist in verwarming en verduurzaming
+      Professionele verwarmingsoplossingen
     </p>
 
-    <!-- Scroll indicator -->
-    <div class="scroll-indicator" style="margin-top:4rem">
-      <svg style="width:24px;height:24px;margin:0 auto;color:var(--text-muted)" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-    </div>
-
   </div>
 </section>
 
-<!-- ========== SECTION 2: TWO DOORS ========== -->
-<section style="padding:3rem 0 4rem" id="takken">
+<!-- ========== SECTION 2: CATEGORY CARDS ========== -->
+<section style="padding:3rem 0 6rem">
   <div style="max-width:80rem;margin:0 auto;padding:0 1.5rem">
 
-    <!-- Section header -->
-    <div style="text-align:center;margin-bottom:3rem">
-      <h2 style="font-size:clamp(1.75rem,4vw,3rem);font-weight:900;margin:0 0 1rem;color:var(--text)">Wat kunnen wij voor u doen?</h2>
-      <p style="font-size:1.125rem;color:var(--text-secondary);max-width:36rem;margin:0 auto">Kies uw richting en ontdek onze oplossingen</p>
-    </div>
+    <div class="cat-grid">
 
-    <div class="doors-grid">
-
-      <!-- LEFT DOOR: Verwarming -->
-      <a href="verwarming.html" class="door-card verwarming">
-        <img src="assets/images/products/goldsun-elite/goldsun-elite-5.jpg" alt="Verwarming">
-        <div class="door-overlay"></div>
-        <div class="door-content">
-          <div class="door-icon">
-            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-              <path d="M12 2c0 4-4 6-4 10a4 4 0 0 0 8 0c0-4-4-6-4-10z"/>
-              <path d="M12 22v-2"/>
-            </svg>
-          </div>
-          <h3 class="door-title">Verwarming</h3>
-          <p class="door-desc">Professionele verwarmingsoplossingen voor terras, hal en kerk</p>
-          <div class="door-badges">
-            <span class="door-badge">Terrasverwarming</span>
-            <span class="door-badge">Halverwarming</span>
-            <span class="door-badge">Kerkverwarming</span>
-          </div>
-          <span class="door-cta">
-            Ontdek Verwarming
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
+      <!-- Terrasverwarming -->
+      <a href="producten.html?cat=terrasverwarming-gas" class="cat-card" id="terrasverwarming">
+        <img src="assets/images/products/goldsun-elite/goldsun-elite-6.jpg" alt="Terrasverwarming" class="cat-card-img">
+        <div class="cat-card-body">
+          <h3 class="cat-card-title">Terrasverwarming</h3>
+          <p class="cat-card-desc">Krachtige terrasverwarmers op gas en elektrisch voor de horeca en particulier. Geniet langer van uw terras.</p>
+          <span class="cat-card-link">Bekijk producten <svg style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
       </a>
 
-      <!-- RIGHT DOOR: Verduurzaming -->
-      <a href="verduurzaming.html" class="door-card verduurzaming">
-        <img src="assets/images/products/zonnepanelen.jpg" alt="Verduurzaming">
-        <div class="door-overlay"></div>
-        <div class="door-content">
-          <div class="door-icon">
-            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-              <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 3z"/>
-              <path d="M17 4a2 2 0 0 0 2 2 2 2 0 0 0-2 2 2 2 0 0 0-2-2 2 2 0 0 0 2-2"/>
-              <path d="M21 10h1"/>
-            </svg>
-          </div>
-          <h3 class="door-title">Verduurzaming</h3>
-          <p class="door-desc">Duurzame oplossingen voor een groene toekomst</p>
-          <div class="door-badges">
-            <span class="door-badge">Zonnepanelen</span>
-            <span class="door-badge">Laadpalen</span>
-            <span class="door-badge">Accu's</span>
-          </div>
-          <span class="door-cta">
-            Ontdek Verduurzaming
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
+      <!-- Parasolverwarming -->
+      <a href="producten.html?cat=parasolverwarming" class="cat-card" id="parasolverwarming">
+        <img src="assets/images/products/parasolverwarming/parasol-verwarming-met-led.jpg" alt="Parasolverwarming" class="cat-card-img">
+        <div class="cat-card-body">
+          <h3 class="cat-card-title">Parasolverwarming</h3>
+          <p class="cat-card-desc">Verwarm uw parasol van binnenuit. Ideale combinatie van schaduw en warmte voor elk terras.</p>
+          <span class="cat-card-link">Bekijk producten <svg style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- Halverwarming -->
+      <a href="producten.html?cat=halverwarming" class="cat-card" id="halverwarming">
+        <img src="assets/images/products/hlq-elektrisch/hlq-7.jpg" alt="Halverwarming" class="cat-card-img">
+        <div class="cat-card-body">
+          <h3 class="cat-card-title">Halverwarming</h3>
+          <p class="cat-card-desc">Effici&euml;nte halverwarming voor bedrijfshallen, werkplaatsen en grote ruimtes. Duurzaam en krachtig.</p>
+          <span class="cat-card-link">Bekijk producten <svg style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- Kerkverwarming -->
+      <a href="producten.html?cat=kerkverwarming" class="cat-card" id="kerkverwarming">
+        <img src="assets/images/cat-kerkverwarming.jpg" alt="Kerkverwarming" class="cat-card-img">
+        <div class="cat-card-body">
+          <h3 class="cat-card-title">Kerkverwarming</h3>
+          <p class="cat-card-desc">Speciale verwarmingsoplossingen voor kerken en monumentale gebouwen. Comfortabel en monumentvriendelijk.</p>
+          <span class="cat-card-link">Bekijk producten <svg style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- Loungehaarden -->
+      <a href="producten.html?cat=loungehaarden" class="cat-card" id="loungehaarden">
+        <img src="assets/images/products/loungehaarden/teak-lounge-dining.jpg" alt="Loungehaarden" class="cat-card-img">
+        <div class="cat-card-body">
+          <h3 class="cat-card-title">Loungehaarden</h3>
+          <p class="cat-card-desc">Sfeervolle loungehaarden en vuurtafels voor een unieke ambiance op uw terras of in uw tuin.</p>
+          <span class="cat-card-link">Bekijk producten <svg style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
       </a>
 
     </div>
+
   </div>
 </section>
 
-<!-- ========== SECTION 3: USPs ========== -->
+<!-- ========== SECTION 3: USPs (Red accents) ========== -->
 <section style="padding:6rem 0" id="waarom-tvs">
   <div style="max-width:80rem;margin:0 auto;padding:0 1.5rem">
 
     <!-- Section header -->
     <div style="text-align:center;margin-bottom:4rem">
       <div class="glass t" style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.25rem;border-radius:9999px;margin-bottom:1.5rem">
-        <svg style="width:16px;height:16px;color:var(--text-muted)" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <svg style="width:16px;height:16px;color:#E31E24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         <span style="font-size:.8125rem;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.05em">Waarom TVS NL</span>
       </div>
-      <h2 style="font-size:clamp(2rem,4vw,3rem);font-weight:900;margin:0;color:var(--text)">Uw Betrouwbare Partner</h2>
+      <h2 style="font-size:clamp(2rem,4vw,3rem);font-weight:900;margin:0;color:var(--text)">Uw Verwarmingsspecialist</h2>
     </div>
 
-    <!-- USP cards (branch-neutral) -->
+    <!-- USP cards with red accents -->
     <div class="usp-grid">
 
-      <!-- Card 1: Ervaring -->
+      <!-- Card 1: 20+ Jaar -->
       <div class="usp-card t">
-        <div class="usp-icon">
-          <svg style="width:28px;height:28px" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="usp-icon" style="background:rgba(227,30,36,.1)">
+          <svg style="width:28px;height:28px;color:#E31E24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <h3 style="font-weight:700;font-size:1.25rem;margin:0 0 1rem;color:var(--text)">20+ Jaar Ervaring</h3>
-        <p style="color:var(--text-secondary);margin:0;line-height:1.7">Al meer dan twee decennia uw betrouwbare partner in installatie en elektrotechniek.</p>
+        <p style="color:var(--text-secondary);margin:0;line-height:1.7">Al meer dan twee decennia uw betrouwbare partner in professionele verwarmingsoplossingen.</p>
       </div>
 
-      <!-- Card 2: Vakmanschap -->
+      <!-- Card 2: A-Merken -->
       <div class="usp-card t">
-        <div class="usp-icon">
-          <svg style="width:28px;height:28px" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        <div class="usp-icon" style="background:rgba(227,30,36,.1)">
+          <svg style="width:28px;height:28px;color:#E31E24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <h3 style="font-weight:700;font-size:1.25rem;margin:0 0 1rem;color:var(--text)">Vakmanschap</h3>
-        <p style="color:var(--text-secondary);margin:0;line-height:1.7">Gecertificeerde vakmensen met uitgebreide technische kennis en oog voor detail.</p>
+        <h3 style="font-weight:700;font-size:1.25rem;margin:0 0 1rem;color:var(--text)">A-Merken</h3>
+        <p style="color:var(--text-secondary);margin:0;line-height:1.7">Wij werken uitsluitend met gerenommeerde A-merken voor de hoogste kwaliteit en betrouwbaarheid.</p>
       </div>
 
-      <!-- Card 3: Maatwerk Advies -->
+      <!-- Card 3: Persoonlijk Advies -->
       <div class="usp-card t">
-        <div class="usp-icon">
-          <svg style="width:28px;height:28px" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <div class="usp-icon" style="background:rgba(227,30,36,.1)">
+          <svg style="width:28px;height:28px;color:#E31E24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
-        <h3 style="font-weight:700;font-size:1.25rem;margin:0 0 1rem;color:var(--text)">Maatwerk Advies</h3>
+        <h3 style="font-weight:700;font-size:1.25rem;margin:0 0 1rem;color:var(--text)">Persoonlijk Advies</h3>
         <p style="color:var(--text-secondary);margin:0;line-height:1.7">Persoonlijk advies en oplossingen die precies aansluiten bij uw situatie en wensen.</p>
       </div>
 
@@ -550,13 +421,12 @@ html:not(.dark) .usp-icon svg { color: #374151; }
       <div style="position:absolute;bottom:0;right:25%;width:192px;height:192px;background:rgba(249,115,22,.1);border-radius:50%;filter:blur(80px);opacity:var(--orb-opacity)" aria-hidden="true"></div>
 
       <div style="position:relative;z-index:1">
-        <h2 style="font-size:clamp(2rem,4vw,3rem);font-weight:900;margin:0 0 1rem;color:var(--text)">Klaar Om Te Starten?</h2>
+        <h2 style="font-size:clamp(2rem,4vw,3rem);font-weight:900;margin:0 0 1rem;color:var(--text)">Advies Nodig?</h2>
         <p style="font-size:1.125rem;color:var(--text-secondary);max-width:36rem;margin:0 auto 2rem;line-height:1.7">
-          Neem vrijblijvend contact op voor persoonlijk advies of een offerte op maat.
-          Wij helpen u graag verder.
+          Onze verwarmingsspecialisten helpen u graag met persoonlijk advies of een offerte op maat.
         </p>
         <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-          <a href="contact.html" style="display:inline-flex;align-items:center;gap:.5rem;padding:1rem 2rem;background:var(--cta-btn-bg);color:var(--cta-btn-text);border-radius:.75rem;font-weight:700;transition:all .3s">
+          <a href="contact.html?branch=verwarming" class="btn-red">
             Neem Contact Op
             <svg style="width:20px;height:20px" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
@@ -635,7 +505,7 @@ html:not(.dark) .usp-icon svg { color: #374151; }
 </footer>
 
 <!-- WhatsApp Widget -->
-<a href="https://wa.me/31348220338?text=Hallo%2C%20ik%20heb%20een%20vraag%20over%20uw%20diensten"
+<a href="https://wa.me/31348220338?text=Hallo%2C%20ik%20heb%20een%20vraag%20over%20uw%20verwarmingsoplossingen"
    target="_blank" rel="noopener noreferrer"
    class="whatsapp-fab" aria-label="Chat via WhatsApp">
   <svg viewBox="0 0 24 24" fill="#fff" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>

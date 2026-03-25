@@ -1,10 +1,14 @@
 <?php
 /**
- * Custom Post Types: Products
- * De klant kan via WordPress admin producten toevoegen, bewerken en verwijderen.
+ * Custom Post Types & Taxonomies
+ *
+ * Producten (verwarming) + Diensten (verduurzaming)
+ * De klant kan alles via WordPress admin beheren.
  */
 
 add_action('init', function () {
+
+  // ========== PRODUCTEN (Verwarming) ==========
   register_post_type('tvs_product', [
     'labels' => [
       'name'               => 'Producten',
@@ -27,7 +31,7 @@ add_action('init', function () {
     'menu_position' => 5,
   ]);
 
-  // Product categorieën (Terrasverwarming, Halverwarming, etc.)
+  // Product categorieën (hierarchisch: terrasverwarming > parasolverwarming)
   register_taxonomy('product_categorie', 'tvs_product', [
     'labels' => [
       'name'          => 'Productcategorieën',
@@ -55,13 +59,51 @@ add_action('init', function () {
     'show_in_rest' => true,
     'show_admin_column' => true,
   ]);
+
+  // ========== DIENSTEN (Verduurzaming) ==========
+  register_post_type('tvs_dienst', [
+    'labels' => [
+      'name'               => 'Diensten',
+      'singular_name'      => 'Dienst',
+      'add_new'            => 'Nieuwe dienst',
+      'add_new_item'       => 'Nieuwe dienst toevoegen',
+      'edit_item'          => 'Dienst bewerken',
+      'new_item'           => 'Nieuwe dienst',
+      'view_item'          => 'Bekijk dienst',
+      'search_items'       => 'Zoek diensten',
+      'not_found'          => 'Geen diensten gevonden',
+      'not_found_in_trash' => 'Geen diensten in prullenbak',
+    ],
+    'public'       => true,
+    'has_archive'  => true,
+    'rewrite'      => ['slug' => 'dienst', 'with_front' => false],
+    'supports'     => ['title', 'editor', 'excerpt', 'thumbnail', 'page-attributes'],
+    'show_in_rest' => true,
+    'menu_icon'    => 'dashicons-admin-site-alt3',
+    'menu_position' => 6,
+  ]);
+
+  // Dienst categorieën
+  register_taxonomy('dienst_categorie', 'tvs_dienst', [
+    'labels' => [
+      'name'          => 'Dienstcategorieën',
+      'singular_name' => 'Dienstcategorie',
+      'add_new_item'  => 'Nieuwe dienstcategorie',
+      'search_items'  => 'Zoek dienstcategorieën',
+    ],
+    'hierarchical' => true,
+    'public'       => true,
+    'rewrite'      => ['slug' => 'diensten'],
+    'show_in_rest' => true,
+    'show_admin_column' => true,
+  ]);
 });
 
 /**
  * Expose product meta via REST API
  */
 add_action('rest_api_init', function () {
-  $fields = ['_tvs_product_price', '_tvs_product_power', '_tvs_product_type', '_tvs_product_application'];
+  $fields = ['_tvs_product_power', '_tvs_product_type', '_tvs_product_application'];
 
   foreach ($fields as $field) {
     register_rest_field('tvs_product', $field, [

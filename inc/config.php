@@ -2,13 +2,16 @@
 /**
  * TVS site configuration (single source of truth).
  * Pas dit bestand aan om modules/copy/legal in één plek te beheren.
+ *
+ * BRANCHES: De site heeft twee takken — verwarming (rood) en verduurzaming (groen).
+ * Zet 'enabled' op false om een hele tak uit te schakelen.
  */
 return [
   'modules' => [
-    'show_products'      => true,
-    'show_testimonials'  => false,
-    'show_contact_form'  => true,
-    'show_verduurzaming' => true,
+    'show_products'     => true,
+    'show_testimonials' => false,
+    'show_contact_form' => true,
+    'show_prices'       => false,
   ],
 
   'contact' => [
@@ -20,30 +23,79 @@ return [
   ],
 
   'company' => [
-    'legal_name' => 'Terras Verwarmings Specialisten (TVS NL B.V.)',
-    'short_name' => 'TVS',
-    'full_name'  => 'Terras Verwarmings Specialisten',
+    'legal_name' => 'TVS NL B.V.',
+    'short_name' => 'TVS NL',
+    'full_name'  => 'TVS NL — Installatie & Elektrotechniek',
+    'tagline'    => 'Uw specialist in verwarming en verduurzaming',
     'kvk'        => '58781005',
     'website'    => 'terrasverwarmers.nu',
   ],
 
+  // ===== BRANCH SYSTEM =====
+  'branches' => [
+    'verwarming' => [
+      'slug'            => 'verwarming',
+      'label'           => 'Verwarming',
+      'tagline'         => 'Professionele verwarmingsoplossingen',
+      'description'     => 'Van terrasverwarming tot halverwarming en kerkverwarming. Al 20+ jaar uw specialist.',
+      'color_primary'   => '#E31E24',
+      'color_secondary' => '#ff6633',
+      'color_gradient'  => 'from-red-600 to-orange-500',
+      'icon'            => 'flame',
+      'type'            => 'catalog',
+      'post_type'       => 'tvs_product',
+      'taxonomy'        => 'product_categorie',
+      'enabled'         => true,
+      'hero_image'      => 'products/goldsun-elite/goldsun-elite-5.jpg',
+      'seo' => [
+        'description' => 'TVS is specialist in terrasverwarming, halverwarming en kerkverwarming. Ontdek onze uitgebreide catalogus met A-merken.',
+      ],
+      'contact_subjects' => [
+        'terrasverwarming' => 'Terrasverwarming',
+        'halverwarming'    => 'Halverwarming',
+        'kerkverwarming'   => 'Kerkverwarming',
+        'loungehaarden'    => 'Loungehaarden',
+        'anders'           => 'Anders',
+      ],
+    ],
+
+    'verduurzaming' => [
+      'slug'            => 'verduurzaming',
+      'label'           => 'Verduurzaming',
+      'tagline'         => 'Duurzame oplossingen voor een groene toekomst',
+      'description'     => 'Zonnepanelen, laadpalen en accu-oplossingen. Advies, installatie en onderhoud op maat.',
+      'color_primary'   => '#22c55e',
+      'color_secondary' => '#16a34a',
+      'color_gradient'  => 'from-emerald-600 to-emerald-500',
+      'icon'            => 'leaf',
+      'type'            => 'services',
+      'post_type'       => 'tvs_dienst',
+      'taxonomy'        => 'dienst_categorie',
+      'enabled'         => true,
+      'hero_image'      => 'products/zonnepanelen.jpg',
+      'seo' => [
+        'description' => 'TVS biedt duurzame oplossingen: zonnepanelen, laadpalen en accu-systemen. Advies en installatie op maat.',
+      ],
+      'contact_subjects' => [
+        'zonnepanelen' => 'Zonnepanelen',
+        'laadpalen'    => 'Laadpalen',
+        'accus'        => "Accu's / Opslag",
+        'advies'       => 'Duurzaamheidsadvies',
+      ],
+    ],
+  ],
+
+  // Legacy: backward compat (wordt berekend in functions.php)
   'categories' => [
     'terrasverwarming' => [
       'slug'  => 'terrasverwarming',
       'label' => 'Terrasverwarming',
       'desc'  => 'Gas en elektrische verwarmingsoplossingen',
-      'children' => [
-        'parasolverwarming' => [
-          'slug'  => 'parasolverwarming',
-          'label' => 'Parasolverwarming',
-          'desc'  => 'Compacte verwarmingsoplossingen voor parasols',
-        ],
-      ],
     ],
     'halverwarming' => [
       'slug'  => 'halverwarming',
       'label' => 'Halverwarming',
-      'desc'  => 'Effectieve verwarming voor grote ruimtes',
+      'desc'  => 'Donkerstralers voor bedrijfshallen en sporthallen',
     ],
     'kerkverwarming' => [
       'slug'  => 'kerkverwarming',
@@ -60,6 +112,7 @@ return [
   'colors' => [
     'primary'   => '#E31E24',
     'secondary' => '#ff6633',
+    'green'     => '#22c55e',
     'dark'      => '#1f2937',
     'light'     => '#f9fafb',
   ],
@@ -69,32 +122,12 @@ return [
     'search_console_id' => '',
     'og_image'          => 'assets/images/og-tvs.png',
     'descriptions'      => [
-      'home'       => 'TVS is specialist in terrasverwarming, halverwarming en kerkverwarming. Ontdek onze uitgebreide catalogus met A-merken voor professionele verwarmingsoplossingen.',
-      'producten'  => 'Bekijk ons complete assortiment professionele verwarmingsoplossingen. Terrasverwarming, halverwarming en kerkverwarming van A-merken.',
-      'over-ons'   => 'Terras Verwarmings Specialisten: 20+ jaar ervaring in professionele verwarmingsoplossingen voor horeca, kerken, hallen en meer.',
-      'contact'    => 'Neem contact op met TVS voor vrijblijvend advies of een offerte op maat voor uw verwarmingsproject.',
-    ],
-  ],
-
-  'verduurzaming' => [
-    'title'    => 'Verduurzaming',
-    'subtitle' => 'Duurzame oplossingen voor een groene toekomst',
-    'color'    => '#22c55e',
-    'diensten' => [
-      'zonnepanelen' => [
-        'label'    => 'Zonnepanelen',
-        'desc'     => 'Bespaar op energiekosten met zonnepanelen op maat. Wij verzorgen advies, installatie en monitoring voor bedrijven en particulieren.',
-        'icon'     => 'sun',
-        'image'    => 'products/zonnepanelen.jpg',
-        'features' => ['Op maat advies', 'Professionele installatie', 'Subsidie-check', 'Monitoring & onderhoud'],
-      ],
-      'laadpalen' => [
-        'label'    => 'Laadpalen',
-        'desc'     => 'Oplaadoplossingen voor thuis en zakelijk. Van advies tot installatie en slimme laadoplossingen.',
-        'icon'     => 'battery-charging',
-        'image'    => '',
-        'features' => ['Thuis & zakelijk', 'Slimme laadoplossingen', 'Installatie & onderhoud', 'Subsidie-check'],
-      ],
+      'home'           => 'TVS NL — Installatie & Elektrotechniek. Specialist in verwarming en verduurzaming.',
+      'producten'      => 'Bekijk ons complete assortiment verwarmingsoplossingen van A-merken.',
+      'verwarming'     => 'Terrasverwarming, halverwarming en kerkverwarming van TVS NL.',
+      'verduurzaming'  => 'Zonnepanelen, laadpalen en accu-systemen van TVS NL.',
+      'over-ons'       => 'TVS NL: 20+ jaar ervaring in installatie & elektrotechniek.',
+      'contact'        => 'Neem contact op met TVS NL voor vrijblijvend advies of een offerte op maat.',
     ],
   ],
 
